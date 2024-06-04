@@ -1,6 +1,6 @@
-import React, {useEffect} from 'react';
+import React from 'react';
 
-import {BrowserRouter, Route, Routes, Link} from 'react-router-dom';
+import { BrowserRouter, Route, Routes, Link } from 'react-router-dom';
 
 import Home from './pages/Home';
 import Profile from './pages/Profile';
@@ -17,7 +17,7 @@ import './App.css';
 function App() {
 
     return (
-        <BrowserRouter>
+        <>
             <nav>
                 <ul>
                     <li><Link to="/">Home</Link></li>
@@ -30,12 +30,12 @@ function App() {
                 <Route exact path="/" element={<Home/>}/>
                 <Route path="/*" element={<NotFound/>}/>
 
-                <Route path="/callback" element={<CallbackPage />} />
+                <Route path="/callback" element={<CallbackPage/>}/>
                 <Route path="/profile" element={<AuthenticationGuard component={Profile}/>}/>
                 <Route path="/dashboard" element={<AuthenticationGuard component={Dashboard}/>}/>
                 <Route path="/map" element={<AuthenticationGuard component={Map}/>}/>
             </Routes>
-        </BrowserRouter>
+        </>
     );
 }
 
