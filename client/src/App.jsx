@@ -1,6 +1,6 @@
 import React from 'react';
 
-import { BrowserRouter, Route, Routes, Link } from 'react-router-dom';
+import { Route, Routes, Link } from 'react-router-dom';
 
 import Home from './pages/Home';
 import Profile from './pages/Profile';
@@ -11,6 +11,8 @@ import CallbackPage from "./pages/CallbackPage";
 
 import AuthenticationGuard from "./components/AuthenticationGuard";
 
+import Sidebar from "./components/Sidebar";
+
 import './App.css';
 
 
@@ -18,14 +20,14 @@ function App() {
 
     return (
         <>
-            <nav>
+            <Sidebar visible={true} onHide={()=>{}}>
                 <ul>
                     <li><Link to="/">Home</Link></li>
                     <li><Link to="/profile">Profile</Link></li>
                     <li><Link to="/dashboard">Dashboard</Link></li>
                     <li><Link to="/map">Map</Link></li>
                 </ul>
-            </nav>
+            </Sidebar>
             <Routes>
                 <Route exact path="/" element={<Home/>}/>
                 <Route path="/*" element={<NotFound/>}/>

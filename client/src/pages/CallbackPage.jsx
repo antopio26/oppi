@@ -1,9 +1,10 @@
 import React from 'react';
+import PageLoader from "../components/PageLoader";
 
 export default function CallbackPage() {
     return (
-        <div>
-            <h1>Redirecting...</h1>
-        </div>
+        <main>
+            <PageLoader/>
+        </main>
     );
 };

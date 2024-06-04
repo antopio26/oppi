@@ -1,5 +1,9 @@
 import React from 'react';
 
 export default function Map() {
-    return (<p>Map Page</p>)
+    return (
+        <main>
+            <h1>Map</h1>
+        </main>
+    )
 }

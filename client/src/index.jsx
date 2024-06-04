@@ -1,9 +1,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
 import { Auth0Provider } from '@auth0/auth0-react';
-import { useNavigate } from 'react-router-dom';
-
-import { BrowserRouter } from 'react-router-dom';
+import { useNavigate, BrowserRouter } from 'react-router-dom';
 
 import App from './App';
 import "primereact/resources/themes/lara-light-cyan/theme.css";
@@ -12,7 +10,7 @@ const Auth0ProviderWithRedirectCallback = ({children, ...props}) => {
     const navigate = useNavigate();
 
     const onRedirectCallback = (appState) => {
-        navigate((appState && appState.returnTo) || window.location.pathname);
+        navigate((appState && appState.returnTo) || (window.location.pathname!=="/callback" ? window.location.pathname: "/"));
     };
 
     return (
