@@ -7,6 +7,13 @@
 }
 
 @font-face {
+    font-family: 'gloock';
+    src: url('../font/gloock/Gloock-Regular.woff2') format('woff2');
+    font-weight: normal;
+    font-style: normal;
+}
+
+@font-face {
     font-family: 'urbanist';
     src: url('../font/urbanist/Urbanist-Italic-VariableFont_wght.woff2') format('woff2 supports variations'),
     url('../font/urbanist/Urbanist-Italic-VariableFont_wght.woff2') format('woff2-variations');

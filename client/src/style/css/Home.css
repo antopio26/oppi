@@ -5,52 +5,72 @@ main {
         "wrapper aside"
         "footer footer";
     grid-template-columns: 1fr 1fr;
-    grid-template-rows: 50% 50%;
+    grid-template-rows: 60% 40%;
     height: 100vh;
-    background-color: #101015;
+    background-color: var(--background);
     padding: 0;
     color: white;
 
     .wrapper {
         grid-area: wrapper;
+        display: flex;
+        flex-direction: column;
         padding: 1.25rem;
 
         .welcome {
             display: flex;
             justify-content: space-between;
             align-items: center;
-            border: 1px solid #050508;
+            border: 1px solid var(--secondary-border);
             border-radius: 5rem;
-            background-color: #303033;
+            background-color: var(--secondary);
             padding-inline-start: 1.5rem;
             font-weight: 500;
+
+            .button {
+                margin: .5rem;
+                width: 2.75rem;
+                height: 2.75rem;
+                font-size: .75rem;
+                color: white;
+
+                &:hover {
+                    color: var(--primary);
+                }
+            }
+
+            .login-button {
+                height: 2.75rem;
+                margin: .5rem;
+            }
+        }
+    }
+
+    .intro {
+        display: flex;
+        flex-direction: column;
+        width: fit-content;
+        padding: 2rem;
+        margin-top: 0.5rem;
+
+        .title {
+            font-size: 2.75rem;
+            font-family: "gloock", serif;
+            margin: 1rem 0 0;
+
+            span {
+                font-family: inherit;
+            }
         }
 
         p {
             margin-block: 1.25rem;
+            line-height: 1.25;
+            text-align: justify;
         }
 
-        h1 {
-            font-size: 2.5rem;
-            font-family: "alfa_slab_one", serif;
-            margin: 1.5rem 0;
-        }
-
-        .logout-button {
-            margin: .5rem;
-            width: 2.75rem;
-            height: 2.75rem;
-            font-size: .75rem;
-            background-color: #45454c;
-
-            &:hover {
-                background-color: #524042;
-            }
-        }
-
-        .login-button {
-            height: 2.75rem;
-            margin:.5rem;
+        button {
+            align-self: end;
         }
     }
 
@@ -62,7 +82,7 @@ main {
         background-color: inherit;
 
         .example {
-            background-color: #66a;
+            background-color: var(--primary);
             width: 100%;
             height: 100%;
             border-radius: 1.5rem;
@@ -70,11 +90,14 @@ main {
             justify-content: center;
             align-items: center;
             font-size: 2rem;
+            box-shadow: inset 0 0 1.5rem rgba(0, 0, 0, 0.5);
 
             &::before {
                 content: "OppI Example";
                 font-size: 2rem;
-                mix-blend-mode: soft-light;
+                color: black;
+                opacity: .65;
+                mix-blend-mode: color-burn;
             }
         }
     }
@@ -84,7 +107,7 @@ main {
         display: flex;
         flex-direction: column;
         align-items: center;
-        background-color: #333337;
+        background-color: #333733;
         border-top-left-radius: 1.5rem;
         border-top-right-radius: 1.5rem;
         padding: 2rem 3rem;
@@ -98,7 +121,7 @@ main {
             padding-inline: 4rem;
 
             .p-divider::before {
-                opacity: .5;
+                opacity: .75;
                 mix-blend-mode: soft-light;
             }
 
@@ -112,9 +135,9 @@ main {
         .content {
             display: grid;
             grid-template-columns: 1fr 1fr;
-            gap: 2rem;
+            gap: 4rem;
             width: 100%;
-            padding: 2rem 0;
+            padding: 2rem 2rem;
 
             .content-item {
                 display: grid;
@@ -132,13 +155,12 @@ main {
                     border-radius: 50%;
                     display: grid;
                     place-items: center;
-                    background-color: #66a;
+                    background-color: var(--primary);
 
                     grid-area: icon;
 
                     i {
-                        opacity: .8;
-                        mix-blend-mode: hard-light;
+                        color: #333733;
                     }
                 }
 
@@ -155,7 +177,8 @@ main {
                     grid-area: text;
                     place-self: start;
                     font-size: .85rem;
-                    mix-blend-mode: soft-light;
+                    opacity: .5;
+                    mix-blend-mode: hard-light;
                 }
             }
         }

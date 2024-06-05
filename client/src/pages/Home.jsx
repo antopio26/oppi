@@ -6,27 +6,32 @@ import {Button} from "primereact/button";
 import {useNavigate} from "react-router-dom";
 
 import "../style/css/Home.css";
-import {Divider} from "primereact/divider";
-import LogoutButton from "../components/LogoutButton";
+import { Divider } from "primereact/divider";
 
 export default function Home() {
-    const {user, isAuthenticated,  loginWithRedirect } = useAuth0();
+    const { user, isAuthenticated, loginWithRedirect } = useAuth0();
     const navigate = useNavigate();
 
     return (
         <main>
             <section className={"wrapper"}>
                 <div className="welcome">
-                    {isAuthenticated ? <>
-                            <p>Welcome, {user.name}</p>
-                            <LogoutButton rounded iconOnly text/>
+                    { isAuthenticated ? <>
+                            <p>Welcome back, {user.name}</p>
+                            <Button icon="pi pi-user" rounded iconOnly className={"button lighter-secondary"}/>
                         </>
                         : <>
                             <p>Welcome in this beautiful place</p>
                             <LoginButton rounded icon text/>
-                        </>}
+                        </>
+                    }
                 </div>
-                <h1>OppI</h1>
+                <div className="intro">
+                    <div className={"title"}><span>OctoMap</span> <span>Path</span> <span>Planning</span><br/><span>Interface</span></div>
+                    <p>
+                        Un'interfaccia grafica per il path planning 3D su OctoMap.
+                        Carica la tua OctoMap, definisci il punto di partenza e quello di arrivo, e OppI si occuperà del resto.
+                    </p>
 
                     <Button label="Get Started" icon="pi pi-arrow-right" iconPos="right" rounded onClick={() => {
                         if (isAuthenticated) {
@@ -35,6 +40,7 @@ export default function Home() {
                             loginWithRedirect({appState: {returnTo: "/dashboard"}});
                         }
                     }}/>
+                </div>
             </section>
             <aside>
                 <div className="example"></div>
