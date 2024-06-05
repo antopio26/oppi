@@ -1,16 +1,53 @@
-:root {
+:root{
+    --font-fallback: -apple-system, 'Roboto', sans-serif;
+}
+
+body, body[theme=lemon]{
+    /*--primary: #ffbf00;*/
+    --primary: #fece2e;
+    --primary-border: #d9aa00;
+    --secondary: #494949;
+    --secondary-border: #595751;
+    --lighter-secondary: #6e6d69;
+    --background: #141310;
+    --low-contrast-background: #383734;
+
+    --primary-r: 254;
+    --primary-g: 206;
+    --primary-b: 46;
+}
+
+body[theme=orange]{
+    --primary: #ff8000;
+    --primary-border: #d97000;
+    --secondary: #494949;
+    --secondary-border: #595551;
+    --lighter-secondary: #6e6c6a;
+    --background: #141210;
+    --low-contrast-background: #383634;
+
+    --primary-r: 255;
+    --primary-g: 128;
+    --primary-b: 0;
+}
+
+body[theme=lime]{
     --primary: #95FF00;
     --primary-border: #7bd900;
     --secondary: #494949;
-    --secondary-border: #505850;
+    --secondary-border: #565951;
     --lighter-secondary: #6a6d6a;
-    --tertiary: #68b300;
-    --background: #101410;
+    --background: #131410;
+    --low-contrast-background: #363834;
+
+    --primary-r: 149;
+    --primary-g: 255;
+    --primary-b: 0;
 }
 
 *, *::before, *::after {
     box-sizing: border-box;
-    font-family: "urbanist", -apple-system, 'Roboto', sans-serif;
+    font-family: "urbanist", var(--font-fallback), serif;
 }
 
 body, #root {
@@ -42,15 +79,15 @@ main {
     font-family: "primeicons", serif !important;
 }
 
-.p-button-text {
+.p-button-text:not(.p-button-danger) {
     color: var(--primary);
 
     &:hover {
-        background: rgba(149, 255, 0, 0.04);
+        background: rgba(var(--primary-r), var(--primary-g), var(--primary-b), 0.04);
     }
 
     &:active {
-        background: rgba(149, 255, 0, 0.16);
+        background: rgba(var(--primary-r), var(--primary-g), var(--primary-b), 0.16);
     }
 }
 
@@ -65,9 +102,13 @@ main {
     border-color: var(--secondary-border);
     color: var(--primary);
     &:hover{
-        background-color: rgba(149, 255, 0, 0.08);
+        background-color: rgba(var(--primary-r), var(--primary-g), var(--primary-b), 0.08);
     }
     &:active{
-        background-color: rgba(149, 255, 0, 0.16);
+        background-color: rgba(var(--primary-r), var(--primary-g), var(--primary-b), 0.16);
     }
+}
+
+.p-button-label{
+    font-weight: 600;
 }

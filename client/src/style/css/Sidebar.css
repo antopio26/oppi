@@ -12,17 +12,14 @@ aside {
         width: 100%;
         display: grid;
         grid-template-columns: 1fr 1fr 1fr;
-        place-items: center;
         margin: 2rem 0 1rem;
 
         .logo{
             font-family: "gloock", serif;
-            text-align: center;
-            font-size: 2rem;
+            font-size: 1.5rem;
             text-decoration: none;
             color: white;
-
-            grid-column: 2;
+            margin-inline: 1rem;
         }
     }
 
@@ -44,5 +41,8 @@ aside {
     .logout-button {
         margin-top: auto;
         width: 100%;
+        .p-button-icon{
+            scale: -1;
+        }
     }
 }

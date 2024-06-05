@@ -1,7 +1,9 @@
-export default function PageLoader() {
+import '../style/css/PageLoader.css'
+
+export default function PageLoader({message="Loading..."}) {
     return (
-        <main>
-            <h3>Loading...</h3>
+        <main className={"loader-main"}>
+            <h3>{message}</h3>
         </main>
     );
 }

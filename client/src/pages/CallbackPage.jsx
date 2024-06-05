@@ -3,6 +3,6 @@ import PageLoader from "../components/PageLoader";
 
 export default function CallbackPage() {
     return (
-            <PageLoader/>
+            <PageLoader message={"Redirecting..."}/>
     );
 };

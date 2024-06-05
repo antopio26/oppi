@@ -51,10 +51,6 @@ Z
 *client/src/components/DashboardSidebar.jsx,a/e/ae4fe58279734e3d809a2aefec57acf51ee1b917
 T
 $client/src/components/MapSidebar.jsx,1/9/191516b0650fc7137f1dca80d4fa9e0c3335ba04
-O
-client/src/utils/octomap.js.jsx,f/d/fd9f20ece63c327c75925d8176f3c895f96eedd4
-K
-client/src/utils/octomap.js,a/e/aeefd18ddfcdc6bf1d10b8ca6198b15c23b4f4d1
 A
 client/.gitignore,e/3/e32ec5c998c4774d8d1bedd59740d14d940c90ec
 W
@@ -67,7 +63,15 @@ R
 "client/src/components/MapScene.jsx,7/b/7b3d0051d25179d102edc796dd42f1887baeacc2
 M
 client/src/pages/NotFound.jsx,5/a/5ade5cda5faefb39831e6d231088bbe58bad1f4e
-T
-$client/src/services/RemotePlanner.js,4/a/4a7baf5a2b72c0d4ff190dbdbc92c0069d649e39
 U
 %client/src/utils/OctomapConversion.js,3/b/3b6d273c5eb03a127852ef0ad9561cb34554ced6
+P
+ client/src/hooks/ThemeChanger.js,b/2/b26db64fe5347e885bb204a01482d956eda02c44
+Q
+!client/src/hooks/RemotePlanner.js,e/1/e1c7b0d44bbf3e746ae6707f95915383f91706ba
+U
+%client/src/components/ThemeSwitch.jsx,f/d/fd36ebce1ab29039b1e3753f2dd93d124934be74
+X
+(client/src/components/ThemesSwitcher.jsx,5/4/54b6af592dedc018c636b31bc1fd779809bf8e97
+S
+#client/src/style/css/PageLoader.css,9/c/9c37604e67fd8ab9e986336a21243c80dea8ed7c

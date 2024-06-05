@@ -1,7 +1,7 @@
 import "../style/css/Sidebar.css";
 
 import React, {useEffect, useState} from "react";
-import {Link, Route, Routes, useLocation, useNavigate} from "react-router-dom";
+import {Link, Outlet, Route, Routes, useLocation, useNavigate} from "react-router-dom";
 
 import LogoutButton from "../components/LogoutButton";
 
@@ -9,6 +9,7 @@ import {Button} from "primereact/button";
 import ProfileSidebar from "./ProfileSidebar";
 import DashboardSidebar from "./DashboardSidebar";
 import MapSidebar from "./MapSidebar";
+import ThemesSwitcher from "./ThemesSwitcher";
 
 export default function Sidebar() {
     const location = useLocation();
@@ -49,8 +50,10 @@ export default function Sidebar() {
                 <Route path="/profile" element={<ProfileSidebar/>}/>
                 <Route path="/dashboard" element={<DashboardSidebar/>}/>
                 <Route path="/map" element={<MapSidebar/>}/>
+                <Route exact path="/" element={<Outlet/>}/>
             </Routes>
 
+            <ThemesSwitcher/>
             <LogoutButton text/>
 
         </aside>
