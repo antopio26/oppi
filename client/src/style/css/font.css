@@ -8,17 +8,16 @@
 
 @font-face {
     font-family: 'urbanist';
-    src: url('../font/urbanist/urbanist-italic-variablefont_wght-webfont.woff2') format('woff2'),
-    url('../font/urbanist/urbanist-italic-variablefont_wght-webfont.woff') format('woff');
-    font-weight: normal;
+    src: url('../font/urbanist/Urbanist-Italic-VariableFont_wght.woff2') format('woff2 supports variations'),
+    url('../font/urbanist/Urbanist-Italic-VariableFont_wght.woff2') format('woff2-variations');
+    font-weight: 100 900;
     font-style: italic;
 }
 
 @font-face {
     font-family: 'urbanist';
-    src: url('../font/urbanist/urbanist-variablefont_wght-webfont.woff2') format('woff2'),
-    url('../font/urbanist/urbanist-variablefont_wght-webfont.woff') format('woff');
-    font-weight: normal;
+    src: url('../font/urbanist/Urbanist-VariableFont_wght.woff2') format('woff2 supports variations'),
+    url('../font/urbanist/Urbanist-VariableFont_wght.woff2') format('woff2-variations');
+    font-weight: 100 900;
     font-style: normal;
-
 }

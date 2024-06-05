@@ -9,7 +9,6 @@ export default function Profile() {
 
     return (
         <>
-            <Sidebar/>
             <main>
                 {isAuthenticated && (
                     <div>

@@ -1,36 +1,57 @@
 import "../style/css/Sidebar.css";
 
-import {useEffect, useState} from "react";
-import {Link, useLocation} from "react-router-dom";
-import { useAuth0 } from "@auth0/auth0-react";
-
+import React, {useEffect, useState} from "react";
+import {Link, Route, Routes, useLocation, useNavigate} from "react-router-dom";
 
 import LogoutButton from "../components/LogoutButton";
 
 import {Button} from "primereact/button";
+import ProfileSidebar from "./ProfileSidebar";
+import DashboardSidebar from "./DashboardSidebar";
+import MapSidebar from "./MapSidebar";
 
 export default function Sidebar() {
-    const { isAuthenticated } = useAuth0();
     const location = useLocation();
-    const [pathname, setPathname] = useState( location.pathname );
+    const navigate = useNavigate();
+    const [pathname, setPathname] = useState(location.pathname);
 
     useEffect(() => {
         setPathname(location.pathname);
     }, [location.pathname]);
 
-    return (
+    return ( pathname !== "/" && pathname!=="/callback" &&
         <aside>
             <div className="top">
-                <LogoutButton iconOnly text/>
                 <Link to="/" className={"logo"}>OppI</Link>
             </div>
             <ul>
-                <li><Link to="/profile">
-                    <Button tooltip="Profile" tooltipOptions={{position: "bottom"}} icon="pi pi-user" className={pathname !== "/profile" && "p-button-text"}/>
-                </Link></li>
-                <li><Link to="/dashboard"><Button tooltip="Dashboard" tooltipOptions={{position: "bottom"}} icon="pi pi-chart-bar" className={pathname !== "/dashboard" && "p-button-text"}/></Link></li>
-                <li><Link to="/map"><Button tooltip="Map" tooltipOptions={{position: "bottom"}} icon="pi pi-map" className={pathname !== "/map" && "p-button-text"}/></Link></li>
+                <li>
+                    <Button tooltip="Profile" tooltipOptions={{position: "bottom"}} icon="pi pi-user"
+                            className={pathname !== "/profile" && "p-button-text"} onClick={()=>{
+                                navigate("/profile");
+                    }}/>
+                </li>
+                <li>
+                    <Button tooltip="Dashboard" tooltipOptions={{position: "bottom"}} icon="pi pi-chart-bar"
+                            className={pathname !== "/dashboard" && "p-button-text"} onClick={()=>{
+                                navigate("/dashboard");
+                    }}/>
+                </li>
+                <li>
+                    <Button tooltip="Map" tooltipOptions={{position: "bottom"}} icon="pi pi-map"
+                            className={pathname !== "/map" && "p-button-text"} onClick={()=>{
+                                navigate("/map");
+                    }}/>
+                </li>
             </ul>
+
+            <Routes>
+                <Route path="/profile" element={<ProfileSidebar/>}/>
+                <Route path="/dashboard" element={<DashboardSidebar/>}/>
+                <Route path="/map" element={<MapSidebar/>}/>
+            </Routes>
+
+            <LogoutButton text/>
 
         </aside>
     );

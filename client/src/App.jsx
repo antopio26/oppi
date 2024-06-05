@@ -1,6 +1,11 @@
 import React from 'react';
 
-import { Route, Routes, Link } from 'react-router-dom';
+import 'primeicons/primeicons.css';
+import './style/css/font.css'
+import './App.css';
+import "primereact/resources/themes/lara-light-cyan/theme.css";
+
+import { Route, Routes } from 'react-router-dom';
 
 import Home from './pages/Home';
 import Profile from './pages/Profile';
@@ -10,27 +15,14 @@ import NotFound from "./pages/NotFound";
 import CallbackPage from "./pages/CallbackPage";
 
 import AuthenticationGuard from "./components/AuthenticationGuard";
-
 import Sidebar from "./components/Sidebar";
-
-import 'primeicons/primeicons.css';
-import './style/css/font.css'
-import './App.css';
-import "primereact/resources/themes/lara-light-cyan/theme.css";
-
 
 function App() {
 
     return (
         <>
-            {/*<Sidebar visible={true} onHide={()=>{}}>*/}
-            {/*    <ul>*/}
-            {/*        <li><Link to="/">Home</Link></li>*/}
-            {/*        <li><Link to="/profile">Profile</Link></li>*/}
-            {/*        <li><Link to="/dashboard">Dashboard</Link></li>*/}
-            {/*        <li><Link to="/map">Map</Link></li>*/}
-            {/*    </ul>*/}
-            {/*</Sidebar>*/}
+            <Sidebar/>
+
             <Routes>
                 <Route exact path="/" element={<Home/>}/>
                 <Route path="/*" element={<NotFound/>}/>
