@@ -1,21 +1,52 @@
 aside {
-    width: 200px;
+    width: 240px;
     height: 100vh;
     background-color: #333;
     color: white;
 
     display: flex;
     flex-direction: column;
-    justify-content: space-between;
+    align-items: center;
+
+    .top{
+        width: 100%;
+        display: grid;
+        grid-template-columns: 1fr 1fr 1fr;
+        place-items: center;
+        margin: 2rem 0 1rem;
+
+        .logo{
+            font-family: "alfa_slab_one",serif;
+            text-align: center;
+            font-size: 2rem;
+            text-decoration: none;
+            color: white;
+
+            grid-column: 2;
+        }
+
+        .logout-button{
+            grid-column: 1;
+            width: 2.5rem;
+            aspect-ratio: 1;
+            padding: .5rem;
+            margin-right: auto;
+            margin-left: 1rem;
+            scale: -1;
+        }
+    }
 
     ul {
         list-style: none;
+        display: flex;
+        gap: .5rem;
         padding: 0;
-        margin: 0;
+        margin: 1rem 0 4rem;
 
         li {
             button {
-                width: 100%;
+                width: 4rem;
+                height: 4rem;
             }
         }
     }

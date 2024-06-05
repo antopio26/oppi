@@ -1,6 +1,10 @@
 *,*::before,*::after{
     box-sizing: border-box;
-    font-family: -apple-system,'Roboto', sans-serif;
+    font-family: "urbanist",-apple-system,'Roboto', sans-serif;
+}
+
+.pi::before{
+    font-family: "primeicons",serif !important;
 }
 
 body{
@@ -16,7 +20,7 @@ body{
     width: 100vw;
 
     aside{
-        width: 200px;
+        width: 240px;
         height: 100vh;
         display: flex;
         flex-direction: column;

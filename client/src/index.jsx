@@ -4,7 +4,6 @@ import { Auth0Provider } from '@auth0/auth0-react';
 import { useNavigate, BrowserRouter } from 'react-router-dom';
 
 import App from './App';
-import "primereact/resources/themes/lara-light-cyan/theme.css";
 
 const Auth0ProviderWithRedirectCallback = ({children, ...props}) => {
     const navigate = useNavigate();

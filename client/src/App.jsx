@@ -13,21 +13,24 @@ import AuthenticationGuard from "./components/AuthenticationGuard";
 
 import Sidebar from "./components/Sidebar";
 
+import 'primeicons/primeicons.css';
+import './style/css/font.css'
 import './App.css';
+import "primereact/resources/themes/lara-light-cyan/theme.css";
 
 
 function App() {
 
     return (
         <>
-            <Sidebar visible={true} onHide={()=>{}}>
-                <ul>
-                    <li><Link to="/">Home</Link></li>
-                    <li><Link to="/profile">Profile</Link></li>
-                    <li><Link to="/dashboard">Dashboard</Link></li>
-                    <li><Link to="/map">Map</Link></li>
-                </ul>
-            </Sidebar>
+            {/*<Sidebar visible={true} onHide={()=>{}}>*/}
+            {/*    <ul>*/}
+            {/*        <li><Link to="/">Home</Link></li>*/}
+            {/*        <li><Link to="/profile">Profile</Link></li>*/}
+            {/*        <li><Link to="/dashboard">Dashboard</Link></li>*/}
+            {/*        <li><Link to="/map">Map</Link></li>*/}
+            {/*    </ul>*/}
+            {/*</Sidebar>*/}
             <Routes>
                 <Route exact path="/" element={<Home/>}/>
                 <Route path="/*" element={<NotFound/>}/>
