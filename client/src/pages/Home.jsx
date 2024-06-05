@@ -18,7 +18,7 @@ export default function Home() {
                 <div className="welcome">
                     { isAuthenticated ? <>
                             <p>Welcome back, {user.name}</p>
-                            <Button icon="pi pi-user" rounded iconOnly className={"button lighter-secondary"}/>
+                            <Button icon="pi pi-user" onClick={()=> navigate("/profile")} rounded className={"button lighter-secondary"}/>
                         </>
                         : <>
                             <p>Welcome in this beautiful place</p>

@@ -7,11 +7,17 @@ import useRemotePlanner from "../hooks/RemotePlanner";
 
 export default function Map() {
 
-    const { readyState, voxels, endpoints, nodes, optPath, smoothPath } = useRemotePlanner();
+    const {
+        readyState,
+        voxels,
+        endpoints, nodes,
+        optPath,
+        smoothPath
+    } = useRemotePlanner('ws://localhost:8080');
 
     return (
-        <main>
-            <Canvas style={{position: "absolute", inset: 0, zIndex: -1}}>
+        <main style={{position: "relative"}}>
+            <Canvas style={{position: "absolute", inset: 0}}>
                 { <MapScene
                     connection={readyState}
                     voxels={voxels}

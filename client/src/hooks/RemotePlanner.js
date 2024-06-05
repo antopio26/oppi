@@ -70,7 +70,7 @@ export default function useRemotePlanner(remoteURL) {
                     // console.log("Optimal Path received");
                     setOptPath(optPath);
                     break;
-                case 'octomp_smoothed_path':
+                case 'octomap_smoothed_path':
                     const smoothPath = JSON.parse(new TextDecoder('utf-8').decode(msg.binaryData));
                     // console.log("Smooth Path received");
                     setSmoothPath(smoothPath);

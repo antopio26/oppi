@@ -6,15 +6,19 @@ import { Octomap } from "./threejs/Octomap"
 import { Nodes } from "./threejs/Nodes";
 import { Path } from "./threejs/Path";
 
-export function Grid() {
+export function Helpers() {
     const { scene, camera } = useThree();
 
     useEffect(() => {
         THREE.Object3D.DefaultUp = new THREE.Vector3(0, 0, 1);
         camera.up.set(0, 0, 1);
+
+        // Add a grid helper to the scene
         const gridHelper = new THREE.GridHelper(10, 10);
         gridHelper.rotation.x = Math.PI / 2;
         scene.add(gridHelper);
+
+        // Add an axes helper to the scene
         const axesHelper = new THREE.AxesHelper( 10);
         scene.add(axesHelper);
 
@@ -23,6 +27,7 @@ export function Grid() {
         camera.lookAt(0, 0, 0);
 
         return () => {
+            // Remove the grid and axes helpers from the scene
             scene.remove(gridHelper);
             scene.remove(axesHelper);
         };
@@ -44,7 +49,7 @@ export default function MapScene({connection, voxels, endpoints, nodes, optPath,
                     {smoothPath.length > 0 ? <Path nodes={smoothPath} color={"blue"}/> : null}
                 </group>
                 : null}
-            <Grid/>
+            <Helpers/>
             <OrbitControls/>
         </group>
     );
