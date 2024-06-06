@@ -6,14 +6,8 @@ export function Octomap({voxels}) {
     const { scene } = useThree();
     const instancedVoxels = useRef();
 
-    const boxMaterial = new THREE.MeshStandardMaterial({
-        color: 'orange',
-        transparent: true,
-        opacity: 0.6,
-        roughness: 0.5,
-        metalness: 0.2,
-        side: THREE.DoubleSide,
-        flatShading: true,
+    const boxMaterial = new THREE.MeshMatcapMaterial({
+        color: '#919191'
     });
 
     const boxGeometry = new THREE.BoxGeometry(1, 1, 1);

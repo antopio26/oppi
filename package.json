@@ -1,6 +1,0 @@
-{
-  "dependencies": {
-    "concurrently": "^8.2.2",
-    "three": "^0.165.0"
-  }
-}

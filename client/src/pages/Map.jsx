@@ -13,7 +13,7 @@ export default function Map() {
         endpoints, nodes,
         optPath,
         smoothPath
-    } = useRemotePlanner('ws://localhost:8080');
+    } = useRemotePlanner('ws://localhost:9002');
 
     return (
         <main style={{position: "relative"}}>
