@@ -13,7 +13,6 @@ export default function MapSidebar() {
     const nodesRefs = useMemo(() => Array.from({length: nodesCount}, () => createRef()), [nodesCount])
 
     return (
-        <>
             <div className="map-sidebar">
                 <div className="nodes">
                     <div className="nodes-top">
@@ -52,6 +51,5 @@ export default function MapSidebar() {
                     </Accordion>
                 </div>
             </div>
-        </>
     )
 }

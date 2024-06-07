@@ -29,7 +29,7 @@ export default function Home() {
                         </>
                         : <>
                             <p>Welcome in this beautiful place</p>
-                            <LoginButton rounded icon text/>
+                            <LoginButton rounded icon text redirectTo={"/dashboard"}/>
                         </>
                     }
                 </div>
