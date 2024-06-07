@@ -69,9 +69,21 @@ P
  client/src/hooks/ThemeChanger.js,b/2/b26db64fe5347e885bb204a01482d956eda02c44
 Q
 !client/src/hooks/RemotePlanner.js,e/1/e1c7b0d44bbf3e746ae6707f95915383f91706ba
-U
-%client/src/components/ThemeSwitch.jsx,f/d/fd36ebce1ab29039b1e3753f2dd93d124934be74
 X
 (client/src/components/ThemesSwitcher.jsx,5/4/54b6af592dedc018c636b31bc1fd779809bf8e97
 S
 #client/src/style/css/PageLoader.css,9/c/9c37604e67fd8ab9e986336a21243c80dea8ed7c
+>
+server/main.js,0/0/00800a03b728d7902d9a7f62ec0052445d938600
+U
+%client/src/components/TripleSwitch.js,e/3/e3e3f3c9f02143299e5d8b8ffa517740300605e3
+U
+%client/src/style/css/TripleSwitch.css,4/8/48676e344e5cb8f3a4151efdc43ad66515fc1cae
+V
+&client/src/components/TripleSwitch.jsx,e/e/eed827916b511ab8f0625dedf7f042e185bc4b40
+K
+client/public/manifest.json,2/5/253fc91369b428e8530c1e5206f921d081515f15
+P
+ client/src/style/css/Profile.css,a/a/aa00feafb30fa16d6abc9dce05bf1b98a373483b
+S
+#client/src/style/css/MapSidebar.css,f/d/fdd633cc861a0a78392e9f62d5a48e364273103a

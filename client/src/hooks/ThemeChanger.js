@@ -2,7 +2,8 @@ import {useEffect, useState} from "react";
 
 export default function useThemeChanger() {
     const themes = ["lemon","orange", "lime"];
-    const [theme, setTheme] = useState(localStorage.getItem("theme") || themes[0]);
+    const colors = ["#fece2e", "#ff8000", "#95FF00"]
+    const [currentTheme, setCurrentTheme] = useState(localStorage.getItem("theme") || themes[0]);
 
     function isValid(theme) {
         return themes.includes(theme);
@@ -13,30 +14,38 @@ export default function useThemeChanger() {
         orange: "#ff8000",
         lime: "#95FF00",
         lemon: "#fece2e"
-    }[theme];
+    }[currentTheme];
 
     useEffect(() => {
         const storedTheme = localStorage.getItem("theme");
         if (storedTheme && isValid(storedTheme)) {
-            setTheme(storedTheme);
+            setCurrentTheme(storedTheme);
         }
     }, []);
 
     useEffect(() => {
-        localStorage.setItem("theme", theme);
-        document.body.setAttribute("theme", theme);
+        localStorage.setItem("theme", currentTheme);
+        document.body.setAttribute("theme", currentTheme);
         const metaThemeColor = document.querySelector("meta[name=theme-color]");
         setTimeout(() => metaThemeColor.setAttribute("content", hexTheme), 250);
-    }, [theme]);
+    }, [currentTheme]);
 
     const changeTheme = (newTheme = undefined) => {
         if (!newTheme) {
-            newTheme = themes[(themes.indexOf(theme) + 1) % themes.length];
-        } else if (!isValid(theme)) {
+            newTheme = themes[(themes.indexOf(currentTheme) + 1) % themes.length];
+        } else if (!isValid(newTheme)) {
             return;
         }
-        setTheme(newTheme);
+        setCurrentTheme(newTheme);
     }
 
-    return {theme, hexTheme, changeTheme};
+    const getColors = () => {
+        return colors;
+        };
+
+    const getThemes = () => {
+        return themes;
+    }
+
+    return {currentTheme, hexTheme, changeTheme, getColors, getThemes};
 }

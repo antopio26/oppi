@@ -1,0 +1,242 @@
+:root{
+    --selected-color: white;
+    --left-r: 255;
+    --left-g: 255;
+    --left-b: 255;
+    --left-color: rgb(var(--left-r), var(--left-g), var(--left-b));
+    --center-r: 255;
+    --center-g: 255;
+    --center-b: 255;
+    --center-color: rgb(var(--center-r), var(--center-g), var(--center-b));
+    --right-r: 255;
+    --right-g: 255;
+    --right-b: 255;
+    --right-color: rgb(var(--right-r), var(--right-g), var(--right-b));
+}
+.triple-switch {
+    position: relative;
+    display: inline-block;
+    vertical-align: middle;
+    width: 250px;
+    height: 50px;
+    border-radius: 100px;
+    background-color: var(--background);
+    /*box-shadow: 1px 1px 10px 1px rgba(0, 0, 0, 0.5);*/
+
+    input[type="radio"] {
+        display: none;
+    }
+
+    label {
+        color: white;
+        z-index: 10;
+        cursor: pointer;
+        transition: color .5s ease-in-out;
+    }
+
+    h4 {
+        margin: 0;
+        font-weight: 500;
+    }
+
+    .black-font {
+        color: var(--background) !important;
+    }
+
+    .switch {
+        height: 44px;
+        width: 80px;
+        background-color: var(--selected-color,white);
+        border-radius: 100px;
+        position: absolute;
+        left: 3px;
+        top: 3px;
+        transition:background-color .5s ease-in-out;
+        animation-duration: 0.5s;
+        animation-timing-function: ease-in-out;
+    }
+
+    /*---------------- LEFT ------------------- */
+
+    .switch.left-to-center {
+        animation-name: leftToCenter;
+    }
+
+    .switch.left-to-right {
+        animation-name: leftToRight;
+    }
+
+    .switch.left-position {
+        left: 3px;
+    }
+
+    .left-label {
+        position: absolute;
+    }
+
+    #left + label {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        height: 50px;
+        width: 80px;
+        border-radius: 100px;
+    }
+
+    #left:checked + label {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        height: 50px;
+        width: 80px;
+        border-radius: 100px;
+    }
+
+    /* -------------------- center ------------------ */
+
+    .switch.center-to-left {
+        animation-name: centerToLeft;
+    }
+
+    .switch.center-to-right {
+        animation-name: centerToRight;
+    }
+
+    .switch.center-position {
+        left: 85px;
+    }
+
+    .center-label {
+        position: absolute;
+        left: 85px;
+    }
+
+    #center + label {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        height: 50px;
+        width: 80px;
+        border-radius: 100px;
+    }
+
+    #center:checked + label {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        height: 50px;
+        width: 80px;
+        border-radius: 100px;
+    }
+
+    /* ------------------- RIGHT ------------------- */
+
+    .switch.right-to-left {
+        animation-name: rightToLeft;
+    }
+
+    .switch.right-to-center {
+        animation-name: rightToCenter;
+    }
+
+    .switch.right-position {
+        left: 167px;
+    }
+
+    .right-label {
+        position: absolute;
+        right: 2px;
+    }
+
+    #right + label {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        height: 50px;
+        width: 80px;
+        border-radius: 100px;
+    }
+
+    #right:checked + label {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        height: 50px;
+        width: 80px;
+        border-radius: 100px;
+    }
+
+    /* ------------------- PLUS ------------------- */
+
+    &.shadow{
+        transition: box-shadow .35s ease-out;
+        &::before{
+            content: var(--left-r);
+            width: 1px;
+            height: 1px;
+        }
+        &:has(#left:hover){
+            box-shadow: 0px 0px .75rem .15rem rgba(var(--left-r), var(--left-g), var(--left-b), .25);
+        }
+        &:has(#center:hover){
+            box-shadow: 0px 0px .75rem .15rem rgba(var(--center-r), var(--center-g), var(--center-b), .25);
+        }
+        &:has(#right:hover){
+            box-shadow: 0px 0px .75rem .15rem rgba(var(--right-r), var(--right-g), var(--right-b), .25);
+        }
+    }
+}
+
+@keyframes leftToCenter {
+    from {
+        left: 3px;
+    }
+    to {
+        left: 85px;
+    }
+}
+
+@keyframes leftToRight {
+    from {
+        left: 3px;
+    }
+    to {
+        left: 167px;
+    }
+}
+
+@keyframes centerToLeft {
+    from {
+        left: 85px;
+    }
+    to {
+        left: 3px;
+    }
+}
+
+@keyframes centerToRight {
+    from {
+        left: 85px;
+    }
+    to {
+        right: 1px;
+    }
+}
+
+@keyframes rightToLeft {
+    from {
+        left: 167px;
+    }
+    to {
+        left: 3px;
+    }
+}
+
+@keyframes rightToCenter {
+    from {
+        left: 167px;
+    }
+    to {
+        right: 85px;
+    }
+}

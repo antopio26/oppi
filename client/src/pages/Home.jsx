@@ -19,13 +19,13 @@ export default function Home() {
     const [rotation, setRotation] = useState(0);
 
     return (
-        <main>
+        <main className={"home-main"}>
             <section className={"wrapper"}>
                 <div className="welcome">
                     {isAuthenticated ? <>
                             <p>Welcome back, {user.name}</p>
                             <Button icon="pi pi-user" onClick={() => navigate("/profile")} rounded
-                                    className={"button lighter-secondary"}/>
+                                    className={"button lighter-secondary-bg primary-text"}/>
                         </>
                         : <>
                             <p>Welcome in this beautiful place</p>
@@ -48,17 +48,23 @@ export default function Home() {
                     <div className={"title"}>OctoMap Path Planning Interface</div>
                     <p>
                         Un'interfaccia grafica per il path planning 3D su OctoMap.
-                        Carica la tua OctoMap, definisci il punto di partenza e quello di arrivo, e OppI si occuperà del
+                        Carica la tua OctoMap, definisci il punto di partenza e quello di arrivo, e OPPI si occuperà del
                         resto.
                     </p>
 
-                    <Button label="Get Started" icon="pi pi-arrow-right" iconPos="right" rounded onClick={() => {
-                        if (isAuthenticated) {
-                            navigate("/dashboard")
-                        } else {
-                            loginWithRedirect({appState: {returnTo: "/dashboard"}});
-                        }
-                    }}/>
+                    <div className="buttons">
+                        <Button label="GitHub" icon="pi pi-github" iconPos="right" rounded onClick={() => {
+                            window.open("https://github.com/antopio26/oppi", "_blank")
+                        }} className={"lighter-secondary-bg"}/>
+                        <Button label="Get Started" icon="pi pi-arrow-right" iconPos="right" rounded onClick={() => {
+                            if (isAuthenticated) {
+                                navigate("/dashboard")
+                            } else {
+                                loginWithRedirect({appState: {returnTo: "/dashboard"}});
+                            }
+                        }}/>
+                    </div>
+
                 </div>
             </section>
             <aside>
@@ -82,7 +88,7 @@ export default function Home() {
                         <div className="title">Naviga</div>
                         <div className="text">
                             Stabilisci un punto di partenza e uno di arrivo.
-                            OppI cercherà di trovare, nel minor tempo possibile, il percorso migliore.
+                            OPPI cercherà di trovare, nel minor tempo possibile, il percorso migliore.
                         </div>
                     </div>
                     <div className="content-item">

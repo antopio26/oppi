@@ -3,7 +3,6 @@
 }
 
 body, body[theme=lemon]{
-    /*--primary: #ffbf00;*/
     --primary: #fece2e;
     --primary-border: #d9aa00;
     --secondary: #494949;
@@ -15,6 +14,10 @@ body, body[theme=lemon]{
     --primary-r: 254;
     --primary-g: 206;
     --primary-b: 46;
+
+    --lighter-secondary-r: 110;
+    --lighter-secondary-g: 109;
+    --lighter-secondary-b: 105;
 }
 
 body[theme=orange]{
@@ -29,6 +32,10 @@ body[theme=orange]{
     --primary-r: 255;
     --primary-g: 128;
     --primary-b: 0;
+
+    --lighter-secondary-r: 110;
+    --lighter-secondary-g: 108;
+    --lighter-secondary-b: 106;
 }
 
 body[theme=lime]{
@@ -43,6 +50,10 @@ body[theme=lime]{
     --primary-r: 149;
     --primary-g: 255;
     --primary-b: 0;
+
+    --lighter-secondary-r: 106;
+    --lighter-secondary-g: 109;
+    --lighter-secondary-b: 106;
 }
 
 *, *::before, *::after {
@@ -55,6 +66,7 @@ body, #root {
     color: #333;
     overflow: hidden;
     margin: 0;
+    position: relative;
 }
 
 #root {
@@ -73,6 +85,8 @@ aside {
 main {
     flex: 1;
     padding: 1rem 2rem;
+    background-color: var(--background);
+    color: white;
 }
 
 .pi::before {
@@ -97,15 +111,25 @@ main {
     color: var(--background);
 }
 
-.p-button.lighter-secondary:not(.p-button-text) {
-    background-color: var(--lighter-secondary);
-    border-color: var(--secondary-border);
-    color: var(--primary);
-    &:hover{
-        background-color: rgba(var(--primary-r), var(--primary-g), var(--primary-b), 0.08);
+.p-button {
+    &.lighter-secondary-bg {
+        background-color: var(--lighter-secondary);
+        border-color: var(--secondary-border);
+        color: white;
+
+        &:hover {
+            background-color: rgba(var(--lighter-secondary-r), var(--lighter-secondary-g), var(--lighter-secondary-b), 0.75);
+        }
+
+        &:active {
+            background-color: rgba(var(--lighter-secondary-r), var(--lighter-secondary-g), var(--lighter-secondary-b), 0.6);
+        }
     }
-    &:active{
-        background-color: rgba(var(--primary-r), var(--primary-g), var(--primary-b), 0.16);
+    &.primary-text{
+        color: var(--primary);
+    }
+    &.white-text{
+        color: white;
     }
 }
 
