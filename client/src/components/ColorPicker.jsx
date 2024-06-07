@@ -17,6 +17,8 @@ export default function ColorPicker({ value ="red",onChange = ()=>{}}){
             e.preventDefault();
             e.stopPropagation();
             if (!e.target.classList.contains("open")) {
+                //close all other color pickers
+                document.querySelectorAll(".color-picker").forEach(cp => cp.classList.remove("open"));
                 e.target.classList.add("open");
             } else {
                 e.target.blur();

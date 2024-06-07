@@ -11,36 +11,35 @@ import MapSidebar from "../components/MapSidebar";
 import MapContextProvider from "../providers/MapContext";
 
 export default function Map() {
-    const [mapMode, setMapMode] = useState("view");
+    const [mapMode, setMapMode] = useState({mode: "view"});
     const [allCollapsed, setAllCollapsed] = useState(false);
-
-
 
     const {
         readyState,
         voxels,
-        endpoints, nodes,
+        waypoints, nodes,
         optPath,
         smoothPath
     } = useRemotePlanner('ws://localhost:9002');
 
     return (
-            <MapContextProvider states={{mapMode,setMapMode,allCollapsed,setAllCollapsed}}>
-            <Sidebar info={"Imposta un punto di partenza, un punto di arrivo e genera un percorso. Puoi modificare i parametri del path planning o muoverti all'interno della mappa."}>
-                <MapSidebar />
+        <MapContextProvider states={{mapMode, setMapMode, allCollapsed, setAllCollapsed}}>
+            <Sidebar
+                info={"Imposta un punto di partenza, un punto di arrivo e genera un percorso. Puoi modificare i parametri del path planning o muoverti all'interno della mappa."}>
+                <MapSidebar/>
             </Sidebar>
-            <main style={{position: "relative"}} className={`map-main ${mapMode}`}>
+            <main style={{position: "relative"}} className={`map-main ${mapMode.mode}`}>
                 <Canvas style={{position: "absolute", inset: 0}}>
                     {<MapScene
                         connection={readyState}
                         voxels={voxels}
-                        endpoints={endpoints}
+                        // waypoints={waypoints}
                         nodes={nodes}
                         optPath={optPath.path}
                         smoothPath={smoothPath.path}
                     />}
                 </Canvas>
             </main>
-            </MapContextProvider>
+        </MapContextProvider>
     )
 }

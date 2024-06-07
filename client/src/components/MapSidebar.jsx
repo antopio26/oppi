@@ -5,17 +5,18 @@ import {Button} from "primereact/button";
 import ColorPicker from "./ColorPicker";
 import {useContext, useEffect, useState, useRef} from "react";
 import {MapContext} from "../providers/MapContext";
+import PointSelectorButton from "./PointSelectorButton";
 
 function InputCoordsOnBlur(e, mapMode, setMapMode) {
-    if (mapMode === "point-selector" && !e.currentTarget.closest(".p-accordion-content").contains(e.relatedTarget) && e.relatedTarget?.closest(".map-sidebar")) {
-        setMapMode("view")
-        document.querySelectorAll(".point-selector-button").forEach(button => button.classList.remove("active"))
+    if (mapMode.mode === "point-selector" && !e.currentTarget.closest(".p-accordion-content").contains(e.relatedTarget) && e.relatedTarget?.closest(".map-sidebar")) {
+        setMapMode({mode: "view"})
     }
 }
 
 export function InputCoords({
                                 label, value = "", onChange = () => {
     }, onBlur = () => {
+    }, onKeyDown = () => {
     }
                             }) {
     return (
@@ -25,7 +26,8 @@ export function InputCoords({
             </div>
             <div className="value">
                 <input type="number" step={.1} value={value} onChange={(e) => onChange(e.target.value)}
-                       onBlur={(e) => onBlur(e)}/>
+                       onBlur={(e) => onBlur(e)} onKeyDown={(e) => onKeyDown(e)}
+                />
             </div>
         </div>
     )
@@ -49,16 +51,28 @@ export default function MapSidebar() {
         }
     }, [allCollapsed]);
 
+    useEffect(() => {
+        const handleKeyDown = (e) => {
+            if (mapMode.mode === "point-selector" && e.key === "Escape" && e.activeElement === undefined) {
+                setMapMode({mode: "view"})
+            }
+        }
+        document.addEventListener("keydown", handleKeyDown)
+        return () => {
+            document.removeEventListener("keydown", handleKeyDown)
+        }
+    }, [mapMode.mode]);
+
     return (
         <div className="map-sidebar" onClickCapture={(e) => {
-            if (mapMode === "point-selector") {
+            if (mapMode.mode === "point-selector") {
                 // target is not .p-accordion-tab input
                 if (!e.target.closest(".point-selector-button") && !e.target.closest(".p-accordion-content input")) {
-                    setMapMode("view")
-                    document.querySelectorAll(".point-selector-button").forEach(button => button.classList.remove("active"))
+                    setMapMode({mode: "view"})
                 }
             }
-        }}>
+        }}
+        >
             <div className="nodes" onClickCapture={(e) => {
                 if (e.currentTarget.classList.contains("removing")) {
                     if (!e.target.closest(".p-accordion-tab")) {
@@ -79,12 +93,13 @@ export default function MapSidebar() {
                             onClick={() => {
                                 setWaypoints([...waypoints, {
                                     id: waypoints[waypoints.length - 1].id + 1,
-                                    coords: ["", "", ""],
+                                    coords: {x: "", y: "", z: ""},
                                     color: "#ff0000"
                                 }]);
                                 setNodesAccordionActiveIndex(waypoints.length);
                             }}/>
-                    <Button icon="pi pi-minus" className={"remove-button primary-text"} disabled={waypoints.length<3} text rounded
+                    <Button icon="pi pi-minus" className={"remove-button primary-text"} disabled={waypoints.length < 3}
+                            text rounded
                             onClick={(e) => {
                                 setAllCollapsed(true);
                                 e.currentTarget.closest(".nodes").classList.toggle("removing")
@@ -96,23 +111,9 @@ export default function MapSidebar() {
                     {waypoints.map((wp, index) =>
                         <AccordionTab key={wp.id} header={<>
                             <span className={"node-name"}>Nodo {index + 1}</span>
-                            <Button icon="pi pi-bullseye" className={"point-selector-button white-text"} text rounded
-                                    onFocus={() => {
-                                        document.querySelectorAll(".color-picker").forEach(cp => cp.classList.remove("open"))
-                                    }}
-                                    onClick={(e) => {
-                                        e.stopPropagation()
-                                        e.currentTarget.classList.toggle("active");
-                                        setMapMode(e.currentTarget.classList.contains("active") ? "point-selector" : "view")
-                                        if (e.currentTarget.classList.contains("active")) {
-                                            setNodesAccordionActiveIndex(index)
-                                            document.querySelectorAll(".point-selector-button").forEach((button, i) => {
-                                                if (i !== index) {
-                                                    button.classList.remove("active")
-                                                }
-                                            })
-                                        }
-                                    }}/>
+                            <PointSelectorButton index={index}
+                                                 setNodesAccordionActiveIndex={setNodesAccordionActiveIndex}
+                                                 id={wp.id}/>
                             <ColorPicker value={waypoints[index].color}
                                          onChange={(e) => setWaypoints(waypoints.map((wp, i) => i === index ? {
                                              id: wp.id,
@@ -121,9 +122,34 @@ export default function MapSidebar() {
                                          } : wp))}/>
                         </>}>
                             <div className="coords">
-                                <InputCoords label={"x"} onBlur={(e) => InputCoordsOnBlur(e, mapMode, setMapMode)}/>
-                                <InputCoords label={"y"} onBlur={(e) => InputCoordsOnBlur(e, mapMode, setMapMode)}/>
-                                <InputCoords label={"z"} onBlur={(e) => InputCoordsOnBlur(e, mapMode, setMapMode)}/>
+                                {Object.keys(wp.coords).map((coord, i) =>
+                                    <InputCoords key={i} label={coord} value={wp.coords[coord]}
+                                                 onChange={(e) => setWaypoints(waypoints.map((wp, j) => j === index ? {
+                                                     id: wp.id,
+                                                     coords: {...wp.coords, [coord]: e},
+                                                     color: wp.color
+                                                 } : wp))}
+                                                 onBlur={(e) => InputCoordsOnBlur(e, mapMode, setMapMode)}
+                                                 onKeyDown={(e) => {
+                                                     if (e.key === "Enter" || e.keyCode === 27) {
+                                                         if (waypoints[index].coords.x && waypoints[index].coords.y && waypoints[index].coords.z) {
+                                                             if (mapMode.mode === "view") {
+                                                                 setAllCollapsed(true)
+                                                             }
+                                                             setMapMode({mode: "view"})
+                                                         } else {
+                                                             // find the first empty input and focus it
+                                                             let found = false;
+                                                             e.currentTarget.closest(".p-accordion-content").querySelectorAll("input").forEach(input => {
+                                                                 if (!input.value && !found) {
+                                                                     input.focus()
+                                                                     found = true;
+                                                                 }
+                                                             })
+                                                         }
+                                                     }
+                                                 }}/>
+                                )}
                             </div>
                         </AccordionTab>
                     )}

@@ -7,7 +7,7 @@ export default function useRemotePlanner(remoteURL) {
 
     const [voxels, setVoxels] = useState({positions: [], sizes: []});
     const [nodes, setNodes] = useState([]);
-    const [endpoints, setEndpoints] = useState({});
+    const [waypoints, setWaypoints] = useState({});
     const [optPath, setOptPath] = useState({path: [], cost: -1});
     const [smoothPath, setSmoothPath] = useState({path: [], cost: -1});
     const [chronoPath, setChronoPath] = useState([]);
@@ -21,7 +21,7 @@ export default function useRemotePlanner(remoteURL) {
             // Reset all states when a new connection is established
             setVoxels({positions: [], sizes: []})
             setNodes([])
-            setEndpoints({})
+            setWaypoints({})
             setChronoPath([])
             setCompleted(false)
             setOptPath({path: [], cost: -1})
@@ -54,9 +54,9 @@ export default function useRemotePlanner(remoteURL) {
                     }
                     break;
                 case 'octomap_endpoints':
-                    const endpoints = JSON.parse(new TextDecoder('utf-8').decode(msg.binaryData));
-                    // console.log("Endpoints received");
-                    setEndpoints(endpoints);
+                    const waypoints = JSON.parse(new TextDecoder('utf-8').decode(msg.binaryData));
+                    // console.log("Waypoints received");
+                    setWaypoints(waypoints);
                     break;
                 case 'octomap_completed':
                     const completed = JSON.parse(new TextDecoder('utf-8').decode(msg.binaryData));
@@ -114,7 +114,7 @@ export default function useRemotePlanner(remoteURL) {
     return {
         voxels,
         nodes,
-        endpoints,
+        waypoints,
         optPath,
         smoothPath,
         chronoPath,

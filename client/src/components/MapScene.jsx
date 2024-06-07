@@ -1,35 +1,39 @@
-import React, { useEffect } from 'react';
-import { useThree } from '@react-three/fiber';
+import React, {useContext, useEffect} from 'react';
+import {useThree} from '@react-three/fiber';
 import * as THREE from 'three';
-import { OrbitControls } from '@react-three/drei';
-import { Octomap } from "./threejs/Octomap";
-import { Nodes } from "./threejs/Nodes";
-import { Path } from "./threejs/Path";
-import { PointSelector } from "./threejs/PointSelector";
+import {OrbitControls} from '@react-three/drei';
+import {Octomap} from "./threejs/Octomap";
+import {Nodes} from "./threejs/Nodes";
+import {Path} from "./threejs/Path";
+import {PointSelector} from "./threejs/PointSelector";
 import useTheme from "../hooks/Theme";
 import {Helpers} from "./threejs/Helpers";
 import {Camera} from "./threejs/Camera";
+import {MapContext} from "../providers/MapContext";
 
-export default function MapScene({ connection, voxels, endpoints, nodes, optPath, smoothPath }) {
-    const { primary } = useTheme();
+export default function MapScene({connection, voxels/*, waypoints*/, nodes, optPath, smoothPath}) {
+    const {primary} = useTheme();
+    const {mapMode, waypoints} = useContext(MapContext);
 
     return (
         <group>
-            <ambientLight intensity={1} />
-            <directionalLight position={[30, 30, -30]} intensity={1} />
-            {connection === 1 ?
+            <ambientLight intensity={1}/>
+            <directionalLight position={[30, 30, -30]} intensity={1}/>
+            {connection === 1 || /*///////////////////////*/true ?
                 <group>
-                    <Octomap voxels={voxels} />
-                    {endpoints.hasOwnProperty('start') ? <Nodes nodes={endpoints} /> : null}
-                    {nodes.length > 0 ? <Path nodes={nodes} color={new THREE.Color(0x00a86b)} lineWidth={0.5} nodeRadius={0.01}/> : null}
-                    {optPath.length > 0 ? <Path nodes={optPath} color={new THREE.Color(0x1E90FF)} lineWidth={0.5} nodeRadius={0.025}/> : null}
-                    {smoothPath.length > 0 ? <Path nodes={smoothPath} color={primary || "blue"} lineWidth={2} /> : null}
+                    <Octomap voxels={voxels}/>
+                    {/*waypoints.hasOwnProperty('start')*/waypoints.length > 0 ? <Nodes nodes={waypoints}/> : null}
+                    {nodes.length > 0 ? <Path nodes={nodes} color={new THREE.Color(0x00a86b)} lineWidth={0.5}
+                                              nodeRadius={0.01}/> : null}
+                    {optPath.length > 0 ? <Path nodes={optPath} color={new THREE.Color(0x1E90FF)} lineWidth={0.5}
+                                                nodeRadius={0.025}/> : null}
+                    {smoothPath.length > 0 ? <Path nodes={smoothPath} color={primary || "blue"} lineWidth={2}/> : null}
                 </group>
                 : null}
-            <Helpers />
-            <Camera />
-            <OrbitControls />
-            <PointSelector />
+            <Helpers/>
+            <Camera/>
+            <OrbitControls/>
+            {mapMode.mode === "point-selector" ? <PointSelector/> : null}
         </group>
     );
 }

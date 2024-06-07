@@ -15,8 +15,7 @@ export function Node({position, nodeColor = 'blue'}) {
 export function Nodes({nodes}) {
     return (
         <group>
-            {Object.keys(nodes).map((key) => <Node key={key} position={nodes[key]}
-                                                   nodeColor={nodes[key].color || "blue"}/>)}
+            {nodes.map(((node) => <Node key={node.id} position={node.coords} nodeColor={node.color || "blue"}/>))}
         </group>
     );
 }
