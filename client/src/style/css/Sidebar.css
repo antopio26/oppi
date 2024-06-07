@@ -3,12 +3,10 @@
 }
 
 aside {
-    /*position: relative;*/
     width: var(--sidebar-width);
     height: 100vh;
     background-color: #333;
     color: white;
-    overflow: hidden;
     z-index: 120;
 
     display: flex;
@@ -19,23 +17,14 @@ aside {
     .top {
         position: relative;
         width: 100%;
+        min-height: 5rem;
         height: 5rem;
         display: grid;
         margin-bottom: .5rem;
         align-self: start;
         transition: margin-left .35s ease-out;
-
-        &::after {
-            content: '';
-            position: absolute;
-            left: 1rem;
-            top: calc(100% + .5rem);
-            width: calc(100% - 2rem);
-            height: 1px;
-            background-color: white;
-            mix-blend-mode: soft-light;
-            pointer-events: none;
-        }
+        overflow-x: hidden;
+        overflow-y: auto;
 
         > * {
             width: 100%;
@@ -143,11 +132,24 @@ aside {
     }
 
     ul {
+        position: relative;
         list-style: none;
         display: flex;
         gap: .5rem;
         padding: 0;
         margin: 1rem 0 3rem;
+
+        &::before {
+            content: '';
+            position: absolute;
+            left: 1rem;
+            top: -1rem;
+            width: calc(100% - 2rem);
+            height: 1px;
+            background-color: white;
+            mix-blend-mode: soft-light;
+            pointer-events: none;
+        }
 
         li {
             button {

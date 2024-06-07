@@ -13,7 +13,7 @@ export default function ColorPicker({ value ="red",onChange = ()=>{}}){
     },[cpRef])
 
     return(<>
-        <input ref={cpRef} className={"color-picker"} onClick={(e) => {
+        <input ref={cpRef} tabIndex={-1} className={"color-picker"} onClick={(e) => {
             e.preventDefault();
             e.stopPropagation();
             if (!e.target.classList.contains("open")) {
@@ -23,7 +23,7 @@ export default function ColorPicker({ value ="red",onChange = ()=>{}}){
             }
         }}
                onBlur={(e) => {
-                   if (!e.relatedTarget?.classList[0].includes("react-colorful")) {
+                   if (!e.relatedTarget?.classList[0]?.includes("react-colorful")) {
                        e.target.classList.remove("open")
                    }
                }}/>
