@@ -91,3 +91,7 @@ T
 $client/src/style/css/ColorPicker.css,3/2/32c82321966f2b76fce7aa5d4f5177f0fa75efc1
 U
 %client/src/components/ColorPicker.jsx,d/d/dd0ba441e12efadf722e8330c8a471088701d043
+_
+/client/src/components/threejs/PointSelector.jsx,2/b/2b0e576ecd2b6bfc7fea2c3e4e80753752043eea
+]
+-client/src/components/PointSelectorButton.jsx,c/9/c9cb30afbd01af17ef5281f0db98569bacddb11a
