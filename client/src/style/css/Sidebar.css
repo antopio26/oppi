@@ -34,6 +34,7 @@ aside {
             height: 1px;
             background-color: white;
             mix-blend-mode: soft-light;
+            pointer-events: none;
         }
 
         > * {
@@ -135,6 +136,10 @@ aside {
 
             }
         }
+
+        &:hover .actions{
+            left:0;
+        }
     }
 
     ul {
@@ -163,9 +168,6 @@ aside {
     .theme-switch-container{
         margin-top: auto;
         padding-top: 1rem;
-        .triple-switch {
-            box-shadow: 0px 0px .75rem .15rem rgba(var(--primary-r), var(--primary-g), var(--primary-b), .25);
-        }
     }
 }
 

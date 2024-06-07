@@ -1,15 +1,25 @@
 {
   "files": {
-    "main.css": "/static/css/main.24e8e169.css",
-    "main.js": "/static/js/main.d81c2bfc.js",
+    "main.css": "/static/css/main.301c461b.css",
+    "main.js": "/static/js/main.e4b8865c.js",
+    "static/media/primeicons.svg": "/static/media/primeicons.6ed59f962963a4a73af2.svg",
     "static/media/Inter-italic.var.woff2?v=3.19": "/static/media/Inter-italic.var.30807be7abc48ba8c73c.woff2",
     "static/media/Inter-roman.var.woff2?v=3.19": "/static/media/Inter-roman.var.ba4caefcdf5b36b438db.woff2",
+    "static/media/primeicons.eot": "/static/media/primeicons.ff0c4cd79b2ffca2de54.eot",
+    "static/media/primeicons.woff": "/static/media/primeicons.8931fda1930c3bd21e96.woff",
+    "static/media/primeicons.ttf": "/static/media/primeicons.a5c2a53d1ff7a9ff5933.ttf",
+    "static/media/Urbanist-Italic-VariableFont_wght.woff2": "/static/media/Urbanist-Italic-VariableFont_wght.53fdedd6a746b2cb121f.woff2",
+    "static/media/Urbanist-VariableFont_wght.woff2": "/static/media/Urbanist-VariableFont_wght.a51055d8b284631a967f.woff2",
+    "static/media/Gloock-Regular.woff2": "/static/media/Gloock-Regular.e57717cf12199189d5d1.woff2",
+    "static/media/primeicons.woff2": "/static/media/primeicons.024b32cc7bf399b1a847.woff2",
+    "static/media/alfaslabone-regular-webfont.woff": "/static/media/alfaslabone-regular-webfont.584746cc177784347624.woff",
+    "static/media/alfaslabone-regular-webfont.woff2": "/static/media/alfaslabone-regular-webfont.a8808c928f917c875d16.woff2",
     "index.html": "/index.html",
-    "main.24e8e169.css.map": "/static/css/main.24e8e169.css.map",
-    "main.d81c2bfc.js.map": "/static/js/main.d81c2bfc.js.map"
+    "main.301c461b.css.map": "/static/css/main.301c461b.css.map",
+    "main.e4b8865c.js.map": "/static/js/main.e4b8865c.js.map"
   },
   "entrypoints": [
-    "static/css/main.24e8e169.css",
-    "static/js/main.d81c2bfc.js"
+    "static/css/main.301c461b.css",
+    "static/js/main.e4b8865c.js"
   ]
 }

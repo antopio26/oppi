@@ -4,7 +4,7 @@ import {useAuth0} from '@auth0/auth0-react';
 import LoginButton from '../components/LoginButton';
 import {Button} from "primereact/button";
 import {useNavigate} from "react-router-dom";
-import useThemeChanger from "../hooks/ThemeChanger";
+import useTheme from "../hooks/Theme";
 
 import "../style/css/Home.css";
 import {Divider} from "primereact/divider";
@@ -14,7 +14,7 @@ import {Avatar} from "primereact/avatar";
 export default function Home() {
     const {user, isAuthenticated, loginWithRedirect} = useAuth0();
     const navigate = useNavigate();
-    const {changeTheme} = useThemeChanger();
+    const {changeTheme} = useTheme();
     const compass = useRef(null);
     const [rotation, setRotation] = useState(0);
 

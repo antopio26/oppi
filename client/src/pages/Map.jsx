@@ -6,6 +6,7 @@ import MapScene from "../components/MapScene";
 import useRemotePlanner from "../hooks/RemotePlanner";
 import Sidebar from "../components/Sidebar";
 import MapSidebar from "../components/MapSidebar";
+import MapContextProvider from "../providers/MapContext";
 
 export default function Map() {
 
@@ -19,6 +20,7 @@ export default function Map() {
 
     return (
         <>
+            <MapContextProvider>
             <Sidebar info={"Imposta un punto di partenza, un punto di arrivo e genera un percorso. Puoi modificare i parametri del path planning o muoverti all'interno della mappa."}>
                 <MapSidebar />
             </Sidebar>
@@ -34,6 +36,7 @@ export default function Map() {
                     />}
                 </Canvas>
             </main>
+            </MapContextProvider>
         </>
     )
 }

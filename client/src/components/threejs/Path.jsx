@@ -3,13 +3,13 @@ import * as THREE from "three";
 import { Line } from "@react-three/drei";
 import { useThree } from "@react-three/fiber";
 
-export function Path({nodes, color = "green"}) {
+export function Path({nodes, color = "green", lineWidth = 1, nodeRadius = 0.05}) {
     const {scene} = useThree();
     const instancedNodes = useRef();
     const nodeMaterial = new THREE.MeshStandardMaterial({
         color: color
     });
-    const nodeGeometry = new THREE.SphereGeometry(.05, 8, 8);
+    const nodeGeometry = new THREE.SphereGeometry(nodeRadius, 8, 8);
 
     useEffect(() => {
         if (!instancedNodes.current) {
@@ -35,10 +35,14 @@ export function Path({nodes, color = "green"}) {
         }
     }, [nodes]);
 
+    useEffect(() => {
+        nodeMaterial.color.set(color);
+        instancedNodes.current.material = nodeMaterial;
+    }, [color]);
 
     return (
         <group>
-            <Line points={nodes.map((node) => [node.x, node.y, node.z])} color={color} lineWidth={1} />
+            <Line points={nodes.map((node) => [node.x, node.y, node.z])} color={color} lineWidth={lineWidth} />
         </group>
     );
 }

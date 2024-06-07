@@ -21,7 +21,6 @@
     height: 50px;
     border-radius: 100px;
     background-color: var(--background);
-    /*box-shadow: 1px 1px 10px 1px rgba(0, 0, 0, 0.5);*/
 
     input[type="radio"] {
         display: none;
@@ -169,12 +168,8 @@
     /* ------------------- PLUS ------------------- */
 
     &.shadow{
+        box-shadow: 0px 0px .75rem .15rem rgba(var(--primary-r), var(--primary-g), var(--primary-b), .25);
         transition: box-shadow .35s ease-out;
-        &::before{
-            content: var(--left-r);
-            width: 1px;
-            height: 1px;
-        }
         &:has(#left:hover){
             box-shadow: 0px 0px .75rem .15rem rgba(var(--left-r), var(--left-g), var(--left-b), .25);
         }
@@ -184,6 +179,17 @@
         &:has(#right:hover){
             box-shadow: 0px 0px .75rem .15rem rgba(var(--right-r), var(--right-g), var(--right-b), .25);
         }
+    }
+    &.hover-text{
+        #left:hover + label{
+            color: rgb(var(--left-r), var(--left-g), var(--left-b));
+        }
+        #center:hover + label{
+            color: rgb(var(--center-r), var(--center-g), var(--center-b));
+        }
+        #right:hover + label{
+             color: rgb(var(--right-r), var(--right-g), var(--right-b));
+         }
     }
 }
 

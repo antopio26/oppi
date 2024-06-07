@@ -1,0 +1,25 @@
+.color-picker{
+    width: 1rem;
+    height: 1rem;
+    border-radius: 50%;
+    border: 1px solid rgba(255, 255, 255, .5);
+    cursor: pointer;
+    user-select: none;
+    outline: none;
+
+    &:hover{
+        border-color: rgba(255, 255, 255, .75);
+    }
+    &:focus{
+        border-color: var(--lighter-secondary);
+
+    }
+    &.open + .react-colorful{
+        display: flex;
+    }
+    + .react-colorful{
+        position: fixed;
+        display: none;
+        left: calc(var(--sidebar-width) + 1rem);
+    }
+}

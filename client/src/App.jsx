@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {createContext, useState} from 'react';
 
 import 'primeicons/primeicons.css';
 import './style/css/font.css'
@@ -15,12 +15,15 @@ import NotFound from "./pages/NotFound";
 import CallbackPage from "./pages/CallbackPage";
 
 import AuthenticationGuard from "./components/AuthenticationGuard";
+import ThemeContextProvider from "./providers/AppContext";
 import Sidebar from "./components/Sidebar";
+import useTheme from "./hooks/Theme";
+
 
 function App() {
-
     return (
         <>
+            <ThemeContextProvider>
             <Routes>
                 <Route exact path="/" element={<Home/>}/>
                 <Route path="/*" element={<NotFound/>}/>
@@ -30,6 +33,7 @@ function App() {
                 <Route path="/dashboard/*" element={<AuthenticationGuard component={Dashboard}/>}/>
                 <Route path="/map/*" element={<AuthenticationGuard component={Map}/>}/>
             </Routes>
+            </ThemeContextProvider>
         </>
     );
 }

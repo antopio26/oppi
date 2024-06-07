@@ -1,25 +1,23 @@
 import "../style/css/Sidebar.css";
 
 import React, {useEffect, useRef, useState} from "react";
-import {Outlet, Route, Routes, useLocation, useNavigate} from "react-router-dom";
+import { useLocation, useNavigate} from "react-router-dom";
 
 import LogoutButton from "../components/LogoutButton";
 
 import {Button} from "primereact/button";
-import ProfileSidebar from "./ProfileSidebar";
-import DashboardSidebar from "./DashboardSidebar";
-import MapSidebar from "./MapSidebar";
 import TripleSwitch from "./TripleSwitch";
-import useThemeChanger from "../hooks/ThemeChanger";
+import useTheme from "../hooks/Theme";
 import {useAuth0} from "@auth0/auth0-react";
 import {Avatar} from "primereact/avatar";
 import {Toast} from "primereact/toast";
+import {log} from "three/examples/jsm/nodes/math/MathNode";
 
 export default function Sidebar({info = undefined, children = <></>}) {
     const location = useLocation();
     const navigate = useNavigate();
     const [pathname, setPathname] = useState(location.pathname);
-    const {currentTheme, changeTheme, getColors, getThemes} = useThemeChanger();
+    const {currentTheme, changeTheme, getColors, getThemes} = useTheme();
     const {user} = useAuth0();
     const toastRef = useRef(null);
 
@@ -93,7 +91,7 @@ export default function Sidebar({info = undefined, children = <></>}) {
                 {children}
 
                 <div className="theme-switch-container">
-                    <TripleSwitch className={"shadow"}
+                    <TripleSwitch className={"hover-text"}
                                   colors={{left: getColors()[0], center: getColors()[1], right: getColors()[2]}}
                                   labels={{
                                       left: {

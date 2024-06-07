@@ -112,6 +112,11 @@ main {
 }
 
 .p-button {
+    outline: none;
+    &:focus{
+        box-shadow: none;
+
+    }
     &.lighter-secondary-bg {
         background-color: var(--lighter-secondary);
         border-color: var(--secondary-border);
