@@ -14,12 +14,13 @@
         border-color: var(--lighter-secondary);
 
     }
-    &.open + .react-colorful{
-        display: flex;
-    }
     + .react-colorful{
         position: fixed;
         display: none;
         left: calc(var(--sidebar-width) + 1rem);
     }
+    &.open + .react-colorful{
+        display: flex;
+    }
+
 }

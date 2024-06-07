@@ -1,13 +1,13 @@
 import {createContext, useState} from "react";
 
-export const NodesColorContext = createContext('');
+export const MapContext = createContext('');
 
-export default function NodeColorContextProvider({children}){
-    const [nodesColor, setNodesColor] = useState(["#ff0000", "#0000ff"])
+export default function MapContextProvider({children, states = {}}) {
+    const [nodesColor, setNodesColor] = useState(["#ff0000", "#0000ff"]);
 
     return (
-        <NodesColorContext.Provider value={{nodesColor, setNodesColor}}>
+        <MapContext.Provider value={Object.assign({nodesColor, setNodesColor},states)}>
             {children}
-        </NodesColorContext.Provider>
+        </MapContext.Provider>
     )
 } ;

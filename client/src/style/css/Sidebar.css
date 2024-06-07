@@ -3,7 +3,7 @@
 }
 
 aside {
-    position: relative;
+    /*position: relative;*/
     width: var(--sidebar-width);
     height: 100vh;
     background-color: #333;

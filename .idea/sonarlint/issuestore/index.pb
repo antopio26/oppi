@@ -65,8 +65,6 @@ M
 client/src/pages/NotFound.jsx,5/a/5ade5cda5faefb39831e6d231088bbe58bad1f4e
 U
 %client/src/utils/OctomapConversion.js,3/b/3b6d273c5eb03a127852ef0ad9561cb34554ced6
-P
- client/src/hooks/ThemeChanger.js,b/2/b26db64fe5347e885bb204a01482d956eda02c44
 Q
 !client/src/hooks/RemotePlanner.js,e/1/e1c7b0d44bbf3e746ae6707f95915383f91706ba
 S
@@ -83,3 +81,13 @@ P
  client/src/style/css/Profile.css,a/a/aa00feafb30fa16d6abc9dce05bf1b98a373483b
 S
 #client/src/style/css/MapSidebar.css,f/d/fdd633cc861a0a78392e9f62d5a48e364273103a
+I
+client/src/hooks/Theme.js,7/7/771b185a93e065905b4daae4a3d4c7b32fa0624f
+R
+"client/src/providers/MapContext.js,8/2/824222406eaf4b8233177588a52dd3b4ebe284b8
+L
+client/src/style/css/Map.css,e/3/e3987fc91248e1b7fa57c6abdec6f8f3c287a7f5
+T
+$client/src/style/css/ColorPicker.css,3/2/32c82321966f2b76fce7aa5d4f5177f0fa75efc1
+U
+%client/src/components/ColorPicker.jsx,d/d/dd0ba441e12efadf722e8330c8a471088701d043

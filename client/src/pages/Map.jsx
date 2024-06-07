@@ -1,4 +1,6 @@
-import React from 'react';
+import React, {useContext, useState} from 'react';
+
+import '../style/css/Map.css';
 
 import {Canvas} from "@react-three/fiber";
 import MapScene from "../components/MapScene";
@@ -9,6 +11,10 @@ import MapSidebar from "../components/MapSidebar";
 import MapContextProvider from "../providers/MapContext";
 
 export default function Map() {
+    const [mapMode, setMapMode] = useState("view");
+    const [allCollapsed, setAllCollapsed] = useState(false);
+
+
 
     const {
         readyState,
@@ -19,12 +25,11 @@ export default function Map() {
     } = useRemotePlanner('ws://localhost:9002');
 
     return (
-        <>
-            <MapContextProvider>
+            <MapContextProvider states={{mapMode,setMapMode,allCollapsed,setAllCollapsed}}>
             <Sidebar info={"Imposta un punto di partenza, un punto di arrivo e genera un percorso. Puoi modificare i parametri del path planning o muoverti all'interno della mappa."}>
                 <MapSidebar />
             </Sidebar>
-            <main style={{position: "relative"}}>
+            <main style={{position: "relative"}} className={`map-main ${mapMode}`}>
                 <Canvas style={{position: "absolute", inset: 0}}>
                     {<MapScene
                         connection={readyState}
@@ -37,6 +42,5 @@ export default function Map() {
                 </Canvas>
             </main>
             </MapContextProvider>
-        </>
     )
 }

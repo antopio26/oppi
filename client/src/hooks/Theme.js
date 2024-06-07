@@ -17,28 +17,17 @@ export default function useTheme() {
     }
 
     useEffect(() => {
+        setColorsAndMeta();
+    }, []);
+
+    useEffect(() => {
         // Set theme to local storage
         localStorage.setItem("theme", currentTheme);
 
         // Set theme to document body
         document.body.setAttribute("theme", currentTheme);
-        const metaThemeColor = document.querySelector("meta[name=theme-color]");
-
         setTimeout(() => {
-            // get var from css
-            const backgroundColor = getComputedStyle(document.body).getPropertyValue('--background');
-            const primaryColor = getComputedStyle(document.body).getPropertyValue('--primary');
-
-            // compute mix between background and primary color (without THREE)
-            const primaryLightColor = '#' + (new THREE.Color(primaryColor).lerp(new THREE.Color(backgroundColor), 0.9)).getHexString();
-
-            // set state
-            setPrimary(primaryColor);
-            setBackground(backgroundColor);
-            setLight(primaryLightColor);
-
-            metaThemeColor.setAttribute("content", primaryColor);
-
+            setColorsAndMeta()
         }, 250);
     }, [currentTheme]);
 
@@ -57,6 +46,22 @@ export default function useTheme() {
 
     const getThemes = () => {
         return themes;
+    }
+
+    const setColorsAndMeta = () => {
+        const backgroundColor = getComputedStyle(document.body).getPropertyValue('--background');
+        const primaryColor = getComputedStyle(document.body).getPropertyValue('--primary');
+
+        // compute mix between background and primary color (without THREE)
+        const primaryLightColor = '#' + (new THREE.Color(primaryColor).lerp(new THREE.Color(backgroundColor), 0.9)).getHexString();
+
+        // set state
+        setPrimary(primaryColor);
+        setBackground(backgroundColor);
+        setLight(primaryLightColor);
+
+        const metaThemeColor = document.querySelector("meta[name=theme-color]");
+        metaThemeColor.setAttribute("content", primaryColor);
     }
 
     return {currentTheme, primary, background, light, changeTheme, getColors, getThemes};

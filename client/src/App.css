@@ -18,6 +18,10 @@ body, body[theme=lemon]{
     --lighter-secondary-r: 110;
     --lighter-secondary-g: 109;
     --lighter-secondary-b: 105;
+
+    --background-r: 20;
+    --background-g: 19;
+    --background-b: 16;
 }
 
 body[theme=orange]{
@@ -36,6 +40,10 @@ body[theme=orange]{
     --lighter-secondary-r: 110;
     --lighter-secondary-g: 108;
     --lighter-secondary-b: 106;
+
+    --background-r: 20;
+    --background-g: 18;
+    --background-b: 16;
 }
 
 body[theme=lime]{
@@ -54,6 +62,10 @@ body[theme=lime]{
     --lighter-secondary-r: 106;
     --lighter-secondary-g: 109;
     --lighter-secondary-b: 106;
+
+    --background-r: 19;
+    --background-g: 20;
+    --background-b: 16;
 }
 
 *, *::before, *::after {
