@@ -1,5 +1,5 @@
 import {Button} from "primereact/button";
-import {useContext, useEffect, useState} from "react";
+import {useContext} from "react";
 import {MapContext} from "../providers/MapContext";
 
 export default function PointSelectorButton({setNodesAccordionActiveIndex, index, id}) {
