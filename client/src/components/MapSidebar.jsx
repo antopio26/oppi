@@ -61,12 +61,11 @@ export default function MapSidebar() {
         return () => {
             document.removeEventListener("keydown", handleKeyDown)
         }
-    }, [mapMode.mode]);
+    }, [mapMode]);
 
     return (
         <div className="map-sidebar" onClickCapture={(e) => {
             if (mapMode.mode === "point-selector") {
-                // target is not .p-accordion-tab input
                 if (!e.target.closest(".point-selector-button") && !e.target.closest(".p-accordion-content input")) {
                     setMapMode({mode: "view"})
                 }
