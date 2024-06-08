@@ -4,9 +4,6 @@ import {MapContext} from "../providers/MapContext";
 
 export default function PointSelectorButton({setNodesAccordionActiveIndex, index, id}) {
     const {mapMode, setMapMode}= useContext(MapContext)
-    useEffect(() => {
-        console.log(mapMode.mode, mapMode.point, id)
-    }, [mapMode]);
 
     return <Button icon="pi pi-bullseye" className={"point-selector-button white-text" + (mapMode.mode === "point-selector" && mapMode.point === id ? " active" : "")}
                    text rounded onFocus={() => {
