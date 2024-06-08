@@ -1,0 +1,20 @@
+
+djavascript:S1481"<Remove the declaration of the unused 'sendMessage' variable.(á§Ì½şÿÿÿÿ8Æ—Î¼ÿ1
+ajavascript:S1854"9Remove this useless assignment to variable "sendMessage".(á§Ì½şÿÿÿÿ8Æ—Î¼ÿ1
+Ujavascript:S6836*"-Unexpected lexical declaration in case block.(È¶‡şıÿÿÿÿ8Æ—Î¼ÿ1
+Fjavascript:S125+"Remove this commented out code.(­Áıƒøÿÿÿÿ8Æ—Î¼ÿ1
+Pjavascript:S68360"-Unexpected lexical declaration in case block.(Øı‹¶8Æ—Î¼ÿ1
+@javascript:S1251"Remove this commented out code.(•¼»8Ç—Î¼ÿ1
+Ujavascript:S68369"-Unexpected lexical declaration in case block.(™•Éõøÿÿÿÿ8Ç—Î¼ÿ1
+Fjavascript:S125:"Remove this commented out code.(ËÇû—ûÿÿÿÿ8Ç—Î¼ÿ1
+Ujavascript:S6836>"-Unexpected lexical declaration in case block.(®Â²Ûşÿÿÿÿ8Ç—Î¼ÿ1
+Fjavascript:S125?"Remove this commented out code.(óœòøÿÿÿÿ8Ç—Î¼ÿ1
+Ujavascript:S6836D"-Unexpected lexical declaration in case block.(íÏ¯ÿÿÿÿÿ8Ç—Î¼ÿ1
+Fjavascript:S125E"Remove this commented out code.(üÌ€©øÿÿÿÿ8Ç—Î¼ÿ1
+Pjavascript:S6836I"-Unexpected lexical declaration in case block.(šîŞÇ8Ç—Î¼ÿ1
+Ajavascript:S125J"Remove this commented out code.(úùã‹8Ç—Î¼ÿ1
+qjavascript:S1481X"IRemove the declaration of the unused 'closeWebSocketConnection' variable.(ËåÙÊıÿÿÿÿ8Ç—Î¼ÿ1
+njavascript:S1854X"FRemove this useless assignment to variable "closeWebSocketConnection".(ËåÙÊıÿÿÿÿ8Ç—Î¼ÿ1
+Wjavascript:S1135h"4Complete the task associated to this "TODO" comment.(ÍÍµ8Ç—Î¼ÿ1
+hjavascript:S1481j"@Remove the declaration of the unused 'connectionState' variable.(“²´üÿÿÿÿ8Ç—Î¼ÿ1
+ejavascript:S1854j"=Remove this useless assignment to variable "connectionState".(“²´üÿÿÿÿ8Ç—Î¼ÿ1

@@ -85,14 +85,14 @@ export function PointSelector() {
             setMapMode({mode: "view"});
         }
 
-        window.addEventListener('pointermove', handlePointerMove);
-        window.addEventListener('pointerup', handlePointerUp);
-        window.addEventListener('pointerdown', handlePointerDown);
+        document.querySelector("main").addEventListener('pointermove', handlePointerMove);
+        document.querySelector("main").addEventListener('pointerup', handlePointerUp);
+        document.querySelector("main").addEventListener('pointerdown', handlePointerDown);
 
         return () => {
-            window.removeEventListener('pointermove', handlePointerMove);
-            window.removeEventListener('pointerup', handlePointerUp);
-            window.removeEventListener('pointerdown', handlePointerDown);
+            document.querySelector("main").removeEventListener('pointermove', handlePointerMove);
+            document.querySelector("main").removeEventListener('pointerup', handlePointerUp);
+            document.querySelector("main").removeEventListener('pointerdown', handlePointerDown);
         };
     }, [clicks, pointer, camera, raycaster]);
 
