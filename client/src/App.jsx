@@ -1,11 +1,9 @@
-import React, {createContext, useState} from 'react';
-
 import 'primeicons/primeicons.css';
 import './style/css/font.css'
 import './App.css';
 import "primereact/resources/themes/lara-light-cyan/theme.css";
 
-import {Outlet, Route, Routes} from 'react-router-dom';
+import {Route, Routes} from 'react-router-dom';
 
 import Home from './pages/Home';
 import Profile from './pages/Profile';
@@ -16,14 +14,11 @@ import CallbackPage from "./pages/CallbackPage";
 
 import AuthenticationGuard from "./components/AuthenticationGuard";
 import ThemeContextProvider from "./providers/AppContext";
-import Sidebar from "./components/Sidebar";
-import useTheme from "./hooks/Theme";
 
 
 function App() {
     return (
-        <>
-            <ThemeContextProvider>
+        <ThemeContextProvider>
             <Routes>
                 <Route exact path="/" element={<Home/>}/>
                 <Route path="/*" element={<NotFound/>}/>
@@ -34,7 +29,6 @@ function App() {
                 <Route path="/map/*" element={<AuthenticationGuard component={Map}/>}/>
             </Routes>
             </ThemeContextProvider>
-        </>
     );
 }
 

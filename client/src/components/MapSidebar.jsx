@@ -125,7 +125,7 @@ export default function MapSidebar() {
                                     <InputCoords key={i} label={coord} value={wp.coords[coord]}
                                                  onChange={(e) => setWaypoints(waypoints.map((wp, j) => j === index ? {
                                                      id: wp.id,
-                                                     coords: {...wp.coords, [coord]: e},
+                                                     coords: {...wp.coords, [coord]: parseFloat(e)},
                                                      color: wp.color
                                                  } : wp))}
                                                  onBlur={(e) => InputCoordsOnBlur(e, mapMode, setMapMode)}

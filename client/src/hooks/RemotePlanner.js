@@ -1,13 +1,14 @@
-import { useEffect, useState } from "react";
+import {useContext, useEffect, useState} from "react";
 import * as THREE from "three";
-import useWebSocket, { ReadyState } from 'react-use-websocket';
-import { decodeMessage, binaryDataToVoxels } from "../utils/OctomapConversion";
+import useWebSocket, {ReadyState} from 'react-use-websocket';
+import {decodeMessage, binaryDataToVoxels} from "../utils/OctomapConversion";
+import {MapContext} from "../providers/MapContext";
 
-export default function useRemotePlanner(remoteURL) {
+export default function useRemotePlanner(remoteURL, waypoints = []) {
 
     const [voxels, setVoxels] = useState({positions: [], sizes: []});
     const [nodes, setNodes] = useState([]);
-    const [waypoints, setWaypoints] = useState({});
+    // const {waypoints, setWaypoints} = useContext(MapContext);
     const [optPath, setOptPath] = useState({path: [], cost: -1});
     const [smoothPath, setSmoothPath] = useState({path: [], cost: -1});
     const [chronoPath, setChronoPath] = useState([]);
@@ -21,7 +22,7 @@ export default function useRemotePlanner(remoteURL) {
             // Reset all states when a new connection is established
             setVoxels({positions: [], sizes: []})
             setNodes([])
-            setWaypoints({})
+            // setWaypoints([])
             setChronoPath([])
             setCompleted(false)
             setOptPath({path: [], cost: -1})
@@ -53,11 +54,11 @@ export default function useRemotePlanner(remoteURL) {
                         setChronoPath(chronoPath => [...chronoPath, nodes.time]);
                     }
                     break;
-                case 'octomap_endpoints':
-                    const waypoints = JSON.parse(new TextDecoder('utf-8').decode(msg.binaryData));
-                    // console.log("Waypoints received");
-                    setWaypoints(waypoints);
-                    break;
+                // case 'octomap_endpoints':
+                //     const waypoints = JSON.parse(new TextDecoder('utf-8').decode(msg.binaryData));
+                //     // console.log("Waypoints received");
+                //     setWaypoints(waypoints);
+                //     break;
                 case 'octomap_completed':
                     const completed = JSON.parse(new TextDecoder('utf-8').decode(msg.binaryData));
                     // console.log("Path Planning completed");
@@ -66,13 +67,13 @@ export default function useRemotePlanner(remoteURL) {
                     break;
                 case 'octomap_optimized_path':
                     const optPath = JSON.parse(new TextDecoder('utf-8').decode(msg.binaryData));
-                    // console.log("Optimal Path received");
-                    setOptPath(optPath);
+                    // console.log("Optimal Path received", optPath);
+                    setOptPath(optPath.path);
                     break;
                 case 'octomap_smoothed_path':
                     const smoothPath = JSON.parse(new TextDecoder('utf-8').decode(msg.binaryData));
                     // console.log("Smooth Path received");
-                    setSmoothPath(smoothPath);
+                    setSmoothPath(smoothPath.path);
                     break;
                 default:
                     console.log('Received unknown message:', msg);
@@ -102,6 +103,18 @@ export default function useRemotePlanner(remoteURL) {
     }, [readyState]);
 
     // TODO: Add functions to handle sending data and commands to the remote planner
+
+    useEffect(() => {
+        console.log(1, waypoints)
+        if (readyState === WebSocket.OPEN) {
+            console.log(2)
+            if (waypoints.length >= 2) {
+                console.log(3)
+                console.log("Waypoints sent");
+                sendMessage(JSON.stringify({topic: 'r', waypoints: waypoints}));
+            }
+        }
+    }, [waypoints]);
 
     const connectionState = {
         [ReadyState.CONNECTING]: 'Connecting',

@@ -63,7 +63,6 @@ export default function Sidebar({info = undefined, children = <></>}) {
                                     });
                                 }
                                 e.currentTarget.classList.toggle("open");
-
                             }}/>}
                     </div>
                 </div>

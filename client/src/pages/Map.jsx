@@ -14,13 +14,13 @@ export default function Map() {
     const [mapMode, setMapMode] = useState({mode: "view"});
     const [allCollapsed, setAllCollapsed] = useState(false);
 
-    const {
-        readyState,
-        voxels,
-        waypoints, nodes,
-        optPath,
-        smoothPath
-    } = useRemotePlanner('ws://localhost:9002');
+    // const {
+    //     readyState,
+    //     voxels,
+    //     nodes,
+    //     optPath,
+    //     smoothPath
+    // } = useRemotePlanner('ws://localhost:9002');
 
     return (
         <MapContextProvider states={{mapMode, setMapMode, allCollapsed, setAllCollapsed}}>
@@ -31,12 +31,12 @@ export default function Map() {
             <main style={{position: "relative"}} className={`map-main ${mapMode.mode}`}>
                 <Canvas style={{position: "absolute", inset: 0}}>
                     {<MapScene
-                        connection={readyState}
-                        voxels={voxels}
-                        // waypoints={waypoints}
-                        nodes={nodes}
-                        optPath={optPath.path}
-                        smoothPath={smoothPath.path}
+                        // connection={readyState}
+                        // voxels={voxels}
+                        // // waypoints={waypoints}
+                        // nodes={nodes}
+                        // optPath={optPath.path}
+                        // smoothPath={smoothPath.path}
                     />}
                 </Canvas>
             </main>

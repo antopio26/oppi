@@ -80,7 +80,7 @@ export function PointSelector() {
             setClicks(0);
             setWaypoints(waypoints.map((waypoint, i) => (i === mapMode.point) ? {
                 ...waypoint,
-                coords: {x: position[0].toFixed(4), y: position[1].toFixed(4), z: position[2].toFixed(4)}
+                coords: {x: Math.round(position[0]*10000)/10000, y: Math.round(position[1]*10000)/10000, z: Math.round(position[2]*10000)/10000}
             } : waypoint));
             setMapMode({mode: "view"});
         }

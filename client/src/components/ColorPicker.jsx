@@ -25,18 +25,21 @@ export default function ColorPicker({ value ="red",onChange = ()=>{}}){
             }
         }}
                onBlur={(e) => {
-                   if (!e.relatedTarget?.classList[0]?.includes("react-colorful")) {
+                   if (!e.relatedTarget?.closest(".react-colorful")) {
                        e.target.classList.remove("open")
                    }
-               }}/>
+               }}
+        />
         <HexColorPicker color={color}
-                        onClick={(e) => e.stopPropagation()}
+                        onClick={(e) => {
+                            e.stopPropagation()
+                        }}
                         onChange={(e) => {
                             setColor(e)
                             onChange(e)
                         }}
                         onBlur={(e) => {
-                            if(!e.relatedTarget && !e.relatedTarget?.classList[0].includes("react-colorful")) {
+                            if(!e.relatedTarget?.closest(".react-colorful")) {
                                 cpRef.current.classList.remove("open");
                             }
                         }}

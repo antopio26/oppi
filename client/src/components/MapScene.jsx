@@ -11,18 +11,26 @@ import {Helpers} from "./threejs/Helpers";
 import {Camera} from "./threejs/Camera";
 import {MapContext} from "../providers/MapContext";
 
-export default function MapScene({connection, voxels/*, waypoints*/, nodes, optPath, smoothPath}) {
+export default function MapScene({/*connection, voxels, nodes, optPath, smoothPath*/}) {
     const {primary} = useTheme();
-    const {mapMode, waypoints} = useContext(MapContext);
+    const {mapMode, waypoints, connection, voxels, nodes, optPath, smoothPath} = useContext(MapContext);
+
+    useEffect(() => {
+        console.log(optPath)
+    },[optPath]);
+
+    useEffect(() => {
+        console.log("Nodes",nodes)
+    },[nodes]);
 
     return (
         <group>
             <ambientLight intensity={1}/>
             <directionalLight position={[30, 30, -30]} intensity={1}/>
-            {connection === 1 || /*///////////////////////*/true ?
+            {connection === 1 ?
                 <group>
                     <Octomap voxels={voxels}/>
-                    {/*waypoints.hasOwnProperty('start')*/waypoints.length > 0 ? <Nodes nodes={waypoints}/> : null}
+                    {waypoints.length > 0 ? <Nodes nodes={waypoints}/> : null}
                     {nodes.length > 0 ? <Path nodes={nodes} color={new THREE.Color(0x00a86b)} lineWidth={0.5}
                                               nodeRadius={0.01}/> : null}
                     {optPath.length > 0 ? <Path nodes={optPath} color={new THREE.Color(0x1E90FF)} lineWidth={0.5}

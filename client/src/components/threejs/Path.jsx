@@ -12,6 +12,7 @@ export function Path({nodes, color = "green", lineWidth = 1, nodeRadius = 0.05})
     const nodeGeometry = new THREE.SphereGeometry(nodeRadius, 8, 8);
 
     useEffect(() => {
+        console.log("Creating instanced nodes")
         if (!instancedNodes.current) {
             instancedNodes.current = new THREE.InstancedMesh(nodeGeometry, nodeMaterial, 500); // Assuming 100,000 instances
             instancedNodes.current.instanceMatrix.setUsage(THREE.DynamicDrawUsage);
