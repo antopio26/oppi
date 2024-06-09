@@ -13,7 +13,7 @@ import {MapContext} from "../providers/MapContext";
 
 export default function MapScene({/*connection, voxels, nodes, optPath, smoothPath*/}) {
     const {primary} = useTheme();
-    const {mapMode, waypoints, connection, voxels, nodes, optPath, smoothPath} = useContext(MapContext);
+    const {mapMode, waypoints, waypointsColor, connection, voxels, nodes, optPath, smoothPath} = useContext(MapContext);
 
     useEffect(() => {
         console.log(optPath)
@@ -30,7 +30,7 @@ export default function MapScene({/*connection, voxels, nodes, optPath, smoothPa
             {connection === 1 ?
                 <group>
                     <Octomap voxels={voxels}/>
-                    {waypoints.length > 0 ? <Nodes nodes={waypoints}/> : null}
+                    {waypoints.length > 0 ? <Nodes nodes={waypoints.map((wp)=>Object.assign({}, wp, {color: waypointsColor.find((c)=>c.id === wp.id).color}) )}/> : null}
                     {nodes.length > 0 ? <Path nodes={nodes} color={new THREE.Color(0x00a86b)} lineWidth={0.5}
                                               nodeRadius={0.01}/> : null}
                     {optPath.length > 0 ? <Path nodes={optPath} color={new THREE.Color(0x1E90FF)} lineWidth={0.5}

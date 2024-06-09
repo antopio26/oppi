@@ -8,7 +8,6 @@ export default function useRemotePlanner(remoteURL, waypoints = []) {
 
     const [voxels, setVoxels] = useState({positions: [], sizes: []});
     const [nodes, setNodes] = useState([]);
-    // const {waypoints, setWaypoints} = useContext(MapContext);
     const [optPath, setOptPath] = useState({path: [], cost: -1});
     const [smoothPath, setSmoothPath] = useState({path: [], cost: -1});
     const [chronoPath, setChronoPath] = useState([]);
@@ -105,11 +104,8 @@ export default function useRemotePlanner(remoteURL, waypoints = []) {
     // TODO: Add functions to handle sending data and commands to the remote planner
 
     useEffect(() => {
-        console.log(1, waypoints)
         if (readyState === WebSocket.OPEN) {
-            console.log(2)
             if (waypoints.length >= 2) {
-                console.log(3)
                 console.log("Waypoints sent");
                 sendMessage(JSON.stringify({topic: 'r', waypoints: waypoints}));
             }

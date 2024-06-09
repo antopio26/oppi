@@ -34,7 +34,7 @@ export function InputCoords({
 }
 
 export default function MapSidebar() {
-    const {waypoints, setWaypoints, mapMode, setMapMode, allCollapsed, setAllCollapsed} = useContext(MapContext);
+    const {waypoints, setWaypoints, waypointsColor, setWaypointsColor, mapMode, setMapMode, allCollapsed, setAllCollapsed} = useContext(MapContext);
     const nodesAccordionRef = useRef();
     const [nodesAccordionActiveIndex, setNodesAccordionActiveIndex] = useState(null);
 
@@ -81,6 +81,7 @@ export default function MapSidebar() {
                         const index = Array.from(nodesAccordionRef.current.getElement().children).indexOf(e.target.closest(".p-accordion-tab"));
                         setTimeout(() => {
                             setWaypoints(waypoints.filter((wp, i) => i !== index));
+                            setWaypointsColor(waypointsColor.filter((c) => c.id !== waypoints[index].id));
                         }, 500)
                     }
                     e.stopPropagation()
@@ -92,7 +93,10 @@ export default function MapSidebar() {
                             onClick={() => {
                                 setWaypoints([...waypoints, {
                                     id: waypoints[waypoints.length - 1].id + 1,
-                                    coords: {x: "", y: "", z: ""},
+                                    coords: {x: 1, y: 1, z: 1}
+                                }]);
+                                setWaypointsColor([...waypointsColor, {
+                                    id: waypoints[waypoints.length - 1].id + 1,
                                     color: "#ff0000"
                                 }]);
                                 setNodesAccordionActiveIndex(waypoints.length);
@@ -113,20 +117,19 @@ export default function MapSidebar() {
                             <PointSelectorButton index={index}
                                                  setNodesAccordionActiveIndex={setNodesAccordionActiveIndex}
                                                  id={wp.id}/>
-                            <ColorPicker value={waypoints[index].color}
-                                         onChange={(e) => setWaypoints(waypoints.map((wp, i) => i === index ? {
-                                             id: wp.id,
-                                             coords: wp.coords,
-                                             color: e
-                                         } : wp))}/>
+                            <ColorPicker value={waypointsColor.find((c) => c.id === wp.id)?.color || "#ff0000"}
+                                         onChange={(e) => setWaypointsColor(waypointsColor.map((c) => c.id === wp.id ? {
+                                                id: c.id,
+                                                color: e
+                                            } : c))
+                                         }/>
                         </>}>
                             <div className="coords">
                                 {Object.keys(wp.coords).map((coord, i) =>
                                     <InputCoords key={i} label={coord} value={wp.coords[coord]}
                                                  onChange={(e) => setWaypoints(waypoints.map((wp, j) => j === index ? {
                                                      id: wp.id,
-                                                     coords: {...wp.coords, [coord]: parseFloat(e)},
-                                                     color: wp.color
+                                                     coords: {...wp.coords, [coord]: parseFloat(e)}
                                                  } : wp))}
                                                  onBlur={(e) => InputCoordsOnBlur(e, mapMode, setMapMode)}
                                                  onKeyDown={(e) => {

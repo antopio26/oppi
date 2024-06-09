@@ -181,6 +181,9 @@
         }
     }
     &.hover-text{
+        & + label{
+            transition: color .25s ease-out;
+        }
         #left:hover + label{
             color: rgb(var(--left-r), var(--left-g), var(--left-b));
         }
