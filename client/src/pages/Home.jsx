@@ -34,8 +34,8 @@ export default function Home() {
                     }
                 </div>
                 <div className="creators">
-                    <p className={"label"}>Realizzato da </p>
-                    <div className={"info"}>Antonio Pio Maggio e Ivan Cisternino
+                    <p className={"label"}>Developed by</p>
+                    <div className={"info"}>Antonio Pio Maggio and Ivan Cisternino
                         <AvatarGroup>
                             <Avatar image="https://avatars.githubusercontent.com/u/15969380?v=4" shape="circle"
                                     className={"p-avatar-md"}/>
@@ -47,9 +47,8 @@ export default function Home() {
                 <div className="intro">
                     <div className={"title"}>OctoMap Path Planning Interface</div>
                     <p>
-                        Un'interfaccia grafica per il path planning 3D su OctoMap.
-                        Carica la tua OctoMap, definisci il punto di partenza e quello di arrivo, e OPPI si occuperà del
-                        resto.
+                        A graphical interface for 3D path planning on OctoMap.
+                        Load your OctoMap, define the starting and ending points, and OPPI will take care of the rest.
                     </p>
 
                     <div className="buttons">
@@ -73,7 +72,7 @@ export default function Home() {
             <footer>
                 <div className="title-container">
                     <Divider/>
-                    <div className="title">Come funziona?</div>
+                    <div className="title">How does it work?</div>
                     <Divider/>
                 </div>
                 <div className="content">
@@ -85,20 +84,20 @@ export default function Home() {
                         }}>
                             <i className="pi pi-compass" style={{fontSize: '2.5rem'}}></i>
                         </div>
-                        <div className="title">Naviga</div>
+                        <div className="title">Navigate</div>
                         <div className="text">
-                            Stabilisci un punto di partenza e uno di arrivo.
-                            OPPI cercherà di trovare, nel minor tempo possibile, il percorso migliore.
+                            Set a starting point and an ending point.
+                            OPPI will try to find the best path in the shortest time possible.
                         </div>
                     </div>
                     <div className="content-item">
                         <div className="icon">
                             <i className="pi pi-database" style={{fontSize: '2.5rem'}}></i>
                         </div>
-                        <div className="title">Analizza</div>
+                        <div className="title">Inspect</div>
                         <div className="text">
-                            Confronta i percorsi generati nel tempo.
-                            Studia i parametri e comprendi come questi influenzano il percorso.
+                            Compare the paths generated over time.
+                            Study the parameters and understand how they influence the path.
                         </div>
                     </div>
                 </div>

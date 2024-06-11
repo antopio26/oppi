@@ -78,7 +78,7 @@ export function PointSelector() {
         if (clicks === 2) {
             delete pointRef.current;
             setClicks(0);
-            setWaypoints(waypoints.map((waypoint, i) => (i === mapMode.point) ? {
+            setWaypoints(waypoints.map((waypoint, i) => (waypoint.id === mapMode.point) ? {
                 ...waypoint,
                 coords: {x: Math.round(position[0]*10000)/10000, y: Math.round(position[1]*10000)/10000, z: Math.round(position[2]*10000)/10000}
             } : waypoint));

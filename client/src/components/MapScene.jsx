@@ -10,10 +10,12 @@ import useTheme from "../hooks/Theme";
 import {Helpers} from "./threejs/Helpers";
 import {Camera} from "./threejs/Camera";
 import {MapContext} from "../providers/MapContext";
+import useRemotePlanner from "../hooks/RemotePlanner";
 
 export default function MapScene({/*connection, voxels, nodes, optPath, smoothPath*/}) {
-    const {primary} = useTheme();
-    const {mapMode, waypoints, waypointsColor, connection, voxels, nodes, optPath, smoothPath} = useContext(MapContext);
+    const { primary } = useTheme();
+    const { mapMode, waypoints, waypointsColor } = useContext(MapContext);
+    const { readyState, voxels, nodes, optPath, smoothPath } = useRemotePlanner('ws://localhost:9002', waypoints);
 
     useEffect(() => {
         console.log("Smooth", smoothPath)
@@ -24,14 +26,14 @@ export default function MapScene({/*connection, voxels, nodes, optPath, smoothPa
     },[optPath]);
 
     useEffect(() => {
-        console.log("Nodes",nodes)
+        console.log("Nodes", nodes)
     },[nodes]);
 
     return (
         <group>
             <ambientLight intensity={1}/>
             <directionalLight position={[30, 30, -30]} intensity={1}/>
-            {connection === 1 ?
+            {readyState === 1 ?
                 <group>
                     <Octomap voxels={voxels}/>
                     {waypoints.length > 0 ? <Nodes nodes={waypoints.map((wp)=>Object.assign({}, wp, {color: waypointsColor.find((c)=>c.id === wp.id).color}) )}/> : null}
