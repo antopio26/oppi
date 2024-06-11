@@ -97,3 +97,13 @@ _
 -client/src/components/PointSelectorButton.jsx,c/9/c9cb30afbd01af17ef5281f0db98569bacddb11a
 R
 "client/src/providers/AppContext.js,d/4/d4e6b556df245e033ba5ec227e44802102d94573
+U
+%client/src/components/InputCoords.jsx,f/3/f3cdcf7c3b9c57f298055b0ec72e18a47408f38a
+]
+-client/src/components/NodeAccordionHeader.jsx,9/2/9297e8278053412c24e7cebc73cbb4af47cfefb4
+R
+"client/src/components/NodeList.jsx,1/6/16a41ad0bdf3ca665ecd3b3fab3fb78bded62046
+]
+-.idea/sonarlint/securityhotspotstore/index.pb,8/8/88a9255124c95bdc913197c120a8d560edc59c8e
+S
+#.idea/sonarlint/issuestore/index.pb,9/f/9fe84ebb15faf917b7def6236dba604453cc61e0

@@ -16,7 +16,11 @@ export default function MapScene({/*connection, voxels, nodes, optPath, smoothPa
     const {mapMode, waypoints, waypointsColor, connection, voxels, nodes, optPath, smoothPath} = useContext(MapContext);
 
     useEffect(() => {
-        console.log(optPath)
+        console.log("Smooth", smoothPath)
+    },[smoothPath]);
+
+    useEffect(() => {
+        console.log("Opt", optPath)
     },[optPath]);
 
     useEffect(() => {
