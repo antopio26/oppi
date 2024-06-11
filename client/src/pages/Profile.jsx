@@ -12,7 +12,7 @@ export default function Profile() {
 
     return (
         <>
-            <Sidebar info={"Modifica i tuoi dati e le tue preferenze."}>
+            <Sidebar info={"Edit your data and preferences."}>
                 <ProfileSidebar />
             </Sidebar>
             <main className={"profile-main"}>

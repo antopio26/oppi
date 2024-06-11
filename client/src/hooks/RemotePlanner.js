@@ -15,7 +15,8 @@ export default function useRemotePlanner(remoteURL, waypoints = []) {
     const [completed, setCompleted] = useState(false);
 
     const {sendMessage, getWebSocket, readyState} = useWebSocket(remoteURL, {
-        onOpen: () => {
+        onOpen: (e) => {
+            e.target.binaryType = 'arraybuffer';
             console.log('WebSocket connection established.');
 
             // Reset all states when a new connection is established
@@ -33,12 +34,19 @@ export default function useRemotePlanner(remoteURL, waypoints = []) {
         onError: (event) => {
             console.error('WebSocket error:', event)
         },
-        onMessage: (event) => {
-            const msg = decodeMessage(event.data);
+        onMessage: async (event) => {
+            let arrayBuffer;
+            if (event.data instanceof Blob) {
+                arrayBuffer = await event.data.arrayBuffer();
+            }else{
+                arrayBuffer = event.data;
+            }
+            const msg = decodeMessage(arrayBuffer);
 
             // Handle different message types
             switch (msg.topic) {
                 case 'octomap':
+                    console.log("Octomap received")
                     const voxelsData = binaryDataToVoxels(msg.binaryData);
                     // console.log("Voxels received");
                     voxelsData.positions = voxelsData.positions.map((coords) => new THREE.Vector3(...coords));
@@ -92,22 +100,16 @@ export default function useRemotePlanner(remoteURL, waypoints = []) {
         }
     };
 
-    useEffect(() => {
-        if (readyState === WebSocket.OPEN) {
-            const webSocketInstance = getWebSocket();
-            if (webSocketInstance && 'binaryType' in webSocketInstance) {
-                webSocketInstance.binaryType = 'arraybuffer';
-            }
-        }
-    }, [readyState]);
-
     // TODO: Add functions to handle sending data and commands to the remote planner
 
     useEffect(() => {
         if (readyState === WebSocket.OPEN) {
             if (waypoints.length >= 2) {
-                console.log("Waypoints sent");
-                sendMessage(JSON.stringify({topic: 'r', waypoints: waypoints}));
+                console.log("Waypoints sent", waypoints);
+                sendMessage(JSON.stringify({topic: 'r', waypoints:
+                        waypoints.map((wp) => {
+                            return {id: wp.id, coords: {x: parseFloat(wp.coords.x)||0, y: parseFloat(wp.coords.y)||0, z: parseFloat(wp.coords.z)||0}};
+                        })}));
             }
         }
     }, [waypoints]);

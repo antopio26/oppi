@@ -28,7 +28,7 @@ export default function useTheme() {
         document.body.setAttribute("theme", currentTheme);
         setTimeout(() => {
             setColorsAndMeta()
-        }, 250);
+        }, 150);
     }, [currentTheme]);
 
     const changeTheme = (newTheme = undefined) => {

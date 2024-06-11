@@ -32,7 +32,7 @@ export default function Sidebar({info = undefined, children = <></>}) {
                     <div className="profile">
                         <Avatar image={user.picture} size="xlarge" shape="circle"/>
                         <div className="info">
-                            <span>Ciao</span>
+                            <span>Welcome</span>
                             <h2>{user.name.substring(0, user.name.indexOf(" ")) || user.name}</h2>
                         </div>
                     </div>
