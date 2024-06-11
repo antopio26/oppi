@@ -1,12 +1,13 @@
-
 import React, { useState } from "react";
 import { Dropdown } from 'primereact/dropdown';
-import { ChevronDownIcon } from 'primereact/icons/chevrondown';
-import { ChevronRightIcon } from 'primereact/icons/chevronright';
 import {Button} from "primereact/button";
+import {Dialog} from "primereact/dialog";
+import {InputText} from "primereact/inputtext";
+import {FileUpload} from 'primereact/fileupload';
 
 export default function MapDropdown() {
     const [selectedMap, setSelectedMap] = useState(null);
+    const [visible, setVisible] = useState(false);
 
     const maps = [
         { name: 'Oplà', guid: 'bw2i3nn3' },
@@ -35,14 +36,26 @@ export default function MapDropdown() {
         return (
             <div className="py-2 px-3">
                 { /* Upload Button */ }
-                <Button type="button" label="Upload" icon="pi pi-upload" className="p-button-sm p-button-text p-button-outlined" />
+                <Button onClick={() => setVisible(true)} type="button" label="Upload" icon="pi pi-upload" className="p-button-sm p-button-text p-button-outlined" />
             </div>
         );
     };
 
     return (
-        <Dropdown value={selectedMap} onChange={(e) => setSelectedMap(e.value)} options={maps} optionLabel="name"
+        <>
+            <Dropdown value={selectedMap} onChange={(e) => setSelectedMap(e.value)} options={maps} optionLabel="name"
                   placeholder="Select a Map" panelFooterTemplate={panelFooterTemplate} />
+            <Dialog header="New Project" visible={visible} onHide={() => {
+                if (!visible) return;
+                setVisible(false);
+            }}>
+                <div className="input-container">
+                    <label htmlFor="MapName">Map Name</label>
+                    <InputText id="name"/>
+                </div>
+                <FileUpload name="map" url={'/api/upload'} accept="" maxFileSize={1000000} emptyTemplate={<p className="m-0">Drag and drop here to upload.</p>} />
+            </Dialog>
+        </>
     )
 }
         
