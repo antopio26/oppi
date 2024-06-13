@@ -28,7 +28,7 @@ export function InputCoords({waypoint, onBlurCallback, index}) {
                      onChange={(e) => setWaypoints(
                          waypoints.map((wp, j) => j === index ? {
                              id: wp.id,
-                             coords: {...wp.coords, [coord]: parseFloat(e)}
+                             coords: {...wp.coords, [coord]: parseFloat(e)||""}
                          } : wp)
                      )}
                      onBlur={onBlurCallback}

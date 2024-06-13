@@ -15,19 +15,7 @@ import useRemotePlanner from "../hooks/RemotePlanner";
 export default function MapScene({/*connection, voxels, nodes, optPath, smoothPath*/}) {
     const { primary } = useTheme();
     const { mapMode, waypoints, waypointsColor } = useContext(MapContext);
-    const { readyState, voxels, nodes, optPath, smoothPath } = useRemotePlanner('ws://localhost:9002', waypoints);
-
-    useEffect(() => {
-        console.log("Smooth", smoothPath)
-    },[smoothPath]);
-
-    useEffect(() => {
-        console.log("Opt", optPath)
-    },[optPath]);
-
-    useEffect(() => {
-        console.log("Nodes", nodes)
-    },[nodes]);
+    const { readyState, voxels, rrtPaths, optPaths, smoothPath } = useRemotePlanner('ws://localhost:9002', waypoints);
 
     return (
         <group>
@@ -37,10 +25,12 @@ export default function MapScene({/*connection, voxels, nodes, optPath, smoothPa
                 <group>
                     <Octomap voxels={voxels}/>
                     {waypoints.length > 0 ? <Nodes nodes={waypoints.map((wp)=>Object.assign({}, wp, {color: waypointsColor.find((c)=>c.id === wp.id).color}) )}/> : null}
-                    {nodes.length > 0 ? <Path nodes={nodes} color={new THREE.Color(0x00a86b)} lineWidth={0.5}
-                                              nodeRadius={0.01}/> : null}
-                    {optPath.length > 0 ? <Path nodes={optPath} color={new THREE.Color(0x1E90FF)} lineWidth={0.5}
-                                                nodeRadius={0.025}/> : null}
+                    {rrtPaths.length > 0 ?
+                        rrtPaths.map((path, i) => <Path key={i} nodes={path.path} color={new THREE.Color(0x00a86b)} lineWidth={0.5} nodeRadius={0.01}/>)
+                        : null}
+                    {optPaths.length > 0 ?
+                        optPaths.map((path, i) => <Path key={i} nodes={path.path} color={new THREE.Color(0x1E90FF)} lineWidth={.5} nodeRadius={0.025}/>)
+                        : null}
                     {smoothPath.length > 0 ? <Path nodes={smoothPath} color={primary || "blue"} lineWidth={2}/> : null}
                 </group>
                 : null}

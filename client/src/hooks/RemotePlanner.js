@@ -7,8 +7,8 @@ import {MapContext} from "../providers/MapContext";
 export default function useRemotePlanner(remoteURL, waypoints = []) {
 
     const [voxels, setVoxels] = useState({positions: [], sizes: []});
-    const [nodes, setNodes] = useState([]);
-    const [optPath, setOptPath] = useState({path: [], cost: -1});
+    const [rrtPaths, setRrtPaths] = useState([]);
+    const [optPaths, setOptPaths] = useState([]);
     const [smoothPath, setSmoothPath] = useState({path: [], cost: -1});
     const [chronoPath, setChronoPath] = useState([]);
 
@@ -21,11 +21,11 @@ export default function useRemotePlanner(remoteURL, waypoints = []) {
 
             // Reset all states when a new connection is established
             setVoxels({positions: [], sizes: []})
-            setNodes([])
+            setRrtPaths([])
             // setWaypoints([])
             setChronoPath([])
             setCompleted(false)
-            setOptPath({path: [], cost: -1})
+            setOptPaths([])
             setSmoothPath({path: [], cost: -1})
         },
         onClose: () => {
@@ -54,28 +54,23 @@ export default function useRemotePlanner(remoteURL, waypoints = []) {
                     break;
                 case 'octomap_path':
                     const nodes = JSON.parse(new TextDecoder('utf-8').decode(msg.binaryData));
-                    // console.log("Path received");
-                    // console.log(nodes.path);
-                    setNodes(nodes.path);
+                    // nodes structure {time: 0, path: [{x: 0, y: 0, z: 0}, ...], start: {id:0,coords:[]}, goal: {id:0,coords:[]}, cost: 0}
+                    // rrtPaths structure [{start: 0, goal: 1, path: [{x: 0, y: 0, z: 0}, ...]}, ...]
+                    setRrtPaths([...rrtPaths.filter((path) => {
+                        if (path.start !== nodes.start.id || path.goal !== nodes.goal.id)
+                            return true;
+                    }),{start: nodes.start.id, goal: nodes.goal.id, path: nodes.path}]);
                     if (nodes.time) {
                         setChronoPath(chronoPath => [...chronoPath, nodes.time]);
                     }
                     break;
-                // case 'octomap_endpoints':
-                //     const waypoints = JSON.parse(new TextDecoder('utf-8').decode(msg.binaryData));
-                //     // console.log("Waypoints received");
-                //     setWaypoints(waypoints);
-                //     break;
-                case 'octomap_completed':
-                    const completed = JSON.parse(new TextDecoder('utf-8').decode(msg.binaryData));
-                    // console.log("Path Planning completed");
-                    setCompleted(completed);
-                    setNodes(completed.path);
-                    break;
                 case 'octomap_optimized_path':
                     const optPath = JSON.parse(new TextDecoder('utf-8').decode(msg.binaryData));
-                    // console.log("Optimal Path received", optPath);
-                    setOptPath(optPath.path);
+                    // same as rrtPaths
+                    setOptPaths([...optPaths.filter((path) => {
+                        if (path.start !== optPath.start.id || path.goal !== optPath.goal.id)
+                            return true;
+                    }),{start: optPath.start.id, goal: optPath.goal.id, path: optPath.path}]);
                     break;
                 case 'octomap_smoothed_path':
                     const smoothPath = JSON.parse(new TextDecoder('utf-8').decode(msg.binaryData));
@@ -114,6 +109,10 @@ export default function useRemotePlanner(remoteURL, waypoints = []) {
         }
     }, [waypoints]);
 
+    useEffect(() => {
+        console.log("RRT Paths sent", rrtPaths);
+    },[rrtPaths]);
+
     const connectionState = {
         [ReadyState.CONNECTING]: 'Connecting',
         [ReadyState.OPEN]: 'Open',
@@ -124,9 +123,9 @@ export default function useRemotePlanner(remoteURL, waypoints = []) {
 
     return {
         voxels,
-        nodes,
+        rrtPaths,
         waypoints,
-        optPath,
+        optPaths,
         smoothPath,
         chronoPath,
         completed,
