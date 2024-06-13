@@ -15,8 +15,8 @@ export function NewProjectButton() {
                 setVisible(false);
             }}>
             <div className="input-container">
-                <label htmlFor="ProjectName">Project Name</label>
-                <InputText id="name"/>
+                <label htmlFor="ProjectName">Name</label>
+                <InputText id="name" />
             </div>
             <div className="input-container">
                 <label htmlFor="Map">Map</label>

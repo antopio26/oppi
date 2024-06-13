@@ -5,9 +5,8 @@ export const MapContext = createContext({});
 
 export default function MapContextProvider({ children, additionalStates={}}) {
     const [waypoints, setWaypoints] = useState([
-        {id: 0, coords: {x: 1, y: 1, z: 1}},
-        {id: 1, coords: {x: 2, y: 1, z: 1}}]);
-    const [waypointsColor, setWaypointsColor] = useState([{id: 0, color: "#ff0000"}, {id: 1, color: "#0000ff"}]);
+        {id: 0, coords: {x: 1, y: 0, z: 1}}]);
+    const [waypointsColor, setWaypointsColor] = useState([{id: 0, color: "#ff0000"}]);
     const [allCollapsed, setAllCollapsed] = useState(false);
 
     return (

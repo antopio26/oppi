@@ -10,10 +10,19 @@ export function NodeList() {
     const nodesAccordionRef = useRef();
     const [nodesAccordionActiveIndex, setNodesAccordionActiveIndex] = useState(null);
 
-    const {waypoints, setWaypoints, waypointsColor, setWaypointsColor, mapMode, setMapMode, allCollapsed, setAllCollapsed} = useContext(MapContext);
+    const {
+        waypoints,
+        setWaypoints,
+        waypointsColor,
+        setWaypointsColor,
+        mapMode,
+        setMapMode,
+        allCollapsed,
+        setAllCollapsed
+    } = useContext(MapContext);
 
     const inputCoordsOnBlur = (e) => {
-        if (mapMode.mode === "point-selector" && !e.currentTarget.closest(".p-accordion-content").contains(e.relatedTarget) && e.relatedTarget?.closest(".map-sidebar")) {
+        if (mapMode.mode === "point-selector" && !e.currentTarget.closest(".p-accordion-content").contains(e.relatedTarget) && e.relatedTarget?.closest(".map-sidebar") && e.relatedTarget?.closest(".point-selector-button")) {
             setMapMode({mode: "view"})
         }
     }
@@ -21,7 +30,7 @@ export function NodeList() {
     const handleAddNode = () => {
         setWaypoints([...waypoints, {
             id: waypoints[waypoints.length - 1].id + 1,
-            coords: {x: 1, y: 1, z: 1}
+            coords: {x: 0, y: 0, z: 1}
         }]);
         setWaypointsColor([...waypointsColor, {
             id: waypoints[waypoints.length - 1].id + 1,
@@ -105,7 +114,7 @@ export function NodeList() {
                                          }/>
                         </>
                     }>
-                        <InputCoords waypoint={wp} onBlurCallback={inputCoordsOnBlur} index={index} />
+                        <InputCoords waypoint={wp} onBlurCallback={inputCoordsOnBlur} index={index}/>
                     </AccordionTab>
                 )}
             </Accordion>

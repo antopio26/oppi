@@ -81,10 +81,6 @@
                             .color-picker {
                                 padding: .5rem;
                                 margin-block: -.25rem;
-
-                                &.open {
-
-                                }
                             }
                         }
                     }
@@ -119,30 +115,13 @@
 
                                 .value {
                                     width: fit-content;
+                                    display: flex;
+                                    align-items: center;
 
                                     input {
                                         width: 3rem;
-                                        border-radius: 1rem;
                                         text-align: center;
-                                        background-color: var(--secondary);
-                                        color: white;
-                                        border: none;
                                         padding: .25rem;
-                                        outline: none;
-
-                                        &::-webkit-outer-spin-button,
-                                        &::-webkit-inner-spin-button {
-                                            -webkit-appearance: none;
-                                            margin: 0;
-                                        }
-
-                                        &[type=number] {
-                                            -moz-appearance: textfield;
-                                        }
-
-                                        &:focus {
-                                            box-shadow: inset 0 0 .5rem rgba(var(--background-r), var(--background-g), var(--background-b), .5);
-                                        }
                                     }
                                 }
                             }

@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 
-// import "../style/css/DashboardSidebar.css";
+import "../style/css/DashboardSidebar.css";
 
 import {NewProjectButton} from "./NewProjectButton";
 

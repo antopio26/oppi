@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, {useEffect, useState} from "react";
 import { Dropdown } from 'primereact/dropdown';
 import {Button} from "primereact/button";
 import {Dialog} from "primereact/dialog";
@@ -34,17 +34,14 @@ export default function MapDropdown() {
 
     const panelFooterTemplate = () => {
         return (
-            <div className="py-2 px-3">
-                { /* Upload Button */ }
-                <Button onClick={() => setVisible(true)} type="button" label="Upload" icon="pi pi-upload" className="p-button-sm p-button-text p-button-outlined" />
-            </div>
+                <Button onClick={() => setVisible(true)} type="button" label="Upload" icon="pi pi-upload" text />
         );
     };
 
     return (
         <>
             <Dropdown value={selectedMap} onChange={(e) => setSelectedMap(e.value)} options={maps} optionLabel="name"
-                  placeholder="Select a Map" panelFooterTemplate={panelFooterTemplate} />
+                  placeholder="Select a Map" panelFooterTemplate={panelFooterTemplate} appendTo={"self"} />
             <Dialog header="New Project" visible={visible} onHide={() => {
                 if (!visible) return;
                 setVisible(false);
@@ -53,7 +50,7 @@ export default function MapDropdown() {
                     <label htmlFor="MapName">Map Name</label>
                     <InputText id="name"/>
                 </div>
-                <FileUpload name="map" url={'/api/upload'} accept="" maxFileSize={1000000} emptyTemplate={<p className="m-0">Drag and drop here to upload.</p>} />
+                <FileUpload name="map" url={'/api/upload'} accept="" maxFileSize={100000000} emptyTemplate={<p onClick={(e)=>e.target.closest(".p-fileupload").querySelector("input[type=file]").click()}>Drag and drop here to upload.</p>} />
             </Dialog>
         </>
     )

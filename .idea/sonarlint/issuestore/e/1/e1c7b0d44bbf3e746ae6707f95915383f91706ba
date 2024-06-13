@@ -1,0 +1,19 @@
+
+Rjavascript:S1128"*Remove this unused import of 'useContext'.(ÙñÃıÿÿÿÿ8§¡¢2
+Mjavascript:S1128"*Remove this unused import of 'MapContext'.(¶ùé‰8¨¡¢2
+tjavascript:S6544%"QPromise-returning function provided to property where a void return was expected.(€±üº8¨¡¢2
+Ujavascript:S68362"-Unexpected lexical declaration in case block.(È¶‡şıÿÿÿÿ8¨¡¢2
+Fjavascript:S1253"Remove this commented out code.(­Áıƒøÿÿÿÿ8¨¡¢2
+Pjavascript:S68368"-Unexpected lexical declaration in case block.(Øı‹¶8¨¡¢2
+@javascript:S1259"Remove this commented out code.(•¼»8¨¡¢2
+Ujavascript:S6836F"-Unexpected lexical declaration in case block.(®Â²Ûşÿÿÿÿ8¨¡¢2
+Fjavascript:S125G"Remove this commented out code.(óœòøÿÿÿÿ8©¡¢2
+Ujavascript:S6836L"-Unexpected lexical declaration in case block.(íÏ¯ÿÿÿÿÿ8©¡¢2
+Ajavascript:S125M"Remove this commented out code.(©Ÿ­ª8©¡¢2
+Pjavascript:S6836Q"-Unexpected lexical declaration in case block.(šîŞÇ8©¡¢2
+Ajavascript:S125R"Remove this commented out code.(úùã‹8©¡¢2
+qjavascript:S1481`"IRemove the declaration of the unused 'closeWebSocketConnection' variable.(ËåÙÊıÿÿÿÿ8©¡¢2
+njavascript:S1854`"FRemove this useless assignment to variable "closeWebSocketConnection".(ËåÙÊıÿÿÿÿ8©¡¢2
+Wjavascript:S1135g"4Complete the task associated to this "TODO" comment.(ÍÍµ8©¡¢2
+hjavascript:S1481u"@Remove the declaration of the unused 'connectionState' variable.(“²´üÿÿÿÿ8©¡¢2
+ejavascript:S1854u"=Remove this useless assignment to variable "connectionState".(“²´üÿÿÿÿ8©¡¢2
