@@ -14,7 +14,7 @@ const jwtCheck = auth({
 const userIdCheck = async (req, res, next) => {
     const auth0Id = req.auth.payload.sub;
     try {
-        const user = await User.findOne({ auth0Id });
+        const user = await User.findOne({auth0Id});
         if (!user) {
             // Get user info from Auth0
             /*
@@ -23,6 +23,7 @@ const userIdCheck = async (req, res, next) => {
             */
             // Get token from req.auth.token
             const token = req.auth.token;
+
             // Get user info from Auth0
             const response = await fetch(`${process.env.AUTH0_DOMAIN}/userinfo`, {
                 headers: {
@@ -35,18 +36,21 @@ const userIdCheck = async (req, res, next) => {
             console.log(userInfo);
 
             // Add new user to the database
-            /*
-            const newUser = new User({
-                auth0Id: userInfo.sub,
-                name: userInfo.name,
-                email: userInfo.email,
-                picture: userInfo.picture
-            });
-            */
-
+            try {
+                req.user = await User.create({
+                    auth0Id,
+                    email: userInfo.email,
+                    name: userInfo.given_name,
+                    surname: userInfo.family_name,
+                });
+                next();
+            } catch (error) {
+                next(error);
+            }
+        } else {
+            req.user = user;
+            next();
         }
-        req.user = user;
-        next();
     } catch (error) {
         next(error);
     }

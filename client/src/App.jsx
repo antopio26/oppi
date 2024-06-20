@@ -16,16 +16,19 @@ import AuthenticationGuard from "./components/AuthenticationGuard";
 import ThemeContextProvider from "./providers/AppContext";
 import axios from "axios";
 import {useAuth0} from "@auth0/auth0-react";
+import {useEffect} from "react";
 
-axios.defaults.baseURL = "/api/";
-axios.interceptors.request.use(async function (config) {
-    const {getAccessTokenSilently} = useAuth0();
-    config.headers.Authorization =  await getAccessTokenSilently();
-
-    return config;
-});
 
 function App() {
+    const {getAccessTokenSilently} = useAuth0();
+    useEffect(() => {
+        axios.interceptors.request.use(async function (config) {
+            config.headers.Authorization = "Bearer " + await getAccessTokenSilently();
+            console.log("Request interceptor", config.headers.Authorization);
+
+            return config;
+        });
+    }, []);
     return (
         <ThemeContextProvider>
             <Routes>

@@ -43,7 +43,7 @@ ProjectSchema.pre('find', function(next) {
 
 const Project = mongoose.model('Project', ProjectSchema);
 
-exports = {
+module.exports = {
     Project,
     ProjectSchema
 }
