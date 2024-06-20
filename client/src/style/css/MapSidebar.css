@@ -1,11 +1,31 @@
 .map-sidebar {
     height: 100%;
-    overflow-y: auto;
+    overflow-y: hidden;
     width: calc(var(--sidebar-width) - 1rem);
     border-radius: 1rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    gap: 1rem;
+    padding-bottom: .5rem;
 
-    .nodes {
-        .nodes-top {
+    .section {
+        display: flex;
+        flex-direction: column;
+        overflow-y: hidden;
+
+        &.parameters{
+            flex: 0 0 auto;
+        }
+        &.nodes{
+            display: flex;
+            flex-direction: column;
+            .section-content{
+                overflow-y:auto;
+            }
+        }
+
+        .section-top {
             display: flex;
             align-items: center;
             color: white;
@@ -33,11 +53,35 @@
             }
         }
 
+        .section-content{
+            display: flex;
+            flex-direction: column;
+            gap: .4rem;
+
+
+            .parameter{
+                display: flex;
+                justify-content: space-between;
+                align-items: center;
+                gap: .5rem;
+                padding-inline: .75rem;
+                color: white;
+                font-size: .9rem;
+
+                input{
+                    width: 3rem;
+                    text-align: center;
+                    padding: .25rem;
+                }
+            }
+        }
+
         .p-accordion {
             --content-bg: var(--lighter-secondary);
             display: flex;
             flex-direction: column;
             gap: .25rem;
+            overflow-y: auto;
 
             .p-accordion-tab {
                 margin-bottom: 0;
@@ -52,6 +96,10 @@
                         border: none;
                         color: white;
                         border-radius: 2rem;
+
+                        &:focus-within {
+                            box-shadow: none;
+                        }
 
                         .p-accordion-header-text {
                             display: flex;
@@ -139,27 +187,30 @@
         }
 
         &.removing {
-            .nodes-top{
-                button:not(.remove-button){
+            .nodes-top {
+                button:not(.remove-button) {
                     pointer-events: none;
                     opacity: .25;
                 }
-                .remove-button{
+
+                .remove-button {
                     background-color: rgba(var(--primary-r), var(--primary-g), var(--primary-b), .16);
                 }
             }
-            .p-accordion-tab{
-                &:hover,&.removing{
-                    .p-accordion-header-link{
+
+            .p-accordion-tab {
+                &:hover, &.removing {
+                    .p-accordion-header-link {
                         background-color: rgba(239, 68, 68, 0.32);
                         opacity: .5;
                     }
                 }
 
-                &.removing{
-                    .p-accordion-header-link{
+                &.removing {
+                    .p-accordion-header-link {
                         animation: node-removing .5s linear forwards;
                     }
+
                     & + .p-accordion-tab {
                         .p-accordion-header-link {
                             margin-top: -.25rem

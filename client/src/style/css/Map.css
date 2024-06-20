@@ -1,6 +1,102 @@
-.map-main{
+.map-main {
+    position: relative;
     transition: box-shadow .35s ease-out;
-    &.point-selector{
+
+    &.point-selector {
         box-shadow: inset 0 0 5rem var(--primary);
+    }
+
+    .metrics-container {
+        position: absolute;
+        bottom: .5rem;
+        right: .5rem;
+        background-color: var(--secondary);
+        padding: 1rem 1.5rem;
+        border-radius: 1rem 0 1rem 1rem;
+        translate: calc(100% + 1rem) calc(100% + 4rem);
+        transition: translate .35s ease-out;
+
+        &:has(.open){
+            translate: 0 0;
+        }
+
+        .metrics-top{
+            position: absolute;
+            top: -3rem;
+            left: 0;
+            width: 100%;
+            display: flex;
+            gap: .5rem;
+
+            .icon {
+                height: 2.5rem;
+                width: 2.5rem;
+                padding: 0;
+                display:flex;
+                justify-content: center;
+                align-items: center;
+                border-radius: 1.25rem;
+                background-color: var(--primary);
+                color: var(--background);
+                span{display:none}
+                translate: -3.5rem -3.5rem;
+                transition: translate .35s ease-out;
+
+                &.open{
+                    translate: 0 0;
+                }
+            }
+            .label {
+                position: relative;
+                height: 3rem;
+                padding: 1rem;
+                border-radius: 1rem 1rem 0 0;
+                background-color: var(--secondary);
+                font-weight: bold;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                gap: 1rem;
+                flex-grow: 1;
+
+                &::before{
+                    content: '';
+                    position: absolute;
+                    bottom: 0;
+                    width: 3rem;
+                    height: 3rem;
+                    border: .75rem solid transparent;
+                    border-bottom-color: var(--secondary);
+                    left: 0;
+                    border-bottom-right-radius: 2rem;
+                    border-right-color: var(--secondary);
+                    translate: calc(-100% + .75rem) .75rem;
+                    pointer-events: none;
+                }
+            }
+        }
+
+        .metrics-data {
+            display: flex;
+            flex-direction: column;
+            gap: .5rem;
+
+            .metric {
+                display: flex;
+                justify-content: space-between;
+                align-items: center;
+                gap: 2rem;
+
+                span {
+                    font-weight: 300;
+                    color: var(--primary);
+
+                    &:first-child {
+                        font-weight: 500;
+                        color: white;
+                    }
+                }
+            }
+        }
     }
 }

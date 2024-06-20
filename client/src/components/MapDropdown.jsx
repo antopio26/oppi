@@ -10,6 +10,7 @@ export default function MapDropdown() {
     const [visible, setVisible] = useState(false);
     const newProjDropdown = useRef(null);
     const newMapFileUpload = useRef(null);
+    const newMapDialog = useRef(null);
 
     const maps = [
         {name: 'Oplà', guid: 'bw2i3nn3'},
@@ -48,17 +49,21 @@ export default function MapDropdown() {
             <Dropdown ref={newProjDropdown} value={selectedMap} onChange={(e) => setSelectedMap(e.value)} options={maps}
                       optionLabel="name"
                       placeholder="Select a Map" panelFooterTemplate={panelFooterTemplate} appendTo={"self"}/>
-            <Dialog header="New Map" dismissableMask visible={visible} maskStyle={{animation: "none"}} onHide={() => {
+            <Dialog ref={newMapDialog} header="New Map" dismissableMask visible={visible}
+                    maskStyle={{animation: "none"}} onHide={() => {
                 if (!visible) return;
                 setVisible(false);
+            }} onShow={() => {
+                newMapDialog.current.getElement().querySelector('input').focus();
             }}>
                 <div className="input-container">
                     <label htmlFor="MapName">Map Name</label>
                     <InputText id="name"/>
                 </div>
-                <FileUpload ref={newMapFileUpload} name="map" url={'/api/upload'} accept="" maxFileSize={100000000} previewWidth={50} removeIcon={"pi pi-trash"}
+                <FileUpload ref={newMapFileUpload} name="map" url={'/api/upload'} accept="" maxFileSize={100000000}
+                            previewWidth={50} removeIcon={"pi pi-trash"}
                             emptyTemplate={<p className={"empty-message"}
-                                onClick={(e) => e.target.closest(".p-fileupload").querySelector("input[type=file]").click()}>Drag
+                                              onClick={(e) => e.target.closest(".p-fileupload").querySelector("input[type=file]").click()}>Drag
                                 and drop here to upload.</p>}/>
             </Dialog>
         </>

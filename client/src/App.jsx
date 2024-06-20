@@ -14,7 +14,16 @@ import CallbackPage from "./pages/CallbackPage";
 
 import AuthenticationGuard from "./components/AuthenticationGuard";
 import ThemeContextProvider from "./providers/AppContext";
+import axios from "axios";
+import {useAuth0} from "@auth0/auth0-react";
 
+axios.defaults.baseURL = "/api/";
+axios.interceptors.request.use(async function (config) {
+    const {getAccessTokenSilently} = useAuth0();
+    config.headers.Authorization =  await getAccessTokenSilently();
+
+    return config;
+});
 
 function App() {
     return (

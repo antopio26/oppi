@@ -31,6 +31,7 @@ const errorHandler = (error, request, response, next) => {
 
     const status = 500;
     const message = "Internal Server Error";
+    console.error(error);
 
     response.status(status).json({ message });
 };

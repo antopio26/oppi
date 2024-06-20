@@ -86,18 +86,18 @@ export function NodeList() {
     }, [mapMode]);
 
     return (
-        <div className="nodes" onClickCapture={handleRemoving}>
-            <div className="nodes-top">
+        <div className="nodes section" onClickCapture={handleRemoving}>
+            <div className="section-top">
                 <p className={"label"}>Nodes</p>
                 <Button icon="pi pi-plus" className={"add-button primary-text"} text rounded
                         onClick={handleAddNode}/>
                 <Button icon="pi pi-minus" className={"remove-button primary-text"} disabled={waypoints.length < 3}
                         text rounded
                         onClick={handleRemoveNode}/>
-                <Button icon="pi pi-compass" className={"run-button"} rounded/>
+                {/*<Button icon="pi pi-compass" className={"run-button"} rounded/>*/}
             </div>
 
-            <Accordion ref={nodesAccordionRef} activeIndex={nodesAccordionActiveIndex}
+            <Accordion ref={nodesAccordionRef} className={"section-content"} activeIndex={nodesAccordionActiveIndex}
                        onTabChange={(e) => setNodesAccordionActiveIndex(e.index)}>
                 {waypoints.map((wp, index) =>
                     <AccordionTab key={wp.id} header={
