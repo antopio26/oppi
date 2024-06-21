@@ -1,5 +1,5 @@
 import {useContext, useEffect, useState} from "react";
-import {ThemeContext} from "../providers/AppContext";
+import {AppContext} from "../providers/AppContext";
 import * as THREE from "three";
 
 export const themes = ["lemon","orange", "lime"];
@@ -7,7 +7,7 @@ export const colors = ["#fece2e", "#ff8000", "#95FF00"]
 export const isValid = (theme) => themes.includes(theme);
 
 export default function useTheme() {
-    const {currentTheme, setCurrentTheme} = useContext(ThemeContext);
+    const {currentTheme, setCurrentTheme} = useContext(AppContext);
     const [primary, setPrimary] = useState('');
     const [background, setBackground] = useState('');
     const [light, setLight] = useState('');

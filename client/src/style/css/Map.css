@@ -1,5 +1,6 @@
 .map-main {
     position: relative;
+    overflow: hidden;
     transition: box-shadow .35s ease-out;
 
     &.point-selector {

@@ -1,7 +1,7 @@
 import "../style/css/Sidebar.css";
 
-import React, {useEffect, useRef, useState} from "react";
-import { useLocation, useNavigate} from "react-router-dom";
+import React, {useContext, useEffect, useState} from "react";
+import {useLocation, useNavigate} from "react-router-dom";
 
 import LogoutButton from "../components/LogoutButton";
 
@@ -11,7 +11,7 @@ import useTheme from "../hooks/Theme";
 import {useAuth0} from "@auth0/auth0-react";
 import {Avatar} from "primereact/avatar";
 import {Toast} from "primereact/toast";
-import {log} from "three/examples/jsm/nodes/math/MathNode";
+import {AppContext} from "../providers/AppContext";
 
 export default function Sidebar({info = undefined, children = <></>}) {
     const location = useLocation();
@@ -19,7 +19,7 @@ export default function Sidebar({info = undefined, children = <></>}) {
     const [pathname, setPathname] = useState(location.pathname);
     const {currentTheme, changeTheme, getColors, getThemes} = useTheme();
     const {user} = useAuth0();
-    const toastRef = useRef(null);
+    const {toastRef} = useContext(AppContext);
 
     useEffect(() => {
         setPathname(location.pathname);

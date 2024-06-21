@@ -1,6 +1,6 @@
 const dotenv = require('dotenv');
 const {auth} = require("express-oauth2-jwt-bearer");
-const {User} = require("../models/User");
+const {User} = require("../models/user.model");
 
 // Load environment variables from .env file
 dotenv.config();
@@ -33,24 +33,18 @@ const userIdCheck = async (req, res, next) => {
 
             const userInfo = await response.json();
 
-            console.log(userInfo);
-
             // Add new user to the database
-            try {
-                req.user = await User.create({
-                    auth0Id,
-                    email: userInfo.email,
-                    name: userInfo.given_name,
-                    surname: userInfo.family_name,
-                });
-                next();
-            } catch (error) {
-                next(error);
-            }
+            req.user = await User.create({
+                auth0Id,
+                email: userInfo.email,
+                name: userInfo.given_name || userInfo.name,
+                surname: userInfo.family_name,
+            });
         } else {
             req.user = user;
-            next();
         }
+        next();
+
     } catch (error) {
         next(error);
     }

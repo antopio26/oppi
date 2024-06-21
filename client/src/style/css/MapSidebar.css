@@ -50,6 +50,10 @@
                 * {
                     font-size: .85rem;
                 }
+
+                &:disabled, &.p-disabled{
+                    opacity: .25;
+                }
             }
         }
 
@@ -187,7 +191,7 @@
         }
 
         &.removing {
-            .nodes-top {
+            .section-top {
                 button:not(.remove-button) {
                     pointer-events: none;
                     opacity: .25;

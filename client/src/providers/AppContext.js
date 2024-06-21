@@ -1,14 +1,14 @@
-import {createContext, useEffect, useState} from "react";
+import {createContext, useEffect, useRef, useState} from "react";
 import {themes, isValid} from "../hooks/Theme";
 
-export const ThemeContext = createContext({});
+export const AppContext = createContext({});
 
-export default function ThemeContextProvider({children}){
+export default function AppContextProvider({children, additionalStates={}}){
     const [currentTheme, setCurrentTheme] = useState(isValid(localStorage.getItem('theme'))? localStorage.getItem("theme"): themes[0]);
 
     return (
-        <ThemeContext.Provider value={{currentTheme, setCurrentTheme}}>
+        <AppContext.Provider value={{currentTheme, setCurrentTheme, ...additionalStates}}>
             {children}
-        </ThemeContext.Provider>
+        </AppContext.Provider>
     )
 } ;

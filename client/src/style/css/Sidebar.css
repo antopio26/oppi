@@ -181,13 +181,17 @@ aside {
 
     .p-toast-message {
         background-color: rgba(var(--lighter-secondary-r), var(--lighter-secondary-g), var(--lighter-secondary-b), .5);
-        border-color: var(--primary);
         color: white;
         text-align: justify;
 
-        .p-toast-message-icon{
-            color: var(--primary);
+        &:not(.p-toast-message-error){
+            border-color: var(--primary);
+
+            .p-toast-message-icon{
+                color: var(--primary);
+            }
         }
+
         .p-toast-icon-close {
             display: none;
         }

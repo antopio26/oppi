@@ -1,26 +1,24 @@
-import React, {useEffect} from 'react';
+import React, {useContext, useEffect} from 'react';
 import "../style/css/Profile.css";
 import {useAuth0} from "@auth0/auth0-react";
 import Sidebar from "../components/Sidebar";
 import ProfileSidebar from "../components/ProfileSidebar";
 import axios from "axios";
 import {log} from "three/examples/jsm/nodes/math/MathNode";
+import {AppContext} from "../providers/AppContext";
 
 export default function Profile() {
     const {user, isAuthenticated} = useAuth0();
+    const {toastRef} = useContext(AppContext);
 
     useEffect(() => {
-        try {
             // Fetch the access token
-            axios.get("/api/users")
+            axios.get("/api/user")
                 .then(response => {
                     if (response.status === 200) {
-                        console.log(response.data)
+                        //TODO
                     }
-                })
-        } catch (error) {
-            console.error('Error fetching user data:', error);
-        }
+                }).catch(()=>{})
     }, []);
 
     return (

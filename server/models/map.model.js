@@ -1,4 +1,5 @@
 const mongoose = require('mongoose');
+
 const MapSchema = new mongoose.Schema({
     name: {
         type: String,
@@ -17,7 +18,6 @@ const MapSchema = new mongoose.Schema({
     // Size/dimensions of the map (x,y,z) >= 0
     size: {
         type: [Number],
-        required: true,
         validate: {
             validator: function(v) {
                 return v.length === 3 && v.every(n => n >= 0);
@@ -27,7 +27,6 @@ const MapSchema = new mongoose.Schema({
     },
     offset: {
         type: [Number],
-        required: true,
         validate: {
             validator: function(v) {
                 return v.length === 3;
@@ -35,6 +34,14 @@ const MapSchema = new mongoose.Schema({
             message: props => `${props.value} is not a valid offset!`
         }
     }
+});
+
+MapSchema.pre('find', function(next) {
+     if (this._conditions.user) {
+         next();
+     } else {
+         next(new Error('User ID is not provided'));
+     }
 });
 
 const Map = mongoose.model('Map', MapSchema);
