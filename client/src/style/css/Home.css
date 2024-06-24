@@ -125,9 +125,9 @@
         height: 100%;
         padding: 1.25rem 1.25rem 1.25rem 0;
         background-color: inherit;
+        border-radius: 1.5rem;
 
         .example {
-            background-color: var(--primary);
             transition: background-color .5s ease-in-out;
             width: 100%;
             height: 100%;
@@ -136,14 +136,18 @@
             justify-content: center;
             align-items: center;
             font-size: 2rem;
-            box-shadow: inset 0 0 1.5rem rgba(0, 0, 0, 0.5);
+            box-shadow: inset 0 0 4rem 1rem rgba(0, 0, 0, 0.5);
 
-            &::before {
-                content: "OPPI Example";
-                font-size: 2rem;
-                color: black;
-                opacity: .65;
-                mix-blend-mode: color-burn;
+            &:empty {
+                background-color: var(--primary);
+                box-shadow: inset 0 0 1.5rem rgba(0, 0, 0, 0.5);
+                &::before {
+                    content: "OPPI Example";
+                    font-size: 2rem;
+                    color: black;
+                    opacity: .65;
+                    mix-blend-mode: color-burn;
+                }
             }
         }
     }

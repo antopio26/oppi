@@ -46,7 +46,8 @@ export default function useRemotePlanner(remoteURL, waypoints = []) {
             // Handle different message types
             switch (msg.topic) {
                 case 'octomap':
-                    console.log("Octomap received")
+                    console.log("Octomap received");
+
                     const voxelsData = binaryDataToVoxels(msg.binaryData);
                     // console.log("Voxels received");
                     voxelsData.positions = voxelsData.positions.map((coords) => new THREE.Vector3(...coords));
@@ -57,8 +58,7 @@ export default function useRemotePlanner(remoteURL, waypoints = []) {
                     // nodes structure {time: 0, path: [{x: 0, y: 0, z: 0}, ...], start: {id:0,coords:[]}, goal: {id:0,coords:[]}, cost: 0}
                     // rrtPaths structure [{start: 0, goal: 1, path: [{x: 0, y: 0, z: 0}, ...]}, ...]
                     setRrtPaths([...rrtPaths.filter((path) => {
-                        if (path.start !== nodes.start.id || path.goal !== nodes.goal.id)
-                            return true;
+                        return (path.start !== nodes.start.id || path.goal !== nodes.goal.id)
                     }),{start: nodes.start.id, goal: nodes.goal.id, path: nodes.path}]);
                     if (nodes.time) {
                         setChronoPath(chronoPath => [...chronoPath, nodes.time]);
@@ -68,8 +68,7 @@ export default function useRemotePlanner(remoteURL, waypoints = []) {
                     const optPath = JSON.parse(new TextDecoder('utf-8').decode(msg.binaryData));
                     // same as rrtPaths
                     setOptPaths([...optPaths.filter((path) => {
-                        if (path.start !== optPath.start.id || path.goal !== optPath.goal.id)
-                            return true;
+                        return (path.start !== optPath.start.id || path.goal !== optPath.goal.id)
                     }),{start: optPath.start.id, goal: optPath.goal.id, path: optPath.path}]);
                     break;
                 case 'octomap_smoothed_path':
@@ -101,10 +100,18 @@ export default function useRemotePlanner(remoteURL, waypoints = []) {
         if (readyState === WebSocket.OPEN) {
             if (waypoints.length >= 2) {
                 console.log("Waypoints sent", waypoints);
-                sendMessage(JSON.stringify({topic: 'r', waypoints:
+                sendMessage(JSON.stringify({
+                    topic: 'r', waypoints:
                         waypoints.map((wp) => {
-                            return {id: wp.id, coords: {x: parseFloat(wp.coords.x)||0, y: parseFloat(wp.coords.y)||0, z: parseFloat(wp.coords.z)||0}};
-                        })}));
+                            return {id: wp.id,
+                                coords: {
+                                    x: parseFloat(wp.coords.x) || 0,
+                                    y: parseFloat(wp.coords.y) || 0,
+                                    z: parseFloat(wp.coords.z) || 0
+                                }
+                            };
+                        })
+                }));
             }
         }
     }, [waypoints]);

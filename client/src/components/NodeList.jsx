@@ -60,6 +60,20 @@ export function NodeList() {
         }
     }
 
+    const handleSavePath = (e) => {
+        let icon = e.currentTarget.querySelector(".pi-bookmark")
+        if (icon){
+            icon.classList.remove("pi-bookmark")
+            icon.classList.add("pi-bookmark-fill")
+            e.currentTarget.classList.remove("p-button-text")
+        }else{
+           icon = e.currentTarget.querySelector(".pi-bookmark-fill")
+              icon.classList.remove("pi-bookmark-fill")
+                icon.classList.add("pi-bookmark")
+                e.currentTarget.classList.add("p-button-text")
+        }
+    }
+
     useEffect(() => {
         if (waypoints.length === 2 && nodesAccordionRef.current.getElement()?.closest(".removing")) {
             nodesAccordionRef.current.getElement().closest(".removing").classList.remove("removing")
@@ -94,7 +108,8 @@ export function NodeList() {
                 <Button icon="pi pi-minus" className={"remove-button primary-text"} disabled={waypoints.length < 3}
                         text rounded
                         onClick={handleRemoveNode}/>
-                {/*<Button icon="pi pi-compass" className={"run-button"} rounded/>*/}
+                <Button icon="pi pi-bookmark" className={"save-button"} text rounded disabled={waypoints.length < 2}
+                onClick={handleSavePath}/>
             </div>
 
             <Accordion ref={nodesAccordionRef} className={"section-content"} activeIndex={nodesAccordionActiveIndex}

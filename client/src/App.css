@@ -379,3 +379,7 @@ input {
     }
 
 }
+
+.p-dialog-mask+.p-dialog-mask{
+    animation: none;
+}

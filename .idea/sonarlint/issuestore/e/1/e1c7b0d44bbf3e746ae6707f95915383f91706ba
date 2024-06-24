@@ -1,0 +1,15 @@
+
+xjavascript:S1128"*Remove this unused import of 'useContext'.(ÙñÃıÿÿÿÿ8„¦ÿÔ„2J$e00061a6-ce16-4c57-a24b-5141254da962
+sjavascript:S1128"*Remove this unused import of 'MapContext'.(¶ùé‰8„¦ÿÔ„2J$f9dc6f30-5f6a-4228-b6ef-9817f36a50f6
+šjavascript:S6544%"QPromise-returning function provided to property where a void return was expected.(€±üº8„¦ÿÔ„2J$395466d0-fa2d-41dd-8357-682059470af6
+{javascript:S68363"-Unexpected lexical declaration in case block.(È¶‡şıÿÿÿÿ8„¦ÿÔ„2J$4e570450-9697-4991-9fa4-2a2b411940a3
+ljavascript:S1254"Remove this commented out code.(­Áıƒøÿÿÿÿ8„¦ÿÔ„2J$4e4e0ed0-3e3e-4f19-99c2-c7f8fe27b0bc
+vjavascript:S68369"-Unexpected lexical declaration in case block.(Øı‹¶8„¦ÿÔ„2J$e0dfcd07-46c4-4bad-ba16-a20f43f41761
+{javascript:S6836D"-Unexpected lexical declaration in case block.(íÏ¯ÿÿÿÿÿ8„¦ÿÔ„2J$8ae3bbdd-0dea-410e-9125-2dbd41eeee5c
+vjavascript:S6836K"-Unexpected lexical declaration in case block.(šîŞÇ8„¦ÿÔ„2J$620b7f65-cfb9-4a2f-86c1-1ea77bc9d3b1
+gjavascript:S125L"Remove this commented out code.(úùã‹8„¦ÿÔ„2J$7020a960-d762-48dd-8f8e-0bccbf88356d
+—javascript:S1481Z"IRemove the declaration of the unused 'closeWebSocketConnection' variable.(ËåÙÊıÿÿÿÿ8„¦ÿÔ„2J$9a922978-5bdc-4d04-90b5-5d33236bec51
+”javascript:S1854Z"FRemove this useless assignment to variable "closeWebSocketConnection".(ËåÙÊıÿÿÿÿ8„¦ÿÔ„2J$3924c4da-7141-4db9-a452-385dde18d977
+}javascript:S1135a"4Complete the task associated to this "TODO" comment.(ÍÍµ8„¦ÿÔ„2J$42334483-0134-4d92-afa1-2884f7d80827
+javascript:S1481{"@Remove the declaration of the unused 'connectionState' variable.(“²´üÿÿÿÿ8„¦ÿÔ„2J$1024f202-8ea0-4957-a487-413227178f24
+‹javascript:S1854{"=Remove this useless assignment to variable "connectionState".(“²´üÿÿÿÿ8„¦ÿÔ„2J$f3ac737f-f41a-4268-87d0-4b7ef8006588

@@ -10,6 +10,9 @@ import "../style/css/Home.css";
 import {Divider} from "primereact/divider";
 import {AvatarGroup} from "primereact/avatargroup";
 import {Avatar} from "primereact/avatar";
+import {Canvas} from "@react-three/fiber";
+import MapScene from "../components/MapScene";
+import useMockMapData from "../hooks/MockMapData";
 
 export default function Home() {
     const {user, isAuthenticated, loginWithRedirect} = useAuth0();
@@ -17,6 +20,8 @@ export default function Home() {
     const {changeTheme} = useTheme();
     const compass = useRef(null);
     const [rotation, setRotation] = useState(0);
+
+    const {voxels, rrtPaths, optPaths, smoothPath, readyState, waypoints, waypointsColor} = useMockMapData('octomap.bt', 'mockMap.json');
 
     return (
         <main className={"home-main"}>
@@ -67,7 +72,18 @@ export default function Home() {
                 </div>
             </section>
             <aside>
-                <div className="example"></div>
+                <Canvas className={"example"}>
+                    <MapScene
+                        waypoints={waypoints}
+                        waypointsColor={waypointsColor}
+                        voxels={voxels}
+                        rrtPaths={rrtPaths}
+                        optPaths={optPaths}
+                        smoothPath={smoothPath}
+                        readyState={readyState}
+                        interactive={false}
+                    />
+                </Canvas>
             </aside>
             <footer>
                 <div className="title-container">

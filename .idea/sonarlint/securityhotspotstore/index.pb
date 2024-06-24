@@ -181,14 +181,6 @@ K
 server/database/database.js,4/4/446cf52e2f9202f9b1796e798de9145ee1f9c578
 ;
 server/.env,7/4/74c0224311d9cb9feca55cc2c27a2b847c0286e7
-D
-server/models/Map.js,1/5/159e55138e6a667b15f7d8a41e0580d9b5304cdb
-E
-server/models/User.js,7/2/72308f7010b2f585b62772eb555a4d5c68c90e6b
-H
-server/models/Project.js,8/7/876c701798d91b903fe5da7e2b59ba33e8ed4adf
-K
-server/models/Parameters.js,9/1/916d9f3059a52a494a0b471b7f63db878f4791b8
 K
 server/routes/map.router.js,6/e/6ec7d0302ae435d2fb98365dbe5d9e309077f35e
 X
@@ -217,7 +209,19 @@ N
 server/models/project.model.js,a/c/acb7839ceddc48d3198404bfcbefce25b79aa40c
 K
 server/models/user.model.js,f/f/ffcf1eef795b5cf181a1e50d6babf81623f81081
-S
-#client/src/components/MapDialog.jsx,d/5/d504156955a25dab629ed8302f396d924dbba8fa
 Y
 )client/src/components/MapUploadDialog.jsx,4/1/41b6cd42ef62052e34c03963863d4364375c1bcd
+Q
+!client/src/components/Metrics.jsx,1/e/1e8715538cf72745c77840f726db6f7b8480ce4f
+R
+"client/src/style/css/Dashboard.css,4/3/43e59de9dc98e38031884315f10f3e59c91f7e09
+U
+%client/src/components/ProjectCard.jsx,a/7/a7c7f7c62c4b5ac9df4d03f098fe47588e24dbbf
+P
+ client/src/hooks/MockMapData.jsx,d/1/d1bee335e0a0a89403ca7c23e8263d2e9a7024bb
+O
+client/src/hooks/MockMapData.js,a/4/a4c9c3223eea73031dac69b37b547319fb6d8bbb
+H
+client/public/octomap.bt,4/a/4a3bfb591de5b2d24b093d4e32abf5cf4517f708
+J
+client/public/mockMap.json,9/7/97156fa415c113f6e15fe3585d55c7c9415af4ae

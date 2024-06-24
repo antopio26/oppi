@@ -1,5 +1,5 @@
-import React, {useContext, useEffect} from 'react';
-import {useThree} from '@react-three/fiber';
+import React, {useContext, useEffect, useRef} from 'react';
+import {useFrame, useThree} from '@react-three/fiber';
 import * as THREE from 'three';
 import {OrbitControls} from '@react-three/drei';
 import {Octomap} from "./threejs/Octomap";
@@ -10,12 +10,19 @@ import useTheme from "../hooks/Theme";
 import {Helpers} from "./threejs/Helpers";
 import {Camera} from "./threejs/Camera";
 import {MapContext} from "../providers/MapContext";
-import useRemotePlanner from "../hooks/RemotePlanner";
+import {Vector3} from "three";
 
-export default function MapScene({/*connection, voxels, nodes, optPath, smoothPath*/}) {
+export default function MapScene({waypoints, waypointsColor, readyState, voxels, rrtPaths, optPaths, smoothPath, interactive = true}) {
     const { primary } = useTheme();
-    const { mapMode, waypoints, waypointsColor } = useContext(MapContext);
-    const { readyState, voxels, rrtPaths, optPaths, smoothPath } = useRemotePlanner('ws://localhost:9002', waypoints);
+    const { mapMode } = useContext(MapContext);
+
+    const OrbitControlsRef = useRef(null);
+
+    useFrame(() => {
+        if (OrbitControlsRef.current && !interactive) {
+            OrbitControlsRef.current.update();
+        }
+    })
 
     return (
         <group>
@@ -36,8 +43,8 @@ export default function MapScene({/*connection, voxels, nodes, optPath, smoothPa
                 : null}
             <Helpers/>
             <Camera/>
-            <OrbitControls/>
-            {mapMode.mode === "point-selector" ? <PointSelector/> : null}
+            <OrbitControls target={!interactive && new Vector3(5, 0, 0)} ref={OrbitControlsRef} autoRotateSpeed={1} autoRotate={!interactive} enabled={interactive}/>
+            {interactive && (mapMode.mode === "point-selector" ? <PointSelector/> : null)}
         </group>
     );
 }

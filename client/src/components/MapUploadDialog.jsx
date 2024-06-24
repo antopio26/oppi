@@ -9,7 +9,7 @@ export default function MapUploadDialog({visible, setVisible}) {
 
     return (
         <Dialog ref={newMapDialog} header="New Map" dismissableMask visible={visible} draggable={false}
-                maskStyle={{animation: "none"}} onHide={() => {
+                onHide={() => {
             if (!visible) return;
             setVisible(false);
         }} onShow={() => {

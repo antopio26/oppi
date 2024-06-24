@@ -54,6 +54,10 @@
                 &:disabled, &.p-disabled{
                     opacity: .25;
                 }
+
+                &:not(.p-button-text){
+                    color: var(--low-contrast-background);
+                }
             }
         }
 
@@ -91,7 +95,7 @@
                 margin-bottom: 0;
 
                 .p-accordion-header {
-                    position: relative;
+                    position:relative;
                     z-index: 1;
 
                     .p-accordion-header-link {

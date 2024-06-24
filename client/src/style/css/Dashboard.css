@@ -1,0 +1,26 @@
+.dashboard-main{
+    .projects-list{
+        display: flex;
+        flex-direction: column;
+        gap: .5rem;
+        .project-card{
+            background-color: var(--secondary);
+            padding: 1rem;
+            border-radius: 1.5rem;
+            display: flex;
+            align-items: center;
+            img{
+                height: 6rem;
+                aspect-ratio: 4/3;
+                border-radius: .5rem;
+            }
+            .project-info{
+                display: flex;
+                flex-direction: column;
+                h3{
+                    margin: 0;
+                }
+            }
+        }
+    }
+}
