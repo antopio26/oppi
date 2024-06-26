@@ -40,6 +40,15 @@
                         background-color: rgba(73, 73, 73, .375);
                     }
                 }
+
+                button{
+                    width: 100%;
+                    justify-content: center;
+                    background-color: var(--low-contrast-background);
+                    .p-button-label{
+                        flex-grow: 0;
+                    }
+                }
             }
         }
     }

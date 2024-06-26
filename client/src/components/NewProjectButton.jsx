@@ -8,6 +8,11 @@ export function NewProjectButton() {
     const [visible, setVisible] = useState(false);
     const newProjRef = useRef(null);
 
+    const handleCreateProject = (e) => {
+
+        setVisible(false);
+    }
+
     return (
         <>
             <Button rounded iconPos={"right"} icon="pi pi-plus" onClick={() => setVisible(true)} />
@@ -19,12 +24,15 @@ export function NewProjectButton() {
             }}>
             <div className="input-container">
                 <label htmlFor="ProjectName">Name</label>
-                <InputText name="name" />
+                <InputText name="name" placeholder={" "} />
             </div>
             <div className="input-container">
                 <label htmlFor="Map">Map</label>
                 <MapDropdown/>
             </div>
+                <div className="buttonbar">
+                    <Button label="Create" className={"create-button"} rounded onClick={handleCreateProject}/>
+                </div>
             </Dialog>
         </>
     )

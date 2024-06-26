@@ -32,7 +32,7 @@ export default function MapUploadDialog({visible, setVisible}) {
         }}>
             <div className="input-container">
                 <label htmlFor="MapName">Map Name</label>
-                <InputText id="name"/>
+                <InputText id="name" placeholder={" "}/>
             </div>
             <FileUpload ref={newMapFileUpload}
                         name="map"

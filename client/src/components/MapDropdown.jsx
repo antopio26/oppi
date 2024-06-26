@@ -10,6 +10,7 @@ export default function MapDropdown() {
     const [selectedMap, setSelectedMap] = useState(null);
     const newProjDropdown = useRef(null);
     const [visible, setVisible] = useState(false);
+    const dropdownInputRef = useRef(null);
 
     const maps = [
         {name: 'Oplà', guid: 'bw2i3nn3'},
@@ -43,9 +44,13 @@ export default function MapDropdown() {
         );
     };
 
+    useEffect(() => {
+        console.log(dropdownInputRef.current)
+    }, []);
+
     return (
         <>
-            <Dropdown ref={newProjDropdown} value={selectedMap} onChange={(e) => setSelectedMap(e.value)} options={maps}
+            <Dropdown ref={newProjDropdown} value={selectedMap} inputRef={dropdownInputRef} onChange={(e) => setSelectedMap(e.value)} options={maps}
                       optionLabel="name"
                       placeholder="Select a Map" panelFooterTemplate={panelFooterTemplate} appendTo={"self"}/>
             <MapUploadDialog visible={visible} setVisible={setVisible}/>

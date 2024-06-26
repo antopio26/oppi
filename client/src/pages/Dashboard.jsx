@@ -1,10 +1,12 @@
 import "../style/css/Dashboard.css";
 
-import React from 'react';
+import React, {useContext, useEffect, useState} from 'react';
 import Sidebar from "../components/Sidebar";
 import DashboardSidebar from "../components/DashboardSidebar";
 import ProjectCard from "../components/ProjectCard";
 import {NewProjectButton} from "../components/NewProjectButton";
+import useMapManager from "../hooks/MapsManager";
+import {AppContext} from "../providers/AppContext";
 
 export default function Dashboard() {
     return (

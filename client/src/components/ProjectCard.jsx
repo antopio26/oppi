@@ -1,10 +1,17 @@
 import {Button} from "primereact/button";
 
 export default function ProjectCard({project}) {
+    const handleSelection = (e) => {
+        document.querySelectorAll(".project-card img.selected").forEach((card) => {
+            card.classList.remove("selected");
+        });
+        e.target.classList.add("selected");
+        // TODO: set selectedProject to project
+    }
     return (
         <div className={"project-card"}>
             <div className="preview">
-                <img tabIndex={0} src="https://i.ytimg.com/vi/GaX4vOM16EE/maxresdefault.jpg" alt="Project Preview" onClick={(e)=>e.target.classList.add("selected")}/>
+                <img tabIndex={0} src="https://i.ytimg.com/vi/GaX4vOM16EE/maxresdefault.jpg" alt="Project Preview" onClick={handleSelection}/>
             </div>
             <div className="project-info">
                 <div className="project-info-top">

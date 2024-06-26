@@ -230,3 +230,7 @@ R
 :
 
 .gitignore,a/5/a5cc2925ca8258af241be7e5b0381edf30266302
+O
+client/src/hooks/MapsManager.js,f/7/f765b0d52477551e1cf7e6ba95cbd3de1fb8fcc0
+Å
+Q.idea/sonarlint/securityhotspotstore/f/7/f765b0d52477551e1cf7e6ba95cbd3de1fb8fcc0,7/b/7b448e8f6b8eecdf58f06fe7cb630bf2c65c669a
