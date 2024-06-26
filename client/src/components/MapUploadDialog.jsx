@@ -8,7 +8,7 @@ import useMapManager from "../hooks/MapsManager";
 export default function MapUploadDialog({visible, setVisible}) {
     const newMapFileUpload = useRef(null);
     const newMapDialog = useRef(null);
-    const {loadMaps} = useMapManager();
+    const {uploadMap} = useMapManager();
 
     const uploadHandler = ({files, options}) => {
         let formData = new FormData();
@@ -17,8 +17,7 @@ export default function MapUploadDialog({visible, setVisible}) {
 
         axios.post(options.props.url, formData)
             .then(response => {
-                console.log(response.data)
-                loadMaps();
+                uploadMap(response.data);
                 setVisible(false);
             })
             .catch(error => console.error(error));
