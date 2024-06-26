@@ -3,22 +3,24 @@ import {FileUpload} from "primereact/fileupload";
 import {Dialog} from "primereact/dialog";
 import React, {useRef} from "react";
 import axios from "axios";
+import useMapManager from "../hooks/MapsManager";
 
 export default function MapUploadDialog({visible, setVisible}) {
     const newMapFileUpload = useRef(null);
     const newMapDialog = useRef(null);
+    const {loadMaps} = useMapManager();
 
     const uploadHandler = ({files, options}) => {
         let formData = new FormData();
         formData.append('file', files[0]);
         formData.append('name', newMapDialog.current.getElement().querySelector('input').value);
 
-        console.log(files);
-        console.log(options);
-
         axios.post(options.props.url, formData)
-            .then(response => response.json())
-            .then(data => console.log(data))
+            .then(response => {
+                console.log(response.data)
+                loadMaps();
+                setVisible(false);
+            })
             .catch(error => console.error(error));
     }
 
@@ -32,7 +34,7 @@ export default function MapUploadDialog({visible, setVisible}) {
         }}>
             <div className="input-container">
                 <label htmlFor="MapName">Map Name</label>
-                <InputText id="name"/>
+                <InputText id="name" placeholder={" "}/>
             </div>
             <FileUpload ref={newMapFileUpload}
                         name="map"

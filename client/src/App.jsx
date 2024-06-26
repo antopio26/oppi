@@ -13,15 +13,17 @@ import NotFound from "./pages/NotFound";
 import CallbackPage from "./pages/CallbackPage";
 
 import AuthenticationGuard from "./components/AuthenticationGuard";
-import AppContextProvider from "./providers/AppContext";
+import AppContextProvider, {AppContext} from "./providers/AppContext";
 import axios from "axios";
 import {useAuth0} from "@auth0/auth0-react";
-import {useEffect, useRef} from "react";
+import {useContext, useEffect, useRef, useState} from "react";
+import useMapManager from "./hooks/MapsManager";
 
 
 function App() {
-    const {getAccessTokenSilently} = useAuth0();
-    const toastRef = useRef(null);
+    const {getAccessTokenSilently, isAuthenticated} = useAuth0();
+    const toastRef = useContext(AppContext);
+    const {loadMaps} = useMapManager();
 
     useEffect(() => {
         axios.interceptors.request.use(async function (config) {
@@ -31,26 +33,31 @@ function App() {
         axios.interceptors.response.use((response) => {
             return response;
         }, (error) => {
-            toastRef.current.show({
-                severity: "error",
-                summary: "Error",
-                detail: error.response.data.message
-            });
+            if (toastRef.current) {
+                toastRef.current.show({
+                    severity: "error",
+                    summary: "Error",
+                    detail: error.response.data.message
+                });
+            }
             return Promise.reject(error);
         });
     }, []);
+    useEffect(() => {
+        if (isAuthenticated) {
+            loadMaps();
+        }
+    }, [isAuthenticated]);
     return (
-        <AppContextProvider additionalStates={{toastRef}}>
-            <Routes>
-                <Route exact path="/" element={<Home/>}/>
-                <Route path="/*" element={<NotFound/>}/>
+        <Routes>
+            <Route exact path="/" element={<Home/>}/>
+            <Route path="/*" element={<NotFound/>}/>
 
-                <Route path="/callback/*" element={<CallbackPage/>}/>
-                <Route path="/profile/*" element={<AuthenticationGuard component={Profile}/>}/>
-                <Route path="/dashboard/*" element={<AuthenticationGuard component={Dashboard}/>}/>
-                <Route path="/map/*" element={<AuthenticationGuard component={Map}/>}/>
-            </Routes>
-        </AppContextProvider>
+            <Route path="/callback/*" element={<CallbackPage/>}/>
+            <Route path="/profile/*" element={<AuthenticationGuard component={Profile}/>}/>
+            <Route path="/dashboard/*" element={<AuthenticationGuard component={Dashboard}/>}/>
+            <Route path="/map/*" element={<AuthenticationGuard component={Map}/>}/>
+        </Routes>
     );
 }
 

@@ -1,22 +1,18 @@
-import React, {useEffect, useRef, useState} from "react";
+import React, {useContext, useEffect, useRef, useState} from "react";
 import {Dropdown} from 'primereact/dropdown';
 import {Button} from "primereact/button";
 import {Dialog} from "primereact/dialog";
 import {InputText} from "primereact/inputtext";
 import {FileUpload} from 'primereact/fileupload';
 import MapUploadDialog from "./MapUploadDialog";
+import {AppContext} from "../providers/AppContext";
 
 export default function MapDropdown() {
     const [selectedMap, setSelectedMap] = useState(null);
     const newProjDropdown = useRef(null);
     const [visible, setVisible] = useState(false);
-
-    const maps = [
-        {name: 'Oplà', guid: 'bw2i3nn3'},
-        {name: 'Arena', guid: '2hj3bnfj'},
-        {name: 'Torino', guid: '2b098ch'},
-        {name: 'Mobirec', guid: 'nj2i90j3'},
-    ];
+    const dropdownInputRef = useRef(null);
+    const {maps} = useContext(AppContext);
 
     const panelFooterTemplate = () => {
         return (
@@ -45,8 +41,8 @@ export default function MapDropdown() {
 
     return (
         <>
-            <Dropdown ref={newProjDropdown} value={selectedMap} onChange={(e) => setSelectedMap(e.value)} options={maps}
-                      optionLabel="name"
+            <Dropdown ref={newProjDropdown} value={selectedMap} inputRef={dropdownInputRef} onChange={(e) => setSelectedMap(e.value)} options={maps}
+                      optionLabel="name" optionValue={"_id"}
                       placeholder="Select a Map" panelFooterTemplate={panelFooterTemplate} appendTo={"self"}/>
             <MapUploadDialog visible={visible} setVisible={setVisible}/>
         </>

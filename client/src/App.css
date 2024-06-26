@@ -280,15 +280,11 @@ input {
         justify-content: end;
         order: 2;
         .p-button{
+            border-radius: 5rem;
             &.p-fileupload-choose,
             &[aria-label="Cancel"]{
                 display:none
             }
-        }
-    }
-    &:has(.empty-message){
-        .p-fileupload-buttonbar{
-            display:none;
         }
     }
     .p-fileupload-content{
@@ -323,6 +319,15 @@ input {
             }
         }
     }
+    &:has(.empty-message){
+        .p-fileupload-buttonbar{
+            display:none;
+        }
+    }
+}
+
+.input-container:has(input:placeholder-shown) ~ .p-fileupload .p-fileupload-buttonbar{
+    display:none;
 }
 
 .p-dialog {
@@ -375,6 +380,17 @@ input {
                 margin-bottom: .5rem;
                 color: rgba(255, 255, 255, .75);
             }
+        }
+
+        .buttonbar{
+            padding-top: .5rem;
+            margin-bottom: -.5rem;
+            display: flex;
+            justify-content: flex-end;
+        }
+
+        .input-container:has(input:placeholder-shown, .p-dropdown .p-placeholder) ~ .buttonbar{
+            display:none;
         }
     }
 
