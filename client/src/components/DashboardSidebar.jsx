@@ -1,13 +1,12 @@
-import React, { useState } from "react";
+import React from "react";
 
 import "../style/css/DashboardSidebar.css";
-
-import {NewProjectButton} from "./NewProjectButton";
+import MapsList from "./MapsList";
 
 export default function DashboardSidebar() {
     return (
         <div className={"dashboard-sidebar"}>
-            <NewProjectButton/>
+            <MapsList/>
         </div>
     )
 }

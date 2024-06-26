@@ -1,2 +1,4 @@
 
-¸javascript:S1077"jimg elements must have an alt prop, either with meaningful text, or an empty string for decorative images.(ïûü‰úÿÿÿÿ8ïá˜Ò„2J$021d50e8-f774-46f8-b269-57f9f40444f2
+ujavascript:S6847"RNon-interactive elements should not be assigned mouse or keyboard event listeners.(üĞô€8¯È˜…2
+‚javascript:S1082"_Visible, non-interactive elements with click handlers must have at least one keyboard listener.(üĞô€8‘¯È˜…2
+^javascript:S6845";`tabIndex` should only be declared on interactive elements.(üĞô€8‘¯È˜…2

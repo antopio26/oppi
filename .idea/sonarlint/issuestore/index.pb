@@ -217,11 +217,16 @@ R
 "client/src/style/css/Dashboard.css,4/3/43e59de9dc98e38031884315f10f3e59c91f7e09
 U
 %client/src/components/ProjectCard.jsx,a/7/a7c7f7c62c4b5ac9df4d03f098fe47588e24dbbf
-P
- client/src/hooks/MockMapData.jsx,d/1/d1bee335e0a0a89403ca7c23e8263d2e9a7024bb
 O
 client/src/hooks/MockMapData.js,a/4/a4c9c3223eea73031dac69b37b547319fb6d8bbb
 H
 client/public/octomap.bt,4/a/4a3bfb591de5b2d24b093d4e32abf5cf4517f708
 J
 client/public/mockMap.json,9/7/97156fa415c113f6e15fe3585d55c7c9415af4ae
+R
+"client/src/components/MapsList.jsx,4/c/4c149b3f63263f4e92d44c6ff5df27630d081879
+R
+"client/src/hooks/ProjectManager.js,0/6/0605a6322c4f4b23b2d197840a97112ead2fb9fa
+:
+
+.gitignore,a/5/a5cc2925ca8258af241be7e5b0381edf30266302

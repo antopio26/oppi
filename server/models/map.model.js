@@ -12,7 +12,6 @@ const MapSchema = new mongoose.Schema({
     },
     createdAt: {
         type: Date,
-        required: true,
         default: Date.now
     },
     // Size/dimensions of the map (x,y,z) >= 0
@@ -23,7 +22,8 @@ const MapSchema = new mongoose.Schema({
                 return v.length === 3 && v.every(n => n >= 0);
             },
             message: props => `${props.value} is not a valid size!`
-        }
+        },
+        default: [0, 0, 0]
     },
     offset: {
         type: [Number],
@@ -32,7 +32,8 @@ const MapSchema = new mongoose.Schema({
                 return v.length === 3;
             },
             message: props => `${props.value} is not a valid offset!`
-        }
+        },
+        default: [0, 0, 0]
     }
 });
 

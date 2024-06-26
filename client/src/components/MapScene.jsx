@@ -21,6 +21,7 @@ export default function MapScene({waypoints, waypointsColor, readyState, voxels,
     useFrame(() => {
         if (OrbitControlsRef.current && !interactive) {
             OrbitControlsRef.current.update();
+            OrbitControlsRef.current.autoRotateSpeed = 1 + 2*Math.pow(Math.sin(OrbitControlsRef.current.getAzimuthalAngle()),2);
         }
     })
 

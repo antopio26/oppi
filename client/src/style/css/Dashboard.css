@@ -1,25 +1,211 @@
-.dashboard-main{
-    .projects-list{
-        display: flex;
-        flex-direction: column;
-        gap: .5rem;
-        .project-card{
+.dashboard-main {
+    *, *::before, *::after {
+        margin: 0;
+    }
+
+    .projects-list {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 1rem;
+        @media (max-width: 1200px) {
+            grid-template-columns: 1fr;
+        }
+
+        .projects-list-top {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            grid-column: 1/-1;
+        }
+
+        &:has(img:hover,img:focus-within) .project-card:not(:has(img:hover,img:focus-within)) {
+            opacity: .75;
+        }
+        &:has(img:active, img.selected) .project-card:not(:has(img:active,img.selected)) {
+            opacity: .5;
+        }
+        .project-card {
             background-color: var(--secondary);
             padding: 1rem;
             border-radius: 1.5rem;
             display: flex;
             align-items: center;
-            img{
-                height: 6rem;
-                aspect-ratio: 4/3;
-                border-radius: .5rem;
-            }
-            .project-info{
-                display: flex;
-                flex-direction: column;
-                h3{
-                    margin: 0;
+            gap: 1rem;
+            transition: opacity .35s ease-out, background-color .35s ease-out;
+
+            &:has(.delete-button:hover){
+                background-color: rgba(73, 73, 73, .5);
+                .preview, .actions *:not(.delete-button, .delete-button *) {
+                    filter: grayscale(1);
                 }
+            }
+
+            .preview {
+                margin: -.25rem 0 -.25rem -.25rem;
+                flex: 0 1 clamp(100px, 12vw, 14rem);
+                align-self: stretch;
+                position: relative;
+                border-radius: .75rem;
+                overflow: hidden;
+                transition: filter .35s ease-out;
+
+                @media (max-width: 1200px) {
+                    flex: 0 1 clamp(80px, 24vw, 12rem);
+                }
+
+                img {
+                    position: absolute;
+                    inset: 0;
+                    object-fit: cover;
+                    width: 100%;
+                    height: 100%;
+                    cursor: pointer;
+                    transition: scale .35s ease-out;
+                    &:hover, &:focus-within{
+                        scale: 1.1;}
+                    &:active, &.selected{
+                        scale: 1.2;
+                    }
+                }
+            }
+
+            .project-info {
+                display: flex;
+                flex-grow: 1;
+                flex-direction: column;
+                margin-right: auto;
+                align-self: stretch;
+
+                .project-info-top {
+                    display: flex;
+                    justify-content: space-between;
+
+                    .actions {
+                        display: flex;
+                        align-items: center;
+                        height: fit-content;
+                        gap: .5rem;
+
+                        button {
+                            font-size: .85rem;
+                            padding: .25rem .5rem;
+                            transition: filter .35s ease-out;
+
+                            &.p-button-icon-only {
+                                height: 1.5rem;
+                                width: 1.5rem;
+                            }
+
+                            &.duplicate-button{
+                                gap: .25rem;
+                            }
+
+                            &.p-button-danger:hover {
+                                background: rgba(239, 68, 68, 0.08);
+                            }
+                            &.p-button-danger:active {
+                                background: rgba(239, 68, 68, 0.16);
+                            }
+
+                            span {
+                                font-size: inherit;
+                            }
+                        }
+                    }
+                }
+
+                ul {
+                    margin-block: 1.5rem;
+                    display: grid;
+                    grid-template-columns: 1fr 1fr;
+                    gap: 1rem 1.5rem;
+                    padding: 0;
+                    align-items: center;
+                    justify-content: center;
+                    @media (max-width: 1200px) {
+                        grid-template-columns: 1fr 1fr 1fr 1fr;
+                        gap: .75rem;
+                        li::after{
+                            content: none !important;
+                        }
+                        li + li:nth-child(n+2)::before{
+                            content: '';
+                            position: absolute;
+                            left: -.375rem !important;
+                            top: 15%;
+                            height: 70%;
+                            width: 1px;
+                            background: rgba(255, 255, 255, .25);
+                        }
+                    }
+
+                    li {
+                        display: flex;
+                        flex-direction: column;
+                        gap: .25rem;
+                        height: 100%;
+                        align-items: center;
+                        justify-content: space-between;
+
+                        & + li {
+                            position: relative;
+
+                            &:nth-child(even)::before {
+                                content: '';
+                                position: absolute;
+                                left: -.75rem;
+                                top: 15%;
+                                height: 70%;
+                                width: 1px;
+                                background: rgba(255, 255, 255, .25);
+                            }
+
+                            &:nth-child(n + 3)::after {
+                                content: '';
+                                position: absolute;
+                                top: -.5rem;
+                                height: 1px;
+                                width: 70%;
+                                max-width: 50px;
+                                background: rgba(255, 255, 255, .25);
+                            }
+                        }
+
+                        .label {
+                            font-size: .85rem;
+                            color: rgba(255, 255, 255, .75);
+                            text-align: center;
+                        }
+
+                        .value {
+                            font-size: 1rem;
+
+                            &[data-unit]::after {
+                                content: attr(data-unit);
+                                font-size: .85rem;
+                                color: rgba(255, 255, 255, .75);
+                                margin-inline-start: .1rem;
+                            }
+                        }
+                    }
+                }
+
+                .project-footer {
+                    margin-top: auto;
+                    display: flex;
+                    justify-content: space-between;
+
+                    .created, .opened {
+                        font-size: .75rem;
+                        color: rgba(255, 255, 255, .5);
+
+                        span:nth-child(2) {
+                            margin-inline-start: .1rem;
+                            color: rgba(255, 255, 255, .75);
+                        }
+                    }
+                }
+
             }
         }
     }

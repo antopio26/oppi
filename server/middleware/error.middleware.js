@@ -13,6 +13,14 @@ class DBError extends Error {
     }
 }
 
+class MapUploadError extends Error {
+    constructor(message = "Error uploading map") {
+        super(message);
+        this.name = "MapUploadError";
+        this.status = 500;
+    }
+}
+
 const errorHandler = (error, request, response, next) => {
     console.error(error);
 
@@ -48,6 +56,12 @@ const errorHandler = (error, request, response, next) => {
         return;
     }
 
+    if (error instanceof MapUploadError) {
+        response.status(error.status).json({ message: error.message });
+
+        return;
+    }
+
     const status = 500;
     const message = "Internal Server Error";
 
@@ -56,5 +70,6 @@ const errorHandler = (error, request, response, next) => {
 
 module.exports = {
     errorHandler,
-    DBError
+    DBError,
+    MapUploadError
 };
