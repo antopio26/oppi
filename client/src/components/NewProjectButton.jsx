@@ -16,7 +16,7 @@ export function NewProjectButton() {
     return (
         <>
             <Button rounded iconPos={"right"} icon="pi pi-plus" onClick={() => setVisible(true)} />
-            <Dialog ref={newProjRef} header="New Project" dismissableMask visible={visible} onHide={() => {
+            <Dialog ref={newProjRef} header="New Project" draggable={false} dismissableMask visible={visible} onHide={() => {
                 if (!visible) return;
                 setVisible(false);
             }} onShow={(e)=>{
