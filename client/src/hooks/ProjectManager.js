@@ -1,8 +1,9 @@
 import axios from "axios";
-import {useState} from "react";
+import {useContext} from "react";
+import {AppContext} from "../providers/AppContext";
 
 export default function useProjectManager() {
-    const [projects, setProjects] = useState([]);
+    const {projects, setProjects} = useContext(AppContext);
 
     const getProjects = async () => {
         const res = await axios.get('/api/projects');
