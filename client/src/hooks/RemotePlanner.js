@@ -3,6 +3,7 @@ import * as THREE from "three";
 import useWebSocket, {ReadyState} from 'react-use-websocket';
 import {decodeMessage, binaryDataToVoxels} from "../utils/OctomapConversion";
 import {MapContext} from "../providers/MapContext";
+import {AppContext} from "../providers/AppContext";
 
 export default function useRemotePlanner(remoteURL, waypoints = []) {
 
@@ -14,10 +15,15 @@ export default function useRemotePlanner(remoteURL, waypoints = []) {
 
     const [completed, setCompleted] = useState(false);
 
+    const {selectedProject} = useContext(AppContext);
+
     const {sendMessage, getWebSocket, readyState} = useWebSocket(remoteURL, {
         onOpen: (e) => {
             e.target.binaryType = 'arraybuffer';
             console.log('WebSocket connection established.');
+            sendMessage(JSON.stringify({
+                topic: 'r', map: selectedProject.map
+            }));
 
             // Reset all states when a new connection is established
             setVoxels({positions: [], sizes: []})

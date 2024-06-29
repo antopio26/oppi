@@ -1,29 +1,17 @@
 import {Button} from "primereact/button";
 import MapUploadDialog from "./MapUploadDialog";
-import {useContext, useEffect, useState} from "react";
-import {AppContext} from "../providers/AppContext";
+import {memo, useState} from "react";
 
 
-export default function MapsList() {
+const MapsList = memo(function({maps, onToggle, onReset, getMapFilter}) {
     const [visible, setVisible] = useState(false);
-    const {maps, setMaps} = useContext(AppContext);
-
-    const handleResetMapFilter = () => {
-        document.querySelectorAll("input[name='map']:checked").forEach((input) => {
-            input.checked = false;
-        });
-    }
-
-    useEffect(() => {
-        console.log(maps)
-    }, [maps]);
 
     return (
         <div className={"section"}>
             <div className="section-top">
                 <p className={"label"}>Maps</p>
-                <Button icon="pi pi-undo" className={"reset-button"} text rounded
-                        onClick={handleResetMapFilter}/>
+                <Button icon="pi pi-undo" className={"reset-button"} text rounded disabled={!getMapFilter().length}
+                        onClick={onReset}/>
             </div>
             <div className="section-content">
                 <ul>
@@ -33,7 +21,10 @@ export default function MapsList() {
                                 <label htmlFor={map._id}>
                                     {map.name}
                                 </label>
-                                <input type="checkbox" name={"map"} value={map._id} hidden id={map._id}/>
+                                <input type="checkbox" name={"map"} value={map._id} hidden id={map._id}
+                                       checked={getMapFilter().includes(map._id)}
+                                onChange={()=> onToggle(map._id)}
+                                />
                             </li>
                         ))
                     }
@@ -46,4 +37,6 @@ export default function MapsList() {
 
         </div>
     )
-}
+});
+
+export default MapsList;

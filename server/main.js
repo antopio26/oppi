@@ -2,12 +2,15 @@ const express = require('express');
 const path = require('path');
 const dotenv = require('dotenv');
 const cors = require('cors');
+const bodyParser = require('body-parser')
 const { errorHandler, DBError} = require('./middleware/error.middleware');
 const { notFoundHandler } = require('./middleware/not-found.middleware');
 const { authGuard } = require('./middleware/auth.middleware')
 
 // Load environment variables from .env file
 dotenv.config();
+
+const jsonParser = bodyParser.json();
 
 // Create express app
 const app = express();
@@ -41,7 +44,7 @@ app.use("/api", (req, res, next) => {
 
 // Use API routes
 app.use("/api/user", authGuard, userRoutes);
-app.use("/api/projects", authGuard, projectRoutes);
+app.use("/api/projects", authGuard, jsonParser, projectRoutes);
 app.use("/api/maps", authGuard, mapRoutes);
 
 // Handle 404 errors

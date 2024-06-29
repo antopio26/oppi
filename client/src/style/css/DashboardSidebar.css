@@ -19,12 +19,14 @@
 
             li {
                 display: flex;
+                justify-content: center;
                 label {
                     flex-grow: 1;
                     background-color: var(--secondary);
                     text-align: center;
                     padding: .5rem 1rem;
                     border-radius: 5rem;
+                    user-select: none;
                     cursor: pointer;
                     transition: background-color .35s ease-out;
 

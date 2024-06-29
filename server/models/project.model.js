@@ -1,4 +1,5 @@
 const mongoose = require('mongoose');
+const { Parameters } = require('./parameters.model');
 
 const ProjectSchema = new mongoose.Schema({
     name: {
@@ -12,12 +13,13 @@ const ProjectSchema = new mongoose.Schema({
     },
     createdAt: {
         type: Date,
-        required: true,
         default: Date.now
+    },
+    thumbnail: {
+        type: String
     },
     lastOpenAt: {
         type: Date,
-        required: true,
         default: Date.now
     },
     map: {
@@ -27,10 +29,11 @@ const ProjectSchema = new mongoose.Schema({
     },
     parameters: {
         type: mongoose.Schema.Types.ObjectId,
-        ref: 'Parameters',
-        required: true
+        ref: 'Parameters'
     }
 })
+
+ProjectSchema.index({name: 1, user: 1}, {unique: true});
 
 // Middleware to filter projects by userId
 ProjectSchema.pre('find', function(next) {
@@ -38,6 +41,17 @@ ProjectSchema.pre('find', function(next) {
         next();
     } else {
         next(new Error('User ID is not provided'));
+    }
+});
+
+ProjectSchema.pre('save', function (next){
+    if (!this.parameters){
+        Parameters.create({}).then(parameters => {
+            this.parameters = parameters._id;
+            next();
+        }).catch(err => next(err));
+    } else {
+        next();
     }
 });
 

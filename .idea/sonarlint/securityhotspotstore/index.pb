@@ -234,3 +234,11 @@ O
 client/src/hooks/MapsManager.js,f/7/f765b0d52477551e1cf7e6ba95cbd3de1fb8fcc0
 Å
 Q.idea/sonarlint/securityhotspotstore/f/7/f765b0d52477551e1cf7e6ba95cbd3de1fb8fcc0,7/b/7b448e8f6b8eecdf58f06fe7cb630bf2c65c669a
+A
+server/.gitignore,6/8/684633b668b24c06fe5d5ba72b7ed42a437aa655
+H
+client/public/robots.txt,b/d/bd6eb45ab686cf67dd2d7534b5cf1e4a1e8cc874
+N
+client/src/hooks/MapManager.js,5/c/5c19c58d7bbdbf793ea8a9200d90ebdd39c60d6b
+U
+%client/src/components/ProjectList.jsx,7/7/7745013908011c0ed4ad6f6884148009aec45cc9

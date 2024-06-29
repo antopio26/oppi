@@ -37,6 +37,8 @@ const MapSchema = new mongoose.Schema({
     }
 });
 
+MapSchema.index({name: 1, user: 1}, {unique: true});
+
 MapSchema.pre('find', function(next) {
      if (this._conditions.user) {
          next();

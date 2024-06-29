@@ -13,17 +13,19 @@ import NotFound from "./pages/NotFound";
 import CallbackPage from "./pages/CallbackPage";
 
 import AuthenticationGuard from "./components/AuthenticationGuard";
-import AppContextProvider, {AppContext} from "./providers/AppContext";
+import {AppContext} from "./providers/AppContext";
 import axios from "axios";
 import {useAuth0} from "@auth0/auth0-react";
-import {useContext, useEffect, useRef, useState} from "react";
-import useMapManager from "./hooks/MapsManager";
+import {useContext, useEffect} from "react";
+import useMapManager from "./hooks/MapManager";
+import useProjectManager from "./hooks/ProjectManager";
 
 
 function App() {
     const {getAccessTokenSilently, isAuthenticated} = useAuth0();
-    const toastRef = useContext(AppContext);
-    const {loadMaps} = useMapManager();
+    const {toastRef} = useContext(AppContext);
+    const {getMaps} = useMapManager();
+    const {getProjects} = useProjectManager();
 
     useEffect(() => {
         axios.interceptors.request.use(async function (config) {
@@ -45,7 +47,8 @@ function App() {
     }, []);
     useEffect(() => {
         if (isAuthenticated) {
-            loadMaps();
+            getMaps();
+            getProjects();
         }
     }, [isAuthenticated]);
     return (

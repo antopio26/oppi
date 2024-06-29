@@ -1,14 +1,10 @@
 import React, {useContext, useEffect, useRef, useState} from "react";
 import {Dropdown} from 'primereact/dropdown';
 import {Button} from "primereact/button";
-import {Dialog} from "primereact/dialog";
-import {InputText} from "primereact/inputtext";
-import {FileUpload} from 'primereact/fileupload';
 import MapUploadDialog from "./MapUploadDialog";
 import {AppContext} from "../providers/AppContext";
 
-export default function MapDropdown() {
-    const [selectedMap, setSelectedMap] = useState(null);
+export default function MapDropdown({selectedMap, setSelectedMap}) {
     const newProjDropdown = useRef(null);
     const [visible, setVisible] = useState(false);
     const dropdownInputRef = useRef(null);
