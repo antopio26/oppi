@@ -43,9 +43,7 @@ export default function useProjectManager() {
         const res = await axios.put(`/api/projects/${id}/lastOpenAt`, {});
         setProjects(projects.map(p => p._id === id ? res.data : p));
 
-        if (!selectedProject) {
-            setSelectedProject(res.data);
-        }
+        setSelectedProject(res.data);
     }
 
     return {

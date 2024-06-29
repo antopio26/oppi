@@ -47,8 +47,6 @@ M
 client/src/style/css/Home.css,a/4/a46a3b8e446ff36bd88f9e9447ba302122eed8dd
 X
 (client/src/components/ProfileSidebar.jsx,b/f/bfc9ccb2cd9bc1f63d4e9b7967bc11d146990d1b
-Z
-*client/src/components/DashboardSidebar.jsx,a/e/ae4fe58279734e3d809a2aefec57acf51ee1b917
 T
 $client/src/components/MapSidebar.jsx,1/9/191516b0650fc7137f1dca80d4fa9e0c3335ba04
 A
@@ -203,8 +201,6 @@ Q
 !server/public/asset-manifest.json,4/a/4a9f2b253d015675abbdf52be0387e80cf96482e
 J
 server/models/map.model.js,c/6/c6dc3ac8c4aa74eb14a4e3d32aeb31b78bfd9a35
-P
- server/models/parameter.model.js,b/e/be2b56016236ad543dea6295f619a42b284d5e81
 N
 server/models/project.model.js,a/c/acb7839ceddc48d3198404bfcbefce25b79aa40c
 K
@@ -230,8 +226,6 @@ R
 :
 
 .gitignore,a/5/a5cc2925ca8258af241be7e5b0381edf30266302
-O
-client/src/hooks/MapsManager.js,f/7/f765b0d52477551e1cf7e6ba95cbd3de1fb8fcc0
 Å
 Q.idea/sonarlint/securityhotspotstore/f/7/f765b0d52477551e1cf7e6ba95cbd3de1fb8fcc0,7/b/7b448e8f6b8eecdf58f06fe7cb630bf2c65c669a
 A

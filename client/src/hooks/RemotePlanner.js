@@ -22,7 +22,7 @@ export default function useRemotePlanner(remoteURL, waypoints = []) {
             e.target.binaryType = 'arraybuffer';
             console.log('WebSocket connection established.');
             sendMessage(JSON.stringify({
-                topic: 'r', map: selectedProject.map
+                topic: 'm', map: selectedProject.map
             }));
 
             // Reset all states when a new connection is established

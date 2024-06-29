@@ -39,8 +39,9 @@ export default function ProjectCard({project}) {
         });
         e.target.classList.add("selected");
 
-        updateLastOpenAt(project._id);
-        navigate('/map');
+        updateLastOpenAt(project._id).then(() => {
+            navigate('/map')
+        });
     }
 
     const handleDelete = () => {
