@@ -16,14 +16,22 @@ export default function useRemotePlanner(remoteURL, waypoints = []) {
 
     const {selectedProject} = useContext(AppContext);
 
-    const {sendMessage, getWebSocket, readyState} = useWebSocket(remoteURL, {
-        onOpen: (e) => {
-            e.target.binaryType = 'arraybuffer';
-            console.log('WebSocket connection established.');
+    const [first, setFirst] = useState(true);
+
+    useEffect(() => {
+        if (first && selectedProject) {
             sendParameters();
             sendMessage(JSON.stringify({
                 topic: 'm', map: selectedProject.map
             }));
+            setFirst(false);
+        }
+    },[selectedProject])
+
+    const {sendMessage, getWebSocket, readyState} = useWebSocket(remoteURL, {
+        onOpen: (e) => {
+            e.target.binaryType = 'arraybuffer';
+            console.log('WebSocket connection established.');
 
             // Reset all states when a new connection is established
             setVoxels({positions: [], sizes: []})

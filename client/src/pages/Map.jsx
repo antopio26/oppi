@@ -20,7 +20,7 @@ export default function Map() {
 
     return (
         <MapContextProvider additionalStates={{mapMode, setMapMode, waypoints, setWaypoints, waypointsColor, setWaypointsColor, sendParameters}}>
-            { voxels.length === 0 && <LoadingOverlay /> }
+            { voxels.positions.length === 0 && <LoadingOverlay /> }
             <Sidebar
                 info={"Set a starting point, an ending point and generate a path. You can modify the path planning parameters and move within the map."}>
                 <MapSidebar/>

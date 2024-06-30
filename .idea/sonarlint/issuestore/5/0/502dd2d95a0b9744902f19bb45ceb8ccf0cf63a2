@@ -1,8 +1,8 @@
 
-xjavascript:S1128"*Remove this unused import of 'AppContext'.(İóß¦ûÿÿÿÿ8ÃêÅÄ†2J$94bdc917-8827-45a4-b5bf-e6fa00954ad6
-xjavascript:S1128"*Remove this unused import of 'useContext'.(¦ü¤üÿÿÿÿ8ÃêÅÄ†2J$a0ad2011-ef15-45b2-aed9-b8461b4fbe0f
-{javascript:S1128"-Remove this unused import of 'useMapManager'.(Ùû¢’ÿÿÿÿÿ8Î’ÙÄ†2J$06ef4b93-6626-4717-b92e-07092733952d
-javascript:S1128"1Remove this unused import of 'useProjectManager'.(‰õÀ‡üÿÿÿÿ8Î’ÙÄ†2J$d97ac4ff-b751-4171-a36a-87ba73ab8a54
-‰javascript:S1481"@Remove the declaration of the unused 'isAuthenticated' variable.(âÇàØ8ãíÄ†2J$f9ff0f5b-0190-4873-85ef-f3baa0a0eb48
-†javascript:S1854"=Remove this useless assignment to variable "isAuthenticated".(âÇàØ8ãíÄ†2J$d2def5d6-5c49-42a4-80ea-b8b31854aca8
-ljavascript:S125"Remove this commented out code.(ËƒÖ§ûÿÿÿÿ8Î’ÙÄ†2J$e54b4a1c-7cd5-49f1-9ff0-c9ef24e7dced
+xjavascript:S1128"*Remove this unused import of 'AppContext'.(İóß¦ûÿÿÿÿ8ÃêÅÄ†2J$6c5bf3c0-4340-4dbc-a929-4ebd812f8953
+xjavascript:S1128"*Remove this unused import of 'useContext'.(¦ü¤üÿÿÿÿ8ÃêÅÄ†2J$8c7eb4b2-5bb5-4e15-8c44-dfb5ed50b250
+Ujavascript:S1128"-Remove this unused import of 'useMapManager'.(Ùû¢’ÿÿÿÿÿ8¹ÅÉÒ†2
+Yjavascript:S1128"1Remove this unused import of 'useProjectManager'.(‰õÀ‡üÿÿÿÿ8¹ÅÉÒ†2
+cjavascript:S1481"@Remove the declaration of the unused 'isAuthenticated' variable.(âÇàØ8¹ÅÉÒ†2
+`javascript:S1854"=Remove this useless assignment to variable "isAuthenticated".(âÇàØ8¹ÅÉÒ†2
+Fjavascript:S125"Remove this commented out code.(ËƒÖ§ûÿÿÿÿ8ºÅÉÒ†2
