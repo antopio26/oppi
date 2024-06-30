@@ -2,6 +2,9 @@ const express = require('express');
 const { Project, ProjectSchema } = require('../models/project.model');
 const {Parameters} = require("../models/parameters.model");
 
+const PathRouter = require('./path.router');
+const {Router} = require("express");
+
 const router = express.Router();
 
 router.get('/', async (req, res, next) => {
@@ -62,5 +65,12 @@ router.put('/:id/parameters', async (req, res, next) => {
     await parameters.save();
     res.send(await project.populate('parameters'));
 })
+
+router.use('/:id/paths', async (req, res, next) => {
+    // Middleware to pass project to path router
+    const project = await Project.findOne({_id: req.params.id, user: req.user._id});
+    req.project = project;
+    next();
+}, PathRouter);
 
 module.exports = router

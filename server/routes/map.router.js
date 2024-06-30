@@ -62,7 +62,12 @@ router.delete('/:id', async (req, res, next) => {
     const map = await Map.findOneAndDelete({_id: req.params.id, user: req.user._id});
 
     // Delete file
-    fs.unlinkSync(`../maps/${map._id}`);
+    try {
+        fs.unlinkSync(`../maps/${map._id}`);
+    } catch (err) {
+        console.log(err);
+        // next(new MapUploadError("Map delete error"));
+    }
 
     res.send(map);
 })

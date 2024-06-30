@@ -1,6 +1,6 @@
 const mongoose = require('mongoose');
-const {Parameters} = require('./parameters.model');
-const {Path} = require("./path.model");
+const { Parameters } = require('./parameters.model');
+const { Path } = require('./path.model');
 
 const ProjectSchema = new mongoose.Schema({
     name: {
@@ -16,9 +16,7 @@ const ProjectSchema = new mongoose.Schema({
         type: Date,
         default: Date.now
     },
-    thumbnail: {
-        type: String
-    },
+    thumbnail: String,
     lastOpenAt: {
         type: Date,
         default: Date.now
@@ -32,43 +30,57 @@ const ProjectSchema = new mongoose.Schema({
         type: mongoose.Schema.Types.ObjectId,
         ref: 'Parameters'
     }
-})
+});
 
-ProjectSchema.index({name: 1, user: 1}, {unique: true});
+ProjectSchema.index({ name: 1, user: 1 }, { unique: true });
 
-// Middleware to filter projects by userId
 ProjectSchema.pre('find', function(next) {
-    if (this._conditions.user) {
-        next();
-    } else {
-        next(new Error('User ID is not provided'));
-    }
+    return this._conditions.user ? next() : next(new Error('User ID is not provided'));
 });
 
-ProjectSchema.pre('save', function (next){
-    if (!this.parameters){
-        Parameters.create({}).then(parameters => {
-            this.parameters = parameters._id;
-            next();
-        }).catch(err => next(err));
+ProjectSchema.pre('save', function(next) {
+    if (!this.parameters) {
+        Parameters.create({})
+            .then(parameters => {
+                this.parameters = parameters._id;
+                next();
+            })
+            .catch(next);
     } else {
         next();
     }
 });
 
-ProjectSchema.pre('remove', function(next) {
-    Parameters.deleteOne({ _id: this.parameters }, err => {
-        if (err) {
-            next(err);
-        } else {
-            Path.deleteMany({ project: this._id }, next);
-        }
-    });
+const deleteRelated = async function(next) {
+    try {
+        const projectId = this._conditions._id || this._id;
+
+        await Parameters.deleteOne({ _id: projectId });
+        await Path.deleteMany({ project: projectId });
+
+        next();
+    } catch (err) {
+        next(err);
+    }
+};
+
+ProjectSchema.pre('deleteOne', { document: false, query: true }, deleteRelated);
+ProjectSchema.pre('deleteOne', { document: true, query: false }, deleteRelated);
+ProjectSchema.pre('findOneAndDelete', deleteRelated);
+
+ProjectSchema.pre('deleteMany', async function(next) {
+    try {
+        const projectIds = this._conditions._id;
+
+        await Parameters.deleteMany({ _id: { $in: projectIds } });
+        await Path.deleteMany({ project: { $in: projectIds } });
+
+        next();
+    } catch (err) {
+        next(err);
+    }
 });
 
 const Project = mongoose.model('Project', ProjectSchema);
 
-module.exports = {
-    Project,
-    ProjectSchema
-}
+module.exports = { Project, ProjectSchema };

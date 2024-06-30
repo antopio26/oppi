@@ -3,7 +3,7 @@ import {useContext} from "react";
 import {AppContext} from "../providers/AppContext";
 
 export default function useProjectManager() {
-    const {projects, setProjects, selectedProject, setSelectedProject} = useContext(AppContext);
+    const {projects, setProjects, selectedProject, setSelectedProject, paths, setPaths} = useContext(AppContext);
 
     const getProjects = async () => {
         const res = await axios.get('/api/projects');
@@ -52,12 +52,36 @@ export default function useProjectManager() {
         setSelectedProject(res.data);
     }
 
+    const getPaths = async (projectId) => {
+        const res = await axios.get(`/api/projects/${projectId}/paths`);
+        setPaths(res.data);
+    }
+
+    const createPath = async (projectId, path) => {
+        const res = await axios.post(`/api/projects/${projectId}/paths`, path);
+        setPaths([...paths, res.data]);
+    }
+
+    const savePath = async (projectId, pathId) => {
+        const res = await axios.put(`/api/projects/${projectId}/paths/${pathId}/save`);
+        setPaths(paths.map(p => p._id === pathId ? res.data : p));
+    }
+
+    const unsavePath = async (projectId, pathId) => {
+        const res = await axios.put(`/api/projects/${projectId}/paths/${pathId}/unsave`);
+        setPaths(paths.map(p => p._id === pathId ? res.data : p));
+    }
+
     return {
         getProjects,
         createProject,
         deleteProject,
         updateProject,
         updateParameters,
-        updateLastOpenAt
+        updateLastOpenAt,
+        getPaths,
+        createPath,
+        savePath,
+        unsavePath
     };
 }

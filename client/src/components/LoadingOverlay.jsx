@@ -5,7 +5,7 @@ import '../style/css/LoadingOverlay.css';
 export default function LoadingOverlay() {
     return (
         <div className='loading-overlay'>
-            <ProgressSpinner />
+            <ProgressSpinner strokeWidth="4" />
         </div>
     )
 }

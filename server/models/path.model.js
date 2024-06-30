@@ -1,4 +1,5 @@
 const mongoose = require('mongoose');
+const {Parameters} = require("./parameters.model");
 
 const PointSchema = new mongoose.Schema({
     x: {
