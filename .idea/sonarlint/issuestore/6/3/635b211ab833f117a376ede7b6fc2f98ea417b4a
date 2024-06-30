@@ -1,0 +1,4 @@
+
+jjavascript:S1481"GRemove the declaration of the unused 'getAccessTokenSilently' variable.(—ý³¡8„ŠŸÄ†2
+gjavascript:S1854"DRemove this useless assignment to variable "getAccessTokenSilently".(—ý³¡8„ŠŸÄ†2
+ujavascript:S6478	"RMove this component definition out of the parent component and pass data as props.(½£Àý8„ŠŸÄ†2

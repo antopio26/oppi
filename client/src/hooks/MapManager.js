@@ -19,8 +19,14 @@ export default function useMapManager() {
         setMaps([...maps, res.data]);
     }
 
+    const deleteMap = async (id) => {
+        await axios.delete(`/api/maps/${id}`);
+        setMaps(maps.filter(p => p._id !== id));
+    }
+
     return {
         getMaps,
-        uploadMap
+        uploadMap,
+        deleteMap
     }
 }

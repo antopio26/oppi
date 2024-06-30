@@ -5,53 +5,100 @@
     width: 100%;
     padding: 0 1rem;
 
-    .section-content {
-        width: 100%;
-
-        ul {
-            list-style: none;
-            display: flex;
-            flex-direction: column;
-            gap: .5rem;
-            padding: 0;
-            margin:0;
+    .section.maps {
+        .section-content {
             width: 100%;
 
-            li {
+            ul {
+                list-style: none;
                 display: flex;
-                justify-content: center;
-                label {
-                    flex-grow: 1;
-                    background-color: var(--secondary);
-                    text-align: center;
-                    padding: .5rem 1rem;
-                    border-radius: 5rem;
-                    user-select: none;
-                    cursor: pointer;
-                    transition: background-color .35s ease-out;
+                flex-direction: column;
+                gap: .5rem;
+                padding: 0;
+                margin: 0;
+                width: 100%;
 
-                    &:hover{
-                        background-color: rgba(73, 73, 73, .75);
-                    }
-
-                    &:active{
-                        background-color: rgba(73, 73, 73, .375);
-                    }
-                    &:has(+:checked){
-                        color: var(--primary);
-                        background-color: rgba(73, 73, 73, .375);
-                    }
-                }
-
-                button{
-                    width: 100%;
+                li {
+                    display: flex;
                     justify-content: center;
-                    background-color: var(--low-contrast-background);
-                    .p-button-label{
-                        flex-grow: 0;
+
+                    label {
+                        flex-grow: 1;
+                        background-color: var(--secondary);
+                        text-align: center;
+                        padding: .5rem 1rem;
+                        border-radius: 5rem;
+                        user-select: none;
+                        cursor: pointer;
+                        transition: background-color .35s ease-out, opacity .35s ease-out;
+
+                        &:hover {
+                            background-color: rgba(73, 73, 73, .75);
+                        }
+
+                        &:active {
+                            background-color: rgba(73, 73, 73, .375);
+                        }
+
+                        &:has(+:checked) {
+                            color: var(--primary);
+                            background-color: rgba(73, 73, 73, .375);
+                        }
+                    }
+
+                    button {
+                        width: 100%;
+                        justify-content: center;
+                        background-color: var(--low-contrast-background);
+
+                        .p-button-label {
+                            flex-grow: 0;
+                        }
                     }
                 }
             }
         }
+
+        &.removing {
+            .section-top {
+                button:not(.remove-button) {
+                    pointer-events: none;
+                    opacity: .25;
+                }
+
+                .remove-button {
+                    background-color: rgba(var(--primary-r), var(--primary-g), var(--primary-b), .16);
+                }
+            }
+
+            .section-content ul li:has(input.removing) {
+                animation: map-removing .5s linear forwards;
+                    label {
+                        background-color: rgba(239, 68, 68, 0.32);
+                        opacity: .5;
+                    }
+             }
+
+            .section-content ul li:hover label{
+                background-color: rgba(239, 68, 68, 0.32);
+                opacity: .5;
+            }
+
+        }
+    }
+
+}
+
+@keyframes map-removing {
+    0% {
+        transform: translateX(0);
+    }
+    50% {
+        transform: translateX(100%);
+        margin-block: 0;
+    }
+    100% {
+        transform: translateX(100%);
+        margin-block: calc((-35px - .5rem) / 2);
     }
 }

@@ -230,7 +230,6 @@
     }
 }
 
-/* Slide to right, then collapse(height = 0)*/
 @keyframes node-removing {
     0% {
         transform: translateX(0);

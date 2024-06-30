@@ -226,8 +226,6 @@ R
 :
 
 .gitignore,a/5/a5cc2925ca8258af241be7e5b0381edf30266302
-Å
-Q.idea/sonarlint/securityhotspotstore/f/7/f765b0d52477551e1cf7e6ba95cbd3de1fb8fcc0,7/b/7b448e8f6b8eecdf58f06fe7cb630bf2c65c669a
 A
 server/.gitignore,6/8/684633b668b24c06fe5d5ba72b7ed42a437aa655
 H
@@ -236,3 +234,11 @@ N
 client/src/hooks/MapManager.js,5/c/5c19c58d7bbdbf793ea8a9200d90ebdd39c60d6b
 U
 %client/src/components/ProjectList.jsx,7/7/7745013908011c0ed4ad6f6884148009aec45cc9
+R
+"client/src/components/PathCard.jsx,b/0/b09e0d53a0ed3d2157d9375d185b701d1eec6228
+J
+client/src/pages/Paths.jsx,7/9/798b5ee7c82ea38f74d5ffc5b2622e738f267ede
+K
+server/models/path.model.js,2/f/2f6179dc9601b1c0e301929f3bb5caab43a90bba
+Q
+!server/models/parameters.model.js,8/f/8f42ae854441b0e873b4e2dccc0f0dc49cf8d197

@@ -19,7 +19,7 @@
         }
         &:not(:has(.project-card))::after {
             content: 'No projects found';
-            font-size: 2rem;
+            font-size: 1.75rem;
             color: var(--secondary);
             text-align: center;
             grid-column: 1/-1;

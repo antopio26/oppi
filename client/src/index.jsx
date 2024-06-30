@@ -33,9 +33,7 @@ root.render(
                     audience: process.env.REACT_APP_AUTH0_AUDIENCE
                 }}
             >
-                <AppContextProvider>
                     <App/>
-                </AppContextProvider>
             </Auth0ProviderWithRedirectCallback>
         </BrowserRouter>
     </React.StrictMode>

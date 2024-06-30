@@ -60,6 +60,10 @@ router.put('/:id', async (req, res, next) => {
 router.delete('/:id', async (req, res, next) => {
     // Delete map
     const map = await Map.findOneAndDelete({_id: req.params.id, user: req.user._id});
+
+    // Delete file
+    fs.unlinkSync(`../maps/${map._id}`);
+
     res.send(map);
 })
 

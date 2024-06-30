@@ -1,0 +1,9 @@
+
+Xjavascript:S1481	"5Remove the declaration of the unused 'user' variable.(’Ã–ò8©€ŽÅ†2
+Ujavascript:S1854	"2Remove this useless assignment to variable "user".(’Ã–ò8ª€ŽÅ†2
+cjavascript:S1481	"@Remove the declaration of the unused 'isAuthenticated' variable.(’Ã–ò8ª€ŽÅ†2
+`javascript:S1854	"=Remove this useless assignment to variable "isAuthenticated".(’Ã–ò8ª€ŽÅ†2
+‚javascript:S1481
+"9Remove the declaration of the unused 'toastRef' variable.(ÿ¬„Ì8ÊûûÄ†2J$e20d27ac-5455-4685-a7e4-172c83d5345a
+javascript:S1854
+"6Remove this useless assignment to variable "toastRef".(ÿ¬„Ì8ÊûûÄ†2J$e30d3c22-5c29-4b94-b73a-340d2a597486
