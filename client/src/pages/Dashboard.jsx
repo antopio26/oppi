@@ -11,9 +11,8 @@ import useProjectManager from "../hooks/ProjectManager";
 
 export default function Dashboard() {
     const [mapFilter, setMapFilter] = useState([]);
-    const {getContextProjects, maps} = useContext(AppContext);
-    const {getMaps,deleteMap} = useMapManager();
-    const {getProjects} = useProjectManager();
+    const {projects, maps} = useContext(AppContext);
+    const {deleteMap} = useMapManager();
 
     const handleToggleMapFilter = (mapId) => {
             if (mapFilter.includes(mapId)) {
@@ -32,14 +31,10 @@ export default function Dashboard() {
 
     const handleRemoveMap = async (mapId) => {
         await deleteMap(mapId);
+        setMapFilter(mapFilter.filter((id) => id !== mapId));
     }
 
     const getMapFilter = () => mapFilter;
-
-    useEffect(() => {
-        getMaps();
-        getProjects();
-    }, []);
 
     return (
         <>
@@ -49,7 +44,7 @@ export default function Dashboard() {
                 </div>
             </Sidebar>
             <main className={"dashboard-main"}>
-                <ProjectList projects={getContextProjects().filter(project => mapFilter.length === 0 || mapFilter.includes(project.map))}/>
+                <ProjectList projects={projects.filter(project => mapFilter.length === 0 || mapFilter.includes(project.map))}/>
             </main>
         </>
 

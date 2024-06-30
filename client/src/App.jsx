@@ -19,6 +19,7 @@ import {useAuth0} from "@auth0/auth0-react";
 import {useContext, useEffect, useRef} from "react";
 import useMapManager from "./hooks/MapManager";
 import useProjectManager from "./hooks/ProjectManager";
+import FetchingLayer from "./components/FetchingLayer";
 
 
 function App() {
@@ -48,15 +49,17 @@ function App() {
 
     return (
         <AppContextProvider additionalStates={{toastRef}}>
-        <Routes>
-            <Route exact path="/" element={<Home/>}/>
-            <Route path="/*" element={<NotFound/>}/>
+            <FetchingLayer>
+                <Routes>
+                    <Route exact path="/" element={<Home/>}/>
+                    <Route path="/*" element={<NotFound/>}/>
 
-            <Route path="/callback/*" element={<CallbackPage/>}/>
-            <Route path="/profile/*" element={<AuthenticationGuard component={Paths}/>}/>
-            <Route path="/dashboard/*" element={<AuthenticationGuard component={Dashboard}/>}/>
-            <Route path="/map/*" element={<AuthenticationGuard component={Map}/>}/>
-        </Routes>
+                    <Route path="/callback/*" element={<CallbackPage/>}/>
+                    <Route path="/profile/*" element={<AuthenticationGuard component={Paths}/>}/>
+                    <Route path="/dashboard/*" element={<AuthenticationGuard component={Dashboard}/>}/>
+                    <Route path="/map/*" element={<AuthenticationGuard component={Map}/>}/>
+                </Routes>
+            </FetchingLayer>
         </AppContextProvider>
     );
 }

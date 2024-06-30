@@ -9,7 +9,6 @@ export default function AppContextProvider({children, additionalStates = {}}) {
     const [selectedProject, setSelectedProject] = useState(null);
     const [maps, setMaps] = useState([]);
     const [projects, setProjects] = useState([]);
-    const getContextProjects = () => projects;
 
     return (
         <AppContext.Provider value={{
@@ -19,7 +18,7 @@ export default function AppContextProvider({children, additionalStates = {}}) {
             setSelectedProject,
             maps,
             setMaps,
-            getContextProjects,
+            projects,
             setProjects,
             ...additionalStates
         }}>

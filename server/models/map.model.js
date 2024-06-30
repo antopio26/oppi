@@ -1,4 +1,5 @@
 const mongoose = require('mongoose');
+const {Project} = require('./project.model');
 
 const MapSchema = new mongoose.Schema({
     name: {
@@ -45,6 +46,10 @@ MapSchema.pre('find', function(next) {
      } else {
          next(new Error('User ID is not provided'));
      }
+});
+
+MapSchema.pre('remove', function(next) {
+    Project.deleteMany({ map: this._id }, next);
 });
 
 const Map = mongoose.model('Map', MapSchema);

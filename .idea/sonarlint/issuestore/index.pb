@@ -31,8 +31,6 @@ N
 client/src/pages/Dashboard.jsx,3/e/3e679e4a9845064d1a9a84fdbea36114b3f7ebf6
 H
 client/src/pages/Map.jsx,1/c/1cc3a6f48c34fe3a8d69fd006937968d840e86f1
-L
-client/src/pages/Profile.jsx,f/4/f450e3154121e7d0cc5ae1fc5cf07878b04268ff
 M
 client/src/style/css/font.css,6/6/66d256e5afbd66ea9ee8e50bb0ee163dff5392c2
 H
@@ -45,8 +43,6 @@ U
 %client/src/components/LoginButton.jsx,f/5/f5b4dce8da021f803335d3a8855662e796d4fee1
 M
 client/src/style/css/Home.css,a/4/a46a3b8e446ff36bd88f9e9447ba302122eed8dd
-X
-(client/src/components/ProfileSidebar.jsx,b/f/bfc9ccb2cd9bc1f63d4e9b7967bc11d146990d1b
 T
 $client/src/components/MapSidebar.jsx,1/9/191516b0650fc7137f1dca80d4fa9e0c3335ba04
 A
@@ -75,8 +71,6 @@ V
 &client/src/components/TripleSwitch.jsx,e/e/eed827916b511ab8f0625dedf7f042e185bc4b40
 K
 client/public/manifest.json,2/5/253fc91369b428e8530c1e5206f921d081515f15
-P
- client/src/style/css/Profile.css,a/a/aa00feafb30fa16d6abc9dce05bf1b98a373483b
 S
 #client/src/style/css/MapSidebar.css,f/d/fdd633cc861a0a78392e9f62d5a48e364273103a
 I
@@ -242,3 +236,15 @@ K
 server/models/path.model.js,2/f/2f6179dc9601b1c0e301929f3bb5caab43a90bba
 Q
 !server/models/parameters.model.js,8/f/8f42ae854441b0e873b4e2dccc0f0dc49cf8d197
+V
+&client/src/components/PathsSidebar.jsx,d/2/d2f6fc6471d0eb7000f503e90d90c5966650982d
+V
+&client/src/components/CharginLayer.jsx,b/c/bcb4b4de4f099869b39b6289ccd38f9a2586b1c9
+W
+'client/src/components/ChargingLayer.jsx,d/d/dd981cbc719579fe377d7d37c1c615538a90522d
+W
+'client/src/components/FetchingLayer.jsx,f/e/fe200c7385090e3019dedfd6fa4440bfafaefb08
+X
+(client/src/components/LoadingOverlay.jsx,8/4/8403dffac14627b0c43783392a3f203af9f1d700
+W
+'client/src/style/css/LoadingOverlay.css,a/c/ac4308d15b7a12fd588ef44c75516ed4431b7f92

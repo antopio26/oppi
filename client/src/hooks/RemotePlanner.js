@@ -2,7 +2,6 @@ import {useContext, useEffect, useState} from "react";
 import * as THREE from "three";
 import useWebSocket, {ReadyState} from 'react-use-websocket';
 import {decodeMessage, binaryDataToVoxels} from "../utils/OctomapConversion";
-import {MapContext} from "../providers/MapContext";
 import {AppContext} from "../providers/AppContext";
 
 export default function useRemotePlanner(remoteURL, waypoints = []) {
@@ -21,6 +20,7 @@ export default function useRemotePlanner(remoteURL, waypoints = []) {
         onOpen: (e) => {
             e.target.binaryType = 'arraybuffer';
             console.log('WebSocket connection established.');
+            sendParameters();
             sendMessage(JSON.stringify({
                 topic: 'm', map: selectedProject.map
             }));
@@ -51,14 +51,6 @@ export default function useRemotePlanner(remoteURL, waypoints = []) {
 
             // Handle different message types
             switch (msg.topic) {
-                case 'octomap':
-                    console.log("Octomap received");
-
-                    const voxelsData = binaryDataToVoxels(msg.binaryData);
-                    // console.log("Voxels received");
-                    voxelsData.positions = voxelsData.positions.map((coords) => new THREE.Vector3(...coords));
-                    setVoxels(voxelsData);
-                    break;
                 case 'octomap_path':
                     const nodes = JSON.parse(new TextDecoder('utf-8').decode(msg.binaryData));
                     // nodes structure {time: 0, path: [{x: 0, y: 0, z: 0}, ...], start: {id:0,coords:[]}, goal: {id:0,coords:[]}, cost: 0}
@@ -83,7 +75,19 @@ export default function useRemotePlanner(remoteURL, waypoints = []) {
                     setSmoothPath(smoothPath.path);
                     break;
                 default:
-                    console.log('Received unknown message:', msg);
+                    if (/^octomap\(\d+(\.\d+)?\)$/.test(msg.topic)) {
+                        console.log("Octomap received");
+
+                        // 'octomap(resolution)'
+                        const resolution = parseFloat(msg.topic.match(/\(([^)]+)\)/)[1]);
+
+                        const voxelsData = binaryDataToVoxels(msg.binaryData, resolution);
+                        console.log("Voxels received",voxelsData);
+                        voxelsData.positions = voxelsData.positions.map((coords) => new THREE.Vector3(...coords));
+                        setVoxels(voxelsData);
+                    } else {
+                        console.log('Received unknown message:', msg);
+                    }
                     break;
             }
         },
@@ -101,6 +105,11 @@ export default function useRemotePlanner(remoteURL, waypoints = []) {
     };
 
     // TODO: Add functions to handle sending data and commands to the remote planner
+    const sendParameters = () => {
+        sendMessage(JSON.stringify({
+            topic: 'p', parameters: selectedProject.parameters
+        }));
+    }
 
     useEffect(() => {
         if (readyState === WebSocket.OPEN) {
@@ -143,6 +152,7 @@ export default function useRemotePlanner(remoteURL, waypoints = []) {
         chronoPath,
         completed,
         readyState,
+        sendParameters
     }
 
 }

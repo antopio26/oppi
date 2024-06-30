@@ -1,4 +1,4 @@
-function binaryDataToVoxels(data) {
+function binaryDataToVoxels(data, resolution = 0.1) {
     let index = 0;
     const voxelPositions = [];
     const voxelSizes = [];
@@ -55,7 +55,7 @@ function binaryDataToVoxels(data) {
     };
 
     // Read the root node
-    readBinaryNode(root, [0, 0, 0], 3276.8 * 2);
+    readBinaryNode(root, [0, 0, 0], 3276.8 * 2 * 10 * resolution);
 
     return { positions: voxelPositions, sizes: voxelSizes };
 }

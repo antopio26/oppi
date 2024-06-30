@@ -9,16 +9,18 @@ import MapSidebar from "../components/MapSidebar";
 import MapContextProvider, {MapContext} from "../providers/MapContext";
 import Metrics from "../components/Metrics";
 import useRemotePlanner from "../hooks/RemotePlanner";
+import LoadingOverlay from "../components/LoadingOverlay";
 
 export default function Map() {
     const [mapMode, setMapMode] = useState({mode: "view"});
     const [waypoints, setWaypoints] = useState([
         {id: 0, coords: {x: 1, y: 0, z: 1}}]);
     const [waypointsColor, setWaypointsColor] = useState([{id: 0, color: "#ff0000"}]);
-    const { readyState, voxels, rrtPaths, optPaths, smoothPath } = useRemotePlanner('ws://localhost:9002', waypoints);
+    const { readyState, voxels, rrtPaths, optPaths, smoothPath, sendParameters } = useRemotePlanner('ws://localhost:9002', waypoints);
 
     return (
-        <MapContextProvider additionalStates={{mapMode, setMapMode, waypoints, setWaypoints, waypointsColor, setWaypointsColor}}>
+        <MapContextProvider additionalStates={{mapMode, setMapMode, waypoints, setWaypoints, waypointsColor, setWaypointsColor, sendParameters}}>
+            { voxels.length === 0 && <LoadingOverlay /> }
             <Sidebar
                 info={"Set a starting point, an ending point and generate a path. You can modify the path planning parameters and move within the map."}>
                 <MapSidebar/>

@@ -39,7 +39,6 @@ const MapsList = memo(function({maps, onToggle, onReset,onRemove, getMapFilter})
                                         e.target.classList.add("removing")
                                         setTimeout(() => {
                                             onRemove(map._id)
-                                            e.target.closest(".section.removing").classList.remove("removing")
                                         }, 500)
                                     }else {
                                         onToggle(map._id)

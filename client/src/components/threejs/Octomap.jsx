@@ -14,7 +14,7 @@ export function Octomap({voxels}) {
 
     useEffect(() => {
         if (!instancedVoxels.current) {
-            instancedVoxels.current = new THREE.InstancedMesh(boxGeometry, boxMaterial, 100000); // Assuming 100,000 instances
+            instancedVoxels.current = new THREE.InstancedMesh(boxGeometry, boxMaterial, 1000000); // Assuming 100,000 instances
             instancedVoxels.current.instanceMatrix.setUsage(THREE.DynamicDrawUsage)
             instancedVoxels.current.count = 0
             scene.add(instancedVoxels.current);
@@ -38,6 +38,14 @@ export function Octomap({voxels}) {
             });
             instancedVoxels.current.instanceMatrix.needsUpdate = true;
             instancedVoxels.current.material.color.needsUpdate = true;
+
+            // Update bounding sphere
+            instancedVoxels.current.computeBoundingSphere();
+
+            // Update the mesh
+            instancedVoxels.current.instanceMatrix.needsUpdate = true;
+
+
         }
     }, [voxels]);
 

@@ -1,5 +1,6 @@
 const mongoose = require('mongoose');
-const { Parameters } = require('./parameters.model');
+const {Parameters} = require('./parameters.model');
+const {Path} = require("./path.model");
 
 const ProjectSchema = new mongoose.Schema({
     name: {
@@ -53,6 +54,16 @@ ProjectSchema.pre('save', function (next){
     } else {
         next();
     }
+});
+
+ProjectSchema.pre('remove', function(next) {
+    Parameters.deleteOne({ _id: this.parameters }, err => {
+        if (err) {
+            next(err);
+        } else {
+            Path.deleteMany({ project: this._id }, next);
+        }
+    });
 });
 
 const Project = mongoose.model('Project', ProjectSchema);

@@ -1,5 +1,5 @@
 export default function PathsSidebar() {
     return (
-        <p>profile sidebar</p>
+        <p>Paths sidebar</p>
     )
 }

@@ -3,7 +3,7 @@ import {useContext} from "react";
 import {AppContext} from "../providers/AppContext";
 
 export default function useProjectManager() {
-    const {getContextProjects, setProjects, selectedProject, setSelectedProject} = useContext(AppContext);
+    const {projects, setProjects, selectedProject, setSelectedProject} = useContext(AppContext);
 
     const getProjects = async () => {
         const res = await axios.get('/api/projects');
@@ -19,29 +19,35 @@ export default function useProjectManager() {
 
     const createProject = async (project) => {
         const res = await axios.post('/api/projects', project);
-        setProjects([...getContextProjects(), res.data]);
+        setProjects([...projects, res.data]);
     }
 
     const deleteProject = async (id) => {
         await axios.delete(`/api/projects/${id}`);
-        setProjects(getContextProjects().filter(p => p._id !== id));
+        setProjects(projects.filter(p => p._id !== id));
+
+        if (selectedProject?._id === id) {
+            setSelectedProject(
+                projects.sort((a, b) => new Date(b.lastOpenAt) - new Date(a.lastOpenAt))[0]
+            );
+        }
     }
 
     const updateProject = async (id, project) => {
         const res = await axios.put(`/api/projects/${id}`, project);
-        setProjects(getContextProjects().map(p => p._id === id ? res.data : p));
+        setProjects(projects.map(p => p._id === id ? res.data : p));
     }
 
     const updateParameters = async (id, parameters) => {
         const res = await axios.put(`/api/projects/${id}/parameters`, parameters);
-        setProjects(getContextProjects().map(p => p._id === id ? res.data : p));
+        setProjects(projects.map(p => p._id === id ? res.data : p));
 
         setSelectedProject(res.data);
     }
 
     const updateLastOpenAt = async (id) => {
         const res = await axios.put(`/api/projects/${id}/lastOpenAt`, {});
-        setProjects(getContextProjects().map(p => p._id === id ? res.data : p));
+        setProjects(projects.map(p => p._id === id ? res.data : p));
 
         setSelectedProject(res.data);
     }
