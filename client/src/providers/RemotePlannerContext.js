@@ -170,7 +170,10 @@ export default function RemotePlannerContextProvider({children, remoteURL}) {
             smoothPath,
             chronoPath,
             completed,
-            readyState
+            readyState,
+            sendParameters,
+            changeMap,
+            resetPlanner,
         }}>
             {children}
         </RemotePlannerContext.Provider>
