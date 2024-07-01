@@ -43,6 +43,7 @@ export default function useProjectManager() {
         setProjects(projects.map(p => p._id === id ? res.data : p));
 
         setSelectedProject(res.data);
+        return res.data;
     }
 
     const updateLastOpenAt = async (id) => {

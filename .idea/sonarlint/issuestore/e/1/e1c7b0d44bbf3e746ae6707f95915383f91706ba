@@ -1,12 +1,12 @@
 
-šjavascript:S65443"QPromise-returning function provided to property where a void return was expected.(€±üº8Ó»µÏ†2J$f94d80c2-b7e9-43aa-b94f-af9c4aa48a03
-vjavascript:S6836?"-Unexpected lexical declaration in case block.(Øı‹¶8Ó»µÏ†2J$b7177cd8-aa07-4c8c-a6b2-adecb232baeb
-{javascript:S6836J"-Unexpected lexical declaration in case block.(íÏ¯ÿÿÿÿÿ8Ó»µÏ†2J$e208b904-631d-40e8-b481-2e72e3333c2f
-vjavascript:S6836Q"-Unexpected lexical declaration in case block.(šîŞÇ8Ó»µÏ†2J$25409c6a-3569-4215-8b66-89e63a0cf30e
-gjavascript:S125R"Remove this commented out code.(úùã‹8Ó»µÏ†2J$4623ddd9-3634-4086-bc45-623d8082aec6
-ujavascript:S6594Z"'Use the "RegExp.exec()" method instead.(ˆ‘ğßùÿÿÿÿ8Ó»µÏ†2J$f20035d2-548c-4346-b2d5-aabd5c0063ee
-—javascript:S1481l"IRemove the declaration of the unused 'closeWebSocketConnection' variable.(ËåÙÊıÿÿÿÿ8Ó»µÏ†2J$a43c7675-0cfc-4522-84fa-b2e4876b7721
-”javascript:S1854l"FRemove this useless assignment to variable "closeWebSocketConnection".(ËåÙÊıÿÿÿÿ8Ó»µÏ†2J$12fff9e5-a701-4d34-9df5-7b6819c3dc67
-}javascript:S1135s"4Complete the task associated to this "TODO" comment.(ÍÍµ8Ó»µÏ†2J$7110e8c5-29d1-4864-b8e8-02d5f4b06af9
-javascript:S1481’"@Remove the declaration of the unused 'connectionState' variable.(“²´üÿÿÿÿ8Ó»µÏ†2J$d7563370-4f78-4670-a6cd-4bf1733b179a
-Œjavascript:S1854’"=Remove this useless assignment to variable "connectionState".(“²´üÿÿÿÿ8Ó»µÏ†2J$d54bbb66-d365-47a9-900e-db0c391a8723
+šjavascript:S65443"QPromise-returning function provided to property where a void return was expected.(€±üº8Ó»µÏ†2J$ce0915f4-311c-4d01-adb4-5f7c8d72b229
+vjavascript:S6836?"-Unexpected lexical declaration in case block.(Øı‹¶8Ó»µÏ†2J$25fd2b7c-7e6e-4e55-9ca7-c36b7eb9e940
+{javascript:S6836J"-Unexpected lexical declaration in case block.(íÏ¯ÿÿÿÿÿ8Ó»µÏ†2J$2ced1e6f-c4c1-4923-84fd-47c1e14d8221
+vjavascript:S6836Q"-Unexpected lexical declaration in case block.(šîŞÇ8Ó»µÏ†2J$64f6ab52-eb65-4d2f-aa77-23cd0b771d4e
+gjavascript:S125R"Remove this commented out code.(úùã‹8Ó»µÏ†2J$966bf25c-ed4a-4566-8cbe-e94381cc632f
+ujavascript:S6594Z"'Use the "RegExp.exec()" method instead.(ˆ‘ğßùÿÿÿÿ8Ó»µÏ†2J$bc05bfd9-b917-4130-9a74-307d819fdf34
+—javascript:S1481l"IRemove the declaration of the unused 'closeWebSocketConnection' variable.(ËåÙÊıÿÿÿÿ8Ó»µÏ†2J$3132718b-25fe-4739-9aac-49ad649950af
+”javascript:S1854l"FRemove this useless assignment to variable "closeWebSocketConnection".(ËåÙÊıÿÿÿÿ8Ó»µÏ†2J$4b9a1bc6-3671-4d8a-ab72-05f7d2767c6b
+}javascript:S1135s"4Complete the task associated to this "TODO" comment.(ÍÍµ8Ó»µÏ†2J$ab84875e-cf01-4c1c-94b9-9300c6fd8f1d
+javascript:S1481’"@Remove the declaration of the unused 'connectionState' variable.(“²´üÿÿÿÿ8Ó»µÏ†2J$9a0b3b57-9664-4e1e-92f6-928b4903cab4
+Œjavascript:S1854’"=Remove this useless assignment to variable "connectionState".(“²´üÿÿÿÿ8Ó»µÏ†2J$61e64a6b-1627-45df-9809-712a60d8f2e9

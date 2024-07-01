@@ -1,5 +1,7 @@
 export default function PathsSidebar() {
     return (
-        <p>Paths sidebar</p>
+        <div className="paths-main">
+<div className={"section "}></div>
+        </div>
     )
 }

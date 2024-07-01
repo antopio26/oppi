@@ -7,15 +7,37 @@
     height: 100vh;
     background-color: rgba(0,0,0,0.5);
 
-   .p-progress-spinner {
-       position: absolute;
-       top: 50%;
-       left: 50%;
-       transform: translate(-50%, -50%);
+    display: grid;
+    grid-template-rows: 1fr 1fr 1fr;
 
-       .p-progress-spinner-circle {
-           animation: p-progress-spinner-dash 1.5s ease-in-out infinite;
-           stroke: var(--primary);
-       }
-   }
+    .center{
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        grid-row: 2/3;
+
+        .p-progress-spinner {
+            .p-progress-spinner-circle {
+                animation: p-progress-spinner-dash 1.5s ease-in-out infinite;
+                stroke: var(--primary);
+            }
+        }
+
+        .loading-overlay-message{
+            color: white;
+            font-size: 1.25rem;
+            margin-top: 1rem;
+        }
+    }
+
+
+    .loading-overlay-cancel {
+        margin: auto auto 2rem;
+        width: fit-content;
+        height: fit-content;
+        color: var(--primary);
+        font-size: 1rem;
+        grid-row: 3/-1;
+    }
 }

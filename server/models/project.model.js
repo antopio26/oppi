@@ -53,7 +53,7 @@ ProjectSchema.pre('save', function(next) {
 
 const deleteRelated = async function(next) {
     try {
-        const projectId = this._conditions._id || this._id;
+        const projectId = this._conditions?._id || this._id;
 
         await Parameters.deleteOne({ _id: projectId });
         await Path.deleteMany({ project: projectId });

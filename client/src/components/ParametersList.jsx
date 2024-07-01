@@ -2,7 +2,6 @@ import {Button} from "primereact/button";
 import {useContext, useEffect, useRef, useState} from "react";
 import {AppContext} from "../providers/AppContext";
 import useProjectManager from "../hooks/ProjectManager";
-import useRemotePlanner from "../hooks/RemotePlanner";
 import {MapContext} from "../providers/MapContext";
 
 export function ParametersList() {
@@ -36,8 +35,8 @@ export function ParametersList() {
 
         console.log(form)
 
-        updateParameters(selectedProject._id, form).then(() => {
-            sendParameters();
+        updateParameters(selectedProject._id, form).then((project) => {
+            sendParameters(project.parameters);
         });
     }
 

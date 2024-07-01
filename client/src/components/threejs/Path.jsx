@@ -32,6 +32,9 @@ export function Path({nodes, color = "green", lineWidth = 1, nodeRadius = 0.05})
                 matrix.compose(position, new THREE.Quaternion(), new THREE.Vector3(1, 1, 1));
                 instancedNodes.current.setMatrixAt(index, matrix);
             });
+            // Update bounding sphere
+            instancedNodes.current.computeBoundingSphere();
+
             instancedNodes.current.instanceMatrix.needsUpdate = true;
         }
     }, [nodes]);

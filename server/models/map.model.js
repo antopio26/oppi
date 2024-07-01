@@ -36,7 +36,7 @@ const MapSchema = new mongoose.Schema({
 MapSchema.index({ name: 1, user: 1 }, { unique: true });
 
 const deleteProjects = async function(next) {
-    const mapId = this._conditions._id || this._id;
+    const mapId = this._conditions?._id || this._id;
     try {
         await Project.deleteMany({ map: Array.isArray(mapId) ? { $in: mapId } : mapId });
         next();

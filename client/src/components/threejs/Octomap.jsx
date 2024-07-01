@@ -36,15 +36,12 @@ export function Octomap({voxels}) {
                 matrix.compose(position, new THREE.Quaternion(), new THREE.Vector3(voxels.sizes[index], voxels.sizes[index], voxels.sizes[index]));
                 instancedVoxels.current.setMatrixAt(index, matrix);
             });
-            instancedVoxels.current.instanceMatrix.needsUpdate = true;
-            instancedVoxels.current.material.color.needsUpdate = true;
 
             // Update bounding sphere
             instancedVoxels.current.computeBoundingSphere();
 
-            // Update the mesh
             instancedVoxels.current.instanceMatrix.needsUpdate = true;
-
+            instancedVoxels.current.material.color.needsUpdate = true;
 
         }
     }, [voxels]);

@@ -113,9 +113,9 @@ export default function useRemotePlanner(remoteURL, waypoints = []) {
     };
 
     // TODO: Add functions to handle sending data and commands to the remote planner
-    const sendParameters = () => {
+    const sendParameters = (parameters) => {
         sendMessage(JSON.stringify({
-            topic: 'p', parameters: selectedProject.parameters
+            topic: 'p', parameters: parameters || selectedProject.parameters
         }));
     }
 

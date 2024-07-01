@@ -1,7 +1,7 @@
 {
   "files": {
-    "main.css": "/static/css/main.12af1946.css",
-    "main.js": "/static/js/main.791291d3.js",
+    "main.css": "/static/css/main.d3dc66ba.css",
+    "main.js": "/static/js/main.300313c0.js",
     "static/media/primeicons.svg": "/static/media/primeicons.6ed59f962963a4a73af2.svg",
     "static/media/Inter-italic.var.woff2?v=3.19": "/static/media/Inter-italic.var.30807be7abc48ba8c73c.woff2",
     "static/media/Inter-roman.var.woff2?v=3.19": "/static/media/Inter-roman.var.ba4caefcdf5b36b438db.woff2",
@@ -15,11 +15,11 @@
     "static/media/alfaslabone-regular-webfont.woff": "/static/media/alfaslabone-regular-webfont.584746cc177784347624.woff",
     "static/media/alfaslabone-regular-webfont.woff2": "/static/media/alfaslabone-regular-webfont.a8808c928f917c875d16.woff2",
     "index.html": "/index.html",
-    "main.12af1946.css.map": "/static/css/main.12af1946.css.map",
-    "main.791291d3.js.map": "/static/js/main.791291d3.js.map"
+    "main.d3dc66ba.css.map": "/static/css/main.d3dc66ba.css.map",
+    "main.300313c0.js.map": "/static/js/main.300313c0.js.map"
   },
   "entrypoints": [
-    "static/css/main.12af1946.css",
-    "static/js/main.791291d3.js"
+    "static/css/main.d3dc66ba.css",
+    "static/js/main.300313c0.js"
   ]
 }

@@ -238,10 +238,6 @@ Q
 !server/models/parameters.model.js,8/f/8f42ae854441b0e873b4e2dccc0f0dc49cf8d197
 V
 &client/src/components/PathsSidebar.jsx,d/2/d2f6fc6471d0eb7000f503e90d90c5966650982d
-V
-&client/src/components/CharginLayer.jsx,b/c/bcb4b4de4f099869b39b6289ccd38f9a2586b1c9
-W
-'client/src/components/ChargingLayer.jsx,d/d/dd981cbc719579fe377d7d37c1c615538a90522d
 W
 'client/src/components/FetchingLayer.jsx,f/e/fe200c7385090e3019dedfd6fa4440bfafaefb08
 X
