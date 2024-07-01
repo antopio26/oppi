@@ -1,4 +1,4 @@
-import React, {useContext, useState} from 'react';
+import React, {useContext, useEffect, useState} from 'react';
 
 import '../style/css/Map.css';
 
@@ -11,17 +11,19 @@ import Metrics from "../components/Metrics";
 import useRemotePlanner from "../hooks/RemotePlanner";
 import LoadingOverlay from "../components/LoadingOverlay";
 import {useNavigate} from "react-router-dom";
+import {ProjectContext} from "../providers/ProjectContext";
 
 export default function Map() {
     const [mapMode, setMapMode] = useState({mode: "view"});
-    const [waypoints, setWaypoints] = useState([{id: 0, coords: {x: 1, y: 0, z: 1}}]);
-    const [waypointsColor, setWaypointsColor] = useState([{id: 0, color: "#ff0000"}]);
-    const { readyState, voxels, rrtPaths, optPaths, smoothPath, sendParameters } = useRemotePlanner('ws://localhost:9002', waypoints);
+    const {waypoints, waypointsColor, readyState, voxels, rrtPaths, optPaths, smoothPath, sendParameters} = useContext(ProjectContext);
     const navigate = useNavigate();
 
+    useEffect(() => {
+        console.log("Map Voxels", voxels)
+    }, [voxels]);
 
     return (
-        <MapContextProvider additionalStates={{mapMode, setMapMode, waypoints, setWaypoints, waypointsColor, setWaypointsColor, sendParameters}}>
+        <MapContextProvider additionalStates={{mapMode, setMapMode, sendParameters}}>
             { voxels.positions.length === 0 && <LoadingOverlay
                 message="Loading Map..."
                 cancelString="Back to Dashboard"
@@ -33,7 +35,7 @@ export default function Map() {
             </Sidebar>
             <main style={{position: "relative"}} className={`map-main ${mapMode.mode}`}>
                 <Canvas style={{position: "absolute", inset: 0}}>
-                    {<MapScene
+                    <MapScene
                         waypoints={waypoints}
                         waypointsColor={waypointsColor}
                         voxels={voxels}
@@ -41,7 +43,7 @@ export default function Map() {
                         optPaths={optPaths}
                         smoothPath={smoothPath}
                         readyState={readyState}
-                    />}
+                    />
                 </Canvas>
                 <Metrics/>
             </main>

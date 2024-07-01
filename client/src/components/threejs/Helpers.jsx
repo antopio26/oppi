@@ -8,8 +8,7 @@ export function Helpers() {
     const { primary, background, light } = useTheme();
 
     useEffect(() => {
-        THREE.Object3D.DefaultUp = new THREE.Vector3(0, 0, 1);
-        camera.up.set(0, 0, 1);
+        if (primary === "") return;
 
         // Add fog to the scene
         scene.fog = new THREE.Fog(background, 5, 40);
@@ -17,6 +16,7 @@ export function Helpers() {
         // Add a grid helper to the scene
         const gridHelper = new THREE.GridHelper(100, 100, primary, light);
         gridHelper.rotation.x = Math.PI / 2;
+        gridHelper.name = "gridHelper"
         scene.add(gridHelper);
 
         return () => {
@@ -26,7 +26,7 @@ export function Helpers() {
             // Remove fog
             scene.fog = null;
         };
-    }, [scene, camera, primary, background, light]);
+    }, [scene, primary, background, light]);
 
     return null;
 }

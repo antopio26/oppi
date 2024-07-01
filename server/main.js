@@ -10,7 +10,7 @@ const { authGuard } = require('./middleware/auth.middleware')
 // Load environment variables from .env file
 dotenv.config();
 
-const jsonParser = bodyParser.json();
+const jsonParser = bodyParser.json({ limit: '2mb' });
 
 // Create express app
 const app = express();

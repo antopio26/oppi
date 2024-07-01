@@ -5,6 +5,7 @@ import {Line} from "@react-three/drei";
 import {Vector3} from "three";
 import useTheme from "../../hooks/Theme";
 import {MapContext} from "../../providers/MapContext";
+import {ProjectContext} from "../../providers/ProjectContext";
 
 export function PointSelector() {
     const {camera, pointer, raycaster} = useThree();
@@ -12,7 +13,8 @@ export function PointSelector() {
     const [clicks, setClicks] = useState(0);
     const [position, setPosition] = useState([0, 0, 0]);
     const {primary, light} = useTheme();
-    const {mapMode, setMapMode, waypoints, setWaypoints} = useContext(MapContext);
+    const {mapMode, setMapMode} = useContext(MapContext);
+    const {waypoints, setWaypoints} = useContext(ProjectContext);
 
     let moved = false;
     let mouseDown = false;

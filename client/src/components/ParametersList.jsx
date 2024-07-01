@@ -3,13 +3,16 @@ import {useContext, useEffect, useRef, useState} from "react";
 import {AppContext} from "../providers/AppContext";
 import useProjectManager from "../hooks/ProjectManager";
 import {MapContext} from "../providers/MapContext";
+import {ProjectContext} from "../providers/ProjectContext";
+import useRemotePlanner from "../hooks/RemotePlanner";
 
 export function ParametersList() {
     const formRef = useRef(null);
     const {selectedProject} = useContext(AppContext);
-    const {sendParameters} = useContext(MapContext);
     const {updateParameters} = useProjectManager();
     const [parameters, setParameters] = useState({});
+
+    // TODO: Import sendParameters
 
     useEffect(() => {
         if (selectedProject?.parameters) {

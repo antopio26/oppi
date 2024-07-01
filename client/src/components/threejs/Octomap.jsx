@@ -26,13 +26,12 @@ export function Octomap({voxels}) {
 
 
     useEffect(() => {
+        console.log("Octomap Voxels", voxels)
         if (instancedVoxels.current) {
             instancedVoxels.current.count = voxels.positions.length
+
             voxels.positions.forEach((position, index) => {
                 const matrix = new THREE.Matrix4();
-                position.z = position.z + position.y;
-                position.y = position.z - position.y;
-                position.z = position.z - position.y;
                 matrix.compose(position, new THREE.Quaternion(), new THREE.Vector3(voxels.sizes[index], voxels.sizes[index], voxels.sizes[index]));
                 instancedVoxels.current.setMatrixAt(index, matrix);
             });

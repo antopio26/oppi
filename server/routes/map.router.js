@@ -53,7 +53,8 @@ router.post('/', upload.single('file'), async (req, res, next) => {
 
 router.put('/:id', async (req, res, next) => {
     // Update map name, offset, size
-    const map = await Map.findOneAndUpdate({_id: req.params.id, user: req.user._id}, req.body);
+    await Map.findOneAndUpdate({_id: req.params.id, user: req.user._id}, req.body);
+    const map = await Map.findOne({_id: req.params.id, user: req.user._id});
     res.send(map);
 })
 

@@ -1,4 +1,4 @@
-import {useContext, useState} from "react";
+import {useContext, useRef, useState} from "react";
 import {AppContext} from "../providers/AppContext";
 import axios from "axios";
 
@@ -9,15 +9,23 @@ export default function useMapManager() {
         setMaps(res.data);
     }
 
-    const uploadMap = async (file, name) => {
+    const uploadMap = async (file, name, onProgress) => {
         let formData = new FormData();
         formData.append('file', file);
         formData.append('name', name);
 
-        const res = await axios.post('/api/maps', formData)
+        const res = await axios.post('/api/maps', formData, {
+            onUploadProgress: (progressEvent) => {
+                const percentCompleted = Math.round((progressEvent.loaded * 100) / progressEvent.total);
+                if (onProgress) {
+                    onProgress(percentCompleted);
+                }
+            }
+        });
 
-        setMaps([...maps, res.data]);
-    }
+        // Assuming `maps` is part of the component's state
+        setMaps((prevMaps) => [...prevMaps, res.data]);
+    };
 
     const deleteMap = async (id) => {
         await axios.delete(`/api/maps/${id}`);

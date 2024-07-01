@@ -37,11 +37,13 @@ router.delete('/:id', async (req, res, next) => {
 
 router.put('/:id', async (req, res, next) => {
     // Update a project
-    const project = await Project.findOneAndUpdate(
+    await Project.findOneAndUpdate(
         { _id: req.params.id, user: req.user._id },
         req.body,
         { new: true }
-    ).populate('parameters');
+    )
+
+    const project = await Project.findOne({ _id: req.params.id, user: req.user._id }).populate('parameters');
     res.send(project);
 });
 

@@ -1,5 +1,5 @@
 const express = require('express');
-const Path = require('../models/path.model');
+const {Path} = require('../models/path.model');
 
 const router = express.Router();
 
@@ -31,11 +31,13 @@ router.post('/', async (req, res, next) => {
 
 router.put('/:id', async (req, res, next) => {
     // Update a path
-    const path = await Path.findOneAndUpdate(
+    await Path.findOneAndUpdate(
         { _id: req.params.id, project: req.project._id },
         req.body,
         { new: true }
     );
+
+    const path = await Path.findOne({ _id: req.params.id, project: req.project._id });
     res.send(path);
 })
 

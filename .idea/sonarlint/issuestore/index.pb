@@ -244,3 +244,15 @@ X
 (client/src/components/LoadingOverlay.jsx,8/4/8403dffac14627b0c43783392a3f203af9f1d700
 W
 'client/src/style/css/LoadingOverlay.css,a/c/ac4308d15b7a12fd588ef44c75516ed4431b7f92
+V
+&client/src/providers/ProjectContext.js,0/6/06a0b4ec8b5445a5bc6c18d982269edeef448726
+Y
+)client/src/components/threejs/Helpers.jsx,f/1/f14566b5b6e668b41c5afa021cc4c7a84caee79f
+X
+(client/src/components/threejs/Camera.jsx,0/2/025237d2a89c151bc764fa25d65b9e72c5b88c6e
+U
+%client/src/style/css/PathsSidebar.css,3/7/37f5d281fb106d3e86f7f8bafd089c43e8d6ce9e
+L
+server/routes/path.router.js,5/f/5f9f8d6a08d1f4d5d1e5abed8bcd5fd89c973df5
+N
+client/src/style/css/Paths.css,7/b/7b8a45732dd675ce21e0e6b329c748c799cb393c

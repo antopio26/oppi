@@ -1,9 +1,12 @@
 import axios from "axios";
 import {useContext} from "react";
 import {AppContext} from "../providers/AppContext";
+import {ProjectContext} from "../providers/ProjectContext";
 
 export default function useProjectManager() {
-    const {projects, setProjects, selectedProject, setSelectedProject, paths, setPaths} = useContext(AppContext);
+    const {projects, setProjects, selectedProject, setSelectedProject} = useContext(AppContext);
+    const {paths, setPaths, setFirst} = useContext(ProjectContext);
+
 
     const getProjects = async () => {
         const res = await axios.get('/api/projects');
@@ -50,6 +53,9 @@ export default function useProjectManager() {
         const res = await axios.put(`/api/projects/${id}/lastOpenAt`, {});
         setProjects(projects.map(p => p._id === id ? res.data : p));
 
+        if (selectedProject?._id !== id) {
+            setFirst(true);
+        }
         setSelectedProject(res.data);
     }
 

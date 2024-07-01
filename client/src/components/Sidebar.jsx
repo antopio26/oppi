@@ -69,8 +69,8 @@ export default function Sidebar({info = undefined, children = <></>}) {
                 <ul>
                     <li>
                         <Button tooltip="Paths" tooltipOptions={{position: "bottom"}} icon="pi pi-compass"
-                                className={pathname !== "/profile" && "p-button-text"} onClick={() => {
-                            navigate("/profile");
+                                className={pathname !== "/paths" && "p-button-text"} onClick={() => {
+                            navigate("/paths");
                         }}/>
                     </li>
                     <li>

@@ -5,16 +5,20 @@ import {InputCoords} from "./InputCoords";
 import {useContext, useEffect, useRef, useState} from "react";
 import {MapContext} from "../providers/MapContext";
 import {Button} from "primereact/button";
+import {ProjectContext} from "../providers/ProjectContext";
 
 export function NodeList() {
     const nodesAccordionRef = useRef();
     const [nodesAccordionActiveIndex, setNodesAccordionActiveIndex] = useState(null);
 
-    const {
+    const{
         waypoints,
         setWaypoints,
         waypointsColor,
-        setWaypointsColor,
+        setWaypointsColor
+    } = useContext(ProjectContext);
+
+    const {
         mapMode,
         setMapMode,
         allCollapsed,

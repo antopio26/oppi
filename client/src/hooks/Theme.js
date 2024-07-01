@@ -49,8 +49,8 @@ export default function useTheme() {
     }
 
     const setColorsAndMeta = () => {
-        const backgroundColor = getComputedStyle(document.body).getPropertyValue('--background');
-        const primaryColor = getComputedStyle(document.body).getPropertyValue('--primary');
+        const backgroundColor = getComputedStyle(document.body).getPropertyValue('--background').toString();
+        const primaryColor = getComputedStyle(document.body).getPropertyValue('--primary').toString();
 
         // compute mix between background and primary color (without THREE)
         const primaryLightColor = '#' + (new THREE.Color(primaryColor).lerp(new THREE.Color(backgroundColor), 0.9)).getHexString();

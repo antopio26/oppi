@@ -1,7 +1,7 @@
 import "../style/css/Dashboard.css";
 import "../style/css/DashboardSidebar.css";
 
-import React, {useContext, useEffect, useState} from 'react';
+import React, {useContext, useEffect, useRef, useState} from 'react';
 import Sidebar from "../components/Sidebar";
 import {AppContext} from "../providers/AppContext";
 import MapsList from "../components/MapsList";

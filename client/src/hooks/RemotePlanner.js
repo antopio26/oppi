@@ -3,40 +3,69 @@ import * as THREE from "three";
 import useWebSocket, {ReadyState} from 'react-use-websocket';
 import {decodeMessage, binaryDataToVoxels} from "../utils/OctomapConversion";
 import {AppContext} from "../providers/AppContext";
+import {ProjectContext} from "../providers/ProjectContext";
 
-export default function useRemotePlanner(remoteURL, waypoints = []) {
-
-    const [voxels, setVoxels] = useState({positions: [], sizes: []});
-    const [rrtPaths, setRrtPaths] = useState([]);
-    const [optPaths, setOptPaths] = useState([]);
-    const [smoothPath, setSmoothPath] = useState({path: [], cost: -1});
-    const [chronoPath, setChronoPath] = useState([]);
-
-    const [completed, setCompleted] = useState(false);
-
+export default function useRemotePlanner(remoteURL) {
     const {selectedProject} = useContext(AppContext);
 
-    const [first, setFirst] = useState(true);
+    const {
+        waypoints,
+        voxels,
+        setVoxels,
+        rrtPaths,
+        setRrtPaths,
+        optPaths,
+        setOptPaths,
+        smoothPath,
+        setSmoothPath,
+        chronoPath,
+        setChronoPath,
+        completed,
+        setCompleted,
+        setReadyState,
+        first,
+        setFirst
+    } = useContext(ProjectContext);
 
     useEffect(() => {
         if (first && selectedProject) {
-            sendParameters();
+            console.log("Selected Project", selectedProject);
+            sendParameters(selectedProject.parameters);
             sendMessage(JSON.stringify({
                 topic: 'm', map: selectedProject.map
             }));
             setFirst(false);
         }
+
     },[selectedProject])
+
+    useEffect(() => {
+        // Reset all states
+        setVoxels({positions: [], sizes: []})
+        setRrtPaths([])
+        setChronoPath([])
+        setCompleted(false)
+        setOptPaths([])
+        setSmoothPath({path: [], cost: -1})
+    }, [selectedProject?._id]);
+
+    // TODO: Add functions to handle sending data and commands to the remote planner
+    const sendParameters = (parameters) => {
+        if (!parameters) return;
+
+        sendMessage(JSON.stringify({
+            topic: 'p', parameters: parameters
+        }));
+    }
 
     const {sendMessage, getWebSocket, readyState} = useWebSocket(remoteURL, {
         onOpen: (e) => {
             e.target.binaryType = 'arraybuffer';
             console.log('WebSocket connection established.');
 
-            // Reset all states when a new connection is established
+            // Reset all states
             setVoxels({positions: [], sizes: []})
             setRrtPaths([])
-            // setWaypoints([])
             setChronoPath([])
             setCompleted(false)
             setOptPaths([])
@@ -91,7 +120,7 @@ export default function useRemotePlanner(remoteURL, waypoints = []) {
 
                         const voxelsData = binaryDataToVoxels(msg.binaryData, resolution);
                         console.log("Voxels received",voxelsData);
-                        voxelsData.positions = voxelsData.positions.map((coords) => new THREE.Vector3(...coords));
+                        voxelsData.positions = voxelsData.positions.map((coords) => new THREE.Vector3(coords[0], coords[2], coords[1]));
                         setVoxels(voxelsData);
                     } else {
                         console.log('Received unknown message:', msg);
@@ -111,13 +140,6 @@ export default function useRemotePlanner(remoteURL, waypoints = []) {
             webSocketInstance.close();
         }
     };
-
-    // TODO: Add functions to handle sending data and commands to the remote planner
-    const sendParameters = (parameters) => {
-        sendMessage(JSON.stringify({
-            topic: 'p', parameters: parameters || selectedProject.parameters
-        }));
-    }
 
     useEffect(() => {
         if (readyState === WebSocket.OPEN) {
@@ -150,6 +172,13 @@ export default function useRemotePlanner(remoteURL, waypoints = []) {
         [ReadyState.CLOSED]: 'Closed',
         [ReadyState.UNINSTANTIATED]: 'Uninstantiated',
     }[readyState];
+
+    useEffect(() => {
+        setReadyState(readyState);
+        if (readyState !== WebSocket.OPEN) {
+            setFirst(true);
+        }
+    },[readyState]);
 
     return {
         voxels,

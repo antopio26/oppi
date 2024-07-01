@@ -13,6 +13,7 @@ import {Avatar} from "primereact/avatar";
 import {Canvas} from "@react-three/fiber";
 import MapScene from "../components/MapScene";
 import useMockMapData from "../hooks/MockMapData";
+import LogoutButton from "../components/LogoutButton";
 
 export default function Home() {
     const {user, isAuthenticated, loginWithRedirect} = useAuth0();
@@ -29,8 +30,7 @@ export default function Home() {
                 <div className="welcome">
                     {isAuthenticated ? <>
                             <p>Welcome back, {user.name}</p>
-                            <Button icon="pi pi-user" onClick={() => navigate("/profile")} rounded
-                                    className={"button lighter-secondary-bg primary-text"}/>
+                            <LogoutButton rounded iconOnly text/>
                         </>
                         : <>
                             <p>Welcome in this beautiful place</p>

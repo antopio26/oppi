@@ -39,7 +39,7 @@ export default function useMockMapData(mapFilePath, dataFilePath) {
 
                 const voxelsData = binaryDataToVoxels(binaryData);
 
-                voxelsData.positions = voxelsData.positions.map((coords) => new THREE.Vector3(...coords));
+                voxelsData.positions = voxelsData.positions.map((coords) => new THREE.Vector3(coords[0], coords[2], coords[1]));
                 setVoxels(voxelsData);
                 setCompleted(true);
             } catch (error) {

@@ -1,5 +1,6 @@
 import {MapContext} from "../providers/MapContext";
 import {useContext} from "react";
+import {ProjectContext} from "../providers/ProjectContext";
 
 function InputCoord({ label, value = "", onChange = (e) => {}, onBlur = (e) => {}, onKeyDown = (e) => {} }) {
     return (
@@ -19,7 +20,8 @@ function InputCoord({ label, value = "", onChange = (e) => {}, onBlur = (e) => {
 
 export function InputCoords({waypoint, onBlurCallback, index}) {
 
-    const { waypoints, setWaypoints, mapMode, setMapMode, setAllCollapsed } = useContext(MapContext)
+    const { mapMode, setMapMode, setAllCollapsed } = useContext(MapContext)
+    const { waypoints, setWaypoints } = useContext(ProjectContext)
 
     return (
         <div className="coords">

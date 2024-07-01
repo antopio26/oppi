@@ -20,6 +20,7 @@ import {useContext, useEffect, useRef} from "react";
 import useMapManager from "./hooks/MapManager";
 import useProjectManager from "./hooks/ProjectManager";
 import FetchingLayer from "./components/FetchingLayer";
+import ProjectContextProvider from "./providers/ProjectContext";
 
 
 function App() {
@@ -49,17 +50,19 @@ function App() {
 
     return (
         <AppContextProvider additionalStates={{toastRef}}>
-            <FetchingLayer>
-                <Routes>
-                    <Route exact path="/" element={<Home/>}/>
-                    <Route path="/*" element={<NotFound/>}/>
+            <ProjectContextProvider>
+                <FetchingLayer>
+                    <Routes>
+                        <Route exact path="/" element={<Home/>}/>
+                        <Route path="/*" element={<NotFound/>}/>
 
-                    <Route path="/callback/*" element={<CallbackPage/>}/>
-                    <Route path="/profile/*" element={<AuthenticationGuard component={Paths}/>}/>
-                    <Route path="/dashboard/*" element={<AuthenticationGuard component={Dashboard}/>}/>
-                    <Route path="/map/*" element={<AuthenticationGuard component={Map}/>}/>
-                </Routes>
-            </FetchingLayer>
+                        <Route path="/callback/*" element={<CallbackPage/>}/>
+                        <Route path="/paths/*" element={<AuthenticationGuard component={Paths}/>}/>
+                        <Route path="/dashboard/*" element={<AuthenticationGuard component={Dashboard}/>}/>
+                        <Route path="/map/*" element={<AuthenticationGuard component={Map}/>}/>
+                    </Routes>
+                </FetchingLayer>
+            </ProjectContextProvider>
         </AppContextProvider>
     );
 }

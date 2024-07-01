@@ -69,12 +69,14 @@
                     height: 100%;
                     user-select: none;
                     transition: scale .35s ease-out;
+                    background-color: rgba(var(--background-r), var(--background-g), var(--background-b), .75);
                     &:hover, &:focus-within{
                         scale: 1.1;}
                     &:active, &.selected{
                         scale: 1.2;
                     }
                 }
+
                 i{
                     position: absolute;
                     inset: 0;
@@ -172,6 +174,7 @@
                         flex-direction: column;
                         gap: .25rem;
                         height: 100%;
+                        max-width: 100%;
                         align-items: center;
                         justify-content: space-between;
 

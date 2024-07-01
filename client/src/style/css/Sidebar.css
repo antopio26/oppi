@@ -212,6 +212,75 @@ aside {
                 }
             }
         }
+
+        .section-content {
+            > ul {
+                list-style: none;
+                display: flex;
+                flex-direction: column;
+                gap: .5rem;
+                padding: 0;
+                margin: 0;
+                width: 100%;
+
+                li {
+                    display: flex;
+                    justify-content: center;
+                    align-items: center;
+
+                    label {
+                        flex-grow: 1;
+                        background-color: var(--secondary);
+                        text-align: center;
+                        padding: .5rem 1rem;
+                        border-radius: 5rem;
+                        user-select: none;
+                        cursor: pointer;
+                        display: flex;
+                        justify-content: center;
+                        transition: background-color .35s ease-out, opacity .35s ease-out;
+                        max-width: 100%;
+                        overflow: hidden;
+                        text-overflow: ellipsis;
+                        white-space: nowrap;
+
+                        &:hover {
+                            background-color: rgba(73, 73, 73, .75);
+                        }
+
+                        &:active {
+                            background-color: rgba(73, 73, 73, .375);
+                        }
+
+                        &:has(+:checked) {
+                            color: var(--primary);
+                            background-color: rgba(73, 73, 73, .375);
+                        }
+
+                        i {
+                            margin-inline-end: .375rem;
+                            margin-top: 1px;
+                        }
+
+                        span{
+                            overflow: hidden;
+                            text-overflow: ellipsis;
+                            white-space: nowrap;
+                        }
+                    }
+
+                    button {
+                        width: 100%;
+                        justify-content: center;
+                        background-color: var(--low-contrast-background);
+
+                        .p-button-label {
+                            flex-grow: 0;
+                        }
+                    }
+                }
+            }
+        }
     }
 }
 
