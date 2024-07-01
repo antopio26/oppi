@@ -1,7 +1,9 @@
 import {Button} from "primereact/button";
 import React from "react";
 
-export default function Metrics() {
+export default function Metrics({metrics}) {
+    if (!metrics) return null;
+
     return (
         <div className="metrics-container">
             <div className="metrics-top">
@@ -12,18 +14,12 @@ export default function Metrics() {
                 </div>
             </div>
             <div className="metrics-data">
-                <div className="metric">
-                    <span>Path Length</span>
-                    <span>0.0 m</span>
-                </div>
-                <div className="metric">
-                    <span>Path Time</span>
-                    <span>0.0 s</span>
-                </div>
-                <div className="metric">
-                    <span>Path Cost</span>
-                    <span>0.0</span>
-                </div>
+                {metrics.keys().map((key, i) => (
+                    <div className="metric" key={i}>
+                        <span>{key}</span>
+                        <span>{metrics[key]}</span>
+                    </div>
+                ))}
             </div>
         </div>
     )

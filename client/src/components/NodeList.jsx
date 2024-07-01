@@ -5,7 +5,7 @@ import {InputCoords} from "./InputCoords";
 import {useContext, useEffect, useRef, useState} from "react";
 import {MapContext} from "../providers/MapContext";
 import {Button} from "primereact/button";
-import {ProjectContext} from "../providers/ProjectContext";
+import useRemotePlanner from "../hooks/RemotePlanner";
 
 export function NodeList() {
     const nodesAccordionRef = useRef();
@@ -16,7 +16,7 @@ export function NodeList() {
         setWaypoints,
         waypointsColor,
         setWaypointsColor
-    } = useContext(ProjectContext);
+    } = useRemotePlanner();
 
     const {
         mapMode,

@@ -11,11 +11,11 @@ import Metrics from "../components/Metrics";
 import useRemotePlanner from "../hooks/RemotePlanner";
 import LoadingOverlay from "../components/LoadingOverlay";
 import {useNavigate} from "react-router-dom";
-import {ProjectContext} from "../providers/ProjectContext";
+import {RemotePlannerContext} from "../providers/RemotePlannerContext";
 
 export default function Map() {
     const [mapMode, setMapMode] = useState({mode: "view"});
-    const {waypoints, waypointsColor, readyState, voxels, rrtPaths, optPaths, smoothPath, sendParameters} = useContext(ProjectContext);
+    const {waypoints, waypointsColor, readyState, voxels, rrtPaths, optPaths, smoothPath, sendParameters} = useRemotePlanner();
     const navigate = useNavigate();
 
     useEffect(() => {

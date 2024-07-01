@@ -20,14 +20,12 @@ import {useContext, useEffect, useRef} from "react";
 import useMapManager from "./hooks/MapManager";
 import useProjectManager from "./hooks/ProjectManager";
 import FetchingLayer from "./components/FetchingLayer";
-import ProjectContextProvider from "./providers/ProjectContext";
+import RemotePlannerContextProvider from "./providers/RemotePlannerContext";
 
 
 function App() {
     const {getAccessTokenSilently, isAuthenticated} = useAuth0();
     const toastRef = useRef(null);
-    // const {getMaps} = useMapManager();
-    // const {getProjects} = useProjectManager();
 
     useEffect(() => {
         axios.interceptors.request.use(async function (config) {
@@ -50,7 +48,7 @@ function App() {
 
     return (
         <AppContextProvider additionalStates={{toastRef}}>
-            <ProjectContextProvider>
+            <RemotePlannerContextProvider remoteURL={"ws://localhost:9002"}>
                 <FetchingLayer>
                     <Routes>
                         <Route exact path="/" element={<Home/>}/>
@@ -62,7 +60,7 @@ function App() {
                         <Route path="/map/*" element={<AuthenticationGuard component={Map}/>}/>
                     </Routes>
                 </FetchingLayer>
-            </ProjectContextProvider>
+            </RemotePlannerContextProvider>
         </AppContextProvider>
     );
 }

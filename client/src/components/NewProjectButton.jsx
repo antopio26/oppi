@@ -6,12 +6,13 @@ import MapDropdown from "./MapDropdown";
 import useProjectManager from "../hooks/ProjectManager";
 
 export function NewProjectButton() {
-    const [visible, setVisible] = useState(false);
-    const {createProject} = useProjectManager();
     const newProjRef = useRef(null);
     const nameInput = useRef(null);
 
+    const [visible, setVisible] = useState(false);
     const [selectedMap, setSelectedMap] = useState(null);
+
+    const {createProject} = useProjectManager();
 
     const handleCreateProject = (e) => {
         const project = {

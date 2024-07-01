@@ -6,7 +6,7 @@ import {NodeList} from "./NodeList";
 import {ParametersList} from "./ParametersList";
 
 export default function MapSidebar() {
-    const { mapMode, setMapMode } = useContext(MapContext)
+    const {mapMode, setMapMode} = useContext(MapContext)
 
     const handleSelectionMode = (e) => {
         if (mapMode.mode === "point-selector") {

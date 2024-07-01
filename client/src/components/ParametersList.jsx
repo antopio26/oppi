@@ -2,17 +2,18 @@ import {Button} from "primereact/button";
 import {useContext, useEffect, useRef, useState} from "react";
 import {AppContext} from "../providers/AppContext";
 import useProjectManager from "../hooks/ProjectManager";
-import {MapContext} from "../providers/MapContext";
-import {ProjectContext} from "../providers/ProjectContext";
 import useRemotePlanner from "../hooks/RemotePlanner";
 
+
 export function ParametersList() {
-    const formRef = useRef(null);
-    const {selectedProject} = useContext(AppContext);
-    const {updateParameters} = useProjectManager();
     const [parameters, setParameters] = useState({});
 
-    // TODO: Import sendParameters
+    const {selectedProject} = useContext(AppContext);
+
+    const {updateParameters} = useProjectManager();
+    const {sendParameters} = useRemotePlanner();
+
+    const formRef = useRef(null);
 
     useEffect(() => {
         if (selectedProject?.parameters) {

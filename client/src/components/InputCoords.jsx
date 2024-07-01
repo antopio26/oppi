@@ -1,6 +1,6 @@
 import {MapContext} from "../providers/MapContext";
 import {useContext} from "react";
-import {ProjectContext} from "../providers/ProjectContext";
+import useRemotePlanner from "../hooks/RemotePlanner";
 
 function InputCoord({ label, value = "", onChange = (e) => {}, onBlur = (e) => {}, onKeyDown = (e) => {} }) {
     return (
@@ -20,8 +20,8 @@ function InputCoord({ label, value = "", onChange = (e) => {}, onBlur = (e) => {
 
 export function InputCoords({waypoint, onBlurCallback, index}) {
 
-    const { mapMode, setMapMode, setAllCollapsed } = useContext(MapContext)
-    const { waypoints, setWaypoints } = useContext(ProjectContext)
+    const {mapMode, setMapMode, setAllCollapsed} = useContext(MapContext)
+    const {waypoints, setWaypoints} = useRemotePlanner();
 
     return (
         <div className="coords">

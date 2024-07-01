@@ -11,7 +11,7 @@ export default function FetchingLayer({children}) {
     const {getProjects, getPaths} = useProjectManager();
     const {selectedProject} = useContext(AppContext);
 
-    useRemotePlanner('ws://localhost:9002');
+    const {resetPlanner, sendParameters, changeMap} = useRemotePlanner();
 
     useEffect(() => {
         if (isAuthenticated){
@@ -23,8 +23,20 @@ export default function FetchingLayer({children}) {
     useEffect(() => {
         if (selectedProject){
             getPaths(selectedProject._id);
+
+            resetPlanner();
+            sendParameters(selectedProject.parameters);
+            changeMap(selectedProject.map);
         }
     }, [selectedProject?._id]);
+
+    // TODO: Find better place for this
+    useEffect(() => {
+        if (selectedProject) {
+            console.log("Selected Project", selectedProject);
+
+        }
+    },[selectedProject?._id])
 
     return(
         <>

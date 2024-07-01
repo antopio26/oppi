@@ -4,6 +4,7 @@ import {useContext} from "react";
 
 export default function PathsSidebar({selection,setSelection}) {
     const {selectedProject} = useContext(AppContext);
+
     return (
         <div className="paths-main">
             <div className="section project-name">

@@ -5,10 +5,12 @@ import MapUploadDialog from "./MapUploadDialog";
 import {AppContext} from "../providers/AppContext";
 
 export default function MapDropdown({selectedMap, setSelectedMap}) {
-    const newProjDropdown = useRef(null);
-    const [visible, setVisible] = useState(false);
-    const dropdownInputRef = useRef(null);
     const {maps} = useContext(AppContext);
+
+    const newProjDropdown = useRef(null);
+    const dropdownInputRef = useRef(null);
+
+    const [visible, setVisible] = useState(false);
 
     const panelFooterTemplate = () => {
         return (

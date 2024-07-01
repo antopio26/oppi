@@ -1,7 +1,6 @@
 import {Button} from "primereact/button";
 import MapUploadDialog from "./MapUploadDialog";
 import {memo, useState} from "react";
-import {retarget} from "three/examples/jsm/utils/SkeletonUtils";
 
 
 const MapsList = memo(function({maps, onToggle, onReset,onRemove, getMapFilter}) {
