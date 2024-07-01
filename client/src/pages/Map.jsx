@@ -12,11 +12,13 @@ import useRemotePlanner from "../hooks/RemotePlanner";
 import LoadingOverlay from "../components/LoadingOverlay";
 import {useNavigate} from "react-router-dom";
 import {RemotePlannerContext} from "../providers/RemotePlannerContext";
+import {AppContext} from "../providers/AppContext";
 
 export default function Map() {
     const [mapMode, setMapMode] = useState({mode: "view"});
     const {waypoints, waypointsColor, readyState, voxels, rrtPaths, optPaths, smoothPath, sendParameters} = useRemotePlanner();
     const navigate = useNavigate();
+    const {selectedProject} = useContext(AppContext);
 
     useEffect(() => {
         console.log("Map Voxels", voxels)
@@ -34,6 +36,7 @@ export default function Map() {
                 <MapSidebar/>
             </Sidebar>
             <main style={{position: "relative"}} className={`map-main ${mapMode.mode}`}>
+                <h3>{selectedProject?.name}</h3>
                 <Canvas style={{position: "absolute", inset: 0}}>
                     <MapScene
                         waypoints={waypoints}

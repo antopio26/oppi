@@ -1,13 +1,64 @@
 .paths-main {
-    .paths-container{
+    .paths-container {
         display: flex;
         flex-direction: column;
+        gap: .5rem;
 
-        .path-card{
+        .path-card {
             display: flex;
+            justify-content: space-between;
             background-color: var(--secondary);
-            border-radius: 1rem;
-            padding: 1rem;
+            border-radius: 2rem;
+            padding: 1rem 1.6rem;
+            border: 1px solid var(--secondary-border);
+            transition: border-color .35s ease-out, opacity .35s ease-out;
+
+            .actions {
+                display: flex;
+                gap: .5rem;
+                -webkit-user-select: none;
+                user-select: none;
+
+                > i {
+                    position: relative;
+                    cursor: pointer;
+                    z-index: 0;
+
+                    > i {
+                        position: absolute;
+                        inset: 0;
+                        opacity: 0;
+                        transition: opacity .35s ease-out;
+                        z-index: -1;
+                    }
+                    &:hover >i{
+                        opacity:.25;
+                    }
+                    &:active >i{
+                        opacity:.5;
+                    }
+                    &.saved >i{
+                        opacity:1;
+                    }
+
+                }
+                i{
+                    outline: none;
+                    transition: color .35s ease-out;
+                }
+            }
+            &:has(.select-button:hover, .select-button:focus-within){
+                border-color: rgba(var(--primary-r), var(--primary-g), var(--primary-b), .5);
+            }
+            &:has(.select-button:active){
+                border-color: var(--primary);
+            }
+        }
+        &:has(.select-button:hover, .select-button:focus-within) >:not(:has(.select-button:hover, .select-button:focus-within)){
+            opacity: .75;
+        }
+        &:has(.select-button:active) >:not(:has(.select-button:active)){
+            opacity: .5;
         }
     }
 }

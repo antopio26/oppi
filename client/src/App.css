@@ -123,6 +123,10 @@ main {
     color: var(--background);
 }
 
+i.primary-text {
+    color: var(--primary);
+}
+
 .p-button {
     outline: none;
 

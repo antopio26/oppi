@@ -1,0 +1,13 @@
+
+Pjavascript:S1135"4Complete the task associated to this "TODO" comment.(ÍÍµ
+mjavascript:S6544A"QPromise-returning function provided to property where a void return was expected.(€±üº
+Ijavascript:S6836M"-Unexpected lexical declaration in case block.(Øı‹¶
+Njavascript:S6836X"-Unexpected lexical declaration in case block.(íÏ¯ÿÿÿÿÿ
+Ijavascript:S6836_"-Unexpected lexical declaration in case block.(šîŞÇ
+:javascript:S125`"Remove this commented out code.(úùã‹
+Hjavascript:S6594h"'Use the "RegExp.exec()" method instead.(ˆ‘ğßùÿÿÿÿ
+jjavascript:S1481z"IRemove the declaration of the unused 'closeWebSocketConnection' variable.(ËåÙÊıÿÿÿÿ
+gjavascript:S1854z"FRemove this useless assignment to variable "closeWebSocketConnection".(ËåÙÊıÿÿÿÿ
+bjavascript:S1481™"@Remove the declaration of the unused 'connectionState' variable.(“²´üÿÿÿÿ
+_javascript:S1854™"=Remove this useless assignment to variable "connectionState".(“²´üÿÿÿÿ
+¢javascript:S6481¢"…The object passed as the value prop to the Context provider changes every render. To fix this consider wrapping it in a useMemo hook.(ğªM

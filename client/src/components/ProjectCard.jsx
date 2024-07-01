@@ -61,7 +61,6 @@ export default function ProjectCard({project}) {
                 <div className="project-info-top">
                 <h3 onClick={handleSelection}>{project.name}</h3>
                     <div className="actions">
-                        <Button className={"duplicate-button"} label={"Duplicate"} icon="pi pi-copy" text rounded/>
                         <Button className={"delete-button"} icon="pi pi-trash" severity={"danger"} text rounded onClick={handleDelete}/>
                     </div>
                 </div>

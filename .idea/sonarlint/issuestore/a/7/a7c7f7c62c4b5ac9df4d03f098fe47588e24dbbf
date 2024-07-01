@@ -1,0 +1,9 @@
+
+javascript:S3776	"TRefactor this function to reduce its Cognitive Complexity from 16 to the 15 allowed.(’Ëóù8¦ƒ–ü†2J$35342ddb-78d3-4ffa-870b-fe783928a8d3
+›javascript:S68477"RNon-interactive elements should not be assigned mouse or keyboard event listeners.(Èãºß8¦ƒ–ü†2J$1205e0f2-1ef3-4301-911a-21f7f482a571
+¨javascript:S10827"_Visible, non-interactive elements with click handlers must have at least one keyboard listener.(Èãºß8¦ƒ–ü†2J$04b6f3d3-3081-43b7-b296-235fbad7c1f6
+„javascript:S68457";`tabIndex` should only be declared on interactive elements.(Èãºß8¦ƒ–ü†2J$7b480616-47fe-4b8f-b4d0-1771f7a3e7fc
+‹javascript:S68489"ÂAvoid non-native interactive elements. If using native HTML is not possible, add an appropriate role and support for tabbing, mouse, keyboard, and touch inputs to an interactive content element.(çú¡u8¦ƒ–ü†2J$0a3dfd6f-79c0-4521-babc-ce225f33c357
+§javascript:S10829"_Visible, non-interactive elements with click handlers must have at least one keyboard listener.(çú¡u8¦ƒ–ü†2J$ff9fb4e8-a3b5-4df8-b182-fdbd9581f085
+ javascript:S6847>"RNon-interactive elements should not be assigned mouse or keyboard event listeners.(°©ûÿÿÿÿ8¦ƒ–ü†2J$d9afd55f-4f95-49b4-88c6-b682b7847722
+­javascript:S1082>"_Visible, non-interactive elements with click handlers must have at least one keyboard listener.(°©ûÿÿÿÿ8¦ƒ–ü†2J$d45f7e52-674a-4030-9666-4cc45f04e5bd

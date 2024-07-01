@@ -200,6 +200,7 @@ aside {
                 height: 1.75rem;
 
                 * {
+                    transition: inherit;
                     font-size: .85rem;
                 }
 
@@ -273,6 +274,7 @@ aside {
                         width: 100%;
                         justify-content: center;
                         background-color: var(--low-contrast-background);
+                        *{transition: inherit}
 
                         .p-button-label {
                             flex-grow: 0;

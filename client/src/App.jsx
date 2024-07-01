@@ -13,18 +13,16 @@ import NotFound from "./pages/NotFound";
 import CallbackPage from "./pages/CallbackPage";
 
 import AuthenticationGuard from "./components/AuthenticationGuard";
-import AppContextProvider, {AppContext} from "./providers/AppContext";
+import AppContextProvider from "./providers/AppContext";
 import axios from "axios";
 import {useAuth0} from "@auth0/auth0-react";
-import {useContext, useEffect, useRef} from "react";
-import useMapManager from "./hooks/MapManager";
-import useProjectManager from "./hooks/ProjectManager";
+import {useEffect, useRef} from "react";
 import FetchingLayer from "./components/FetchingLayer";
 import RemotePlannerContextProvider from "./providers/RemotePlannerContext";
 
 
 function App() {
-    const {getAccessTokenSilently, isAuthenticated} = useAuth0();
+    const {getAccessTokenSilently} = useAuth0();
     const toastRef = useRef(null);
 
     useEffect(() => {
