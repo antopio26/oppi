@@ -25,10 +25,12 @@ export default function useMapManager() {
 
         // Assuming `maps` is part of the component's state
         setMaps((prevMaps) => [...prevMaps, res.data]);
+
+        return res.data;
     };
 
     const deleteMap = async (id) => {
-        await axios.delete(`/api/maps/${id}`);
+        const res = await axios.delete(`/api/maps/${id}`);
         setMaps(maps.filter(p => p._id !== id));
         setProjects(projects.filter(p => p.map !== id));
 
@@ -37,6 +39,8 @@ export default function useMapManager() {
                 projects.sort((a, b) => new Date(b.lastOpenAt) - new Date(a.lastOpenAt))[0]
             );
         }
+
+        return res.data;
     }
 
     return {

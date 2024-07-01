@@ -6,6 +6,8 @@ import {useContext, useEffect, useRef, useState} from "react";
 import {MapContext} from "../providers/MapContext";
 import {Button} from "primereact/button";
 import useRemotePlanner from "../hooks/RemotePlanner";
+import {AppContext} from "../providers/AppContext";
+import useProjectManager from "../hooks/ProjectManager";
 
 export function NodeList() {
     const nodesAccordionRef = useRef();
@@ -15,7 +17,8 @@ export function NodeList() {
         waypoints,
         setWaypoints,
         waypointsColor,
-        setWaypointsColor
+        setWaypointsColor,
+        smoothPath,
     } = useRemotePlanner();
 
     const {
@@ -24,6 +27,9 @@ export function NodeList() {
         allCollapsed,
         setAllCollapsed
     } = useContext(MapContext);
+
+    const {selectedProject, currentPath, setCurrentPath} = useContext(AppContext);
+    const {createPath, savePath, unsavePath} = useProjectManager();
 
     const inputCoordsOnBlur = (e) => {
         if (mapMode.mode === "point-selector" && !e.currentTarget.closest(".p-accordion-content").contains(e.relatedTarget) && e.relatedTarget?.closest(".map-sidebar") && e.relatedTarget?.closest(".point-selector-button")) {
@@ -64,17 +70,23 @@ export function NodeList() {
         }
     }
 
-    const handleSavePath = (e) => {
-        let icon = e.currentTarget.querySelector(".pi-bookmark")
-        if (icon){
-            icon.classList.remove("pi-bookmark")
-            icon.classList.add("pi-bookmark-fill")
-            e.currentTarget.classList.remove("p-button-text")
-        }else{
-           icon = e.currentTarget.querySelector(".pi-bookmark-fill")
-              icon.classList.remove("pi-bookmark-fill")
-                icon.classList.add("pi-bookmark")
-                e.currentTarget.classList.add("p-button-text")
+    const handleSavePath = async (e) => {
+        if(currentPath) {
+            if (currentPath.saved) {
+                setCurrentPath(await unsavePath(selectedProject._id, currentPath._id));
+            } else {
+                setCurrentPath(await savePath(selectedProject._id, currentPath._id));
+            }
+        } else {
+            const path = await createPath(selectedProject._id, {
+                waypoints,
+                waypointsColor,
+                cost: smoothPath.cost,
+                smoothPath: smoothPath.path,
+                saved: true
+            })
+
+            setCurrentPath(path);
         }
     }
 
@@ -112,7 +124,7 @@ export function NodeList() {
                 <Button icon="pi pi-minus" className={"remove-button primary-text"} disabled={waypoints.length < 3}
                         text rounded
                         onClick={handleRemoveNode}/>
-                <Button icon="pi pi-bookmark" className={"save-button"} text rounded disabled={waypoints.length < 2}
+                <Button icon={"pi pi-bookmark" + (currentPath?.saved ? "-fill":"")} className={"save-button"} text rounded disabled={waypoints.length < 2}
                 onClick={handleSavePath}/>
             </div>
 

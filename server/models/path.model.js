@@ -1,5 +1,5 @@
 const mongoose = require('mongoose');
-const {Parameters} = require("./parameters.model");
+const { Parameters } = require("./parameters.model");
 
 const PointSchema = new mongoose.Schema({
     x: {
@@ -14,7 +14,7 @@ const PointSchema = new mongoose.Schema({
         type: Number,
         required: true
     }
-})
+});
 
 const PathSchema = new mongoose.Schema({
     createdAt: {
@@ -34,33 +34,42 @@ const PathSchema = new mongoose.Schema({
         type: Number,
         required: true
     },
-    // TODO: add more metrics here
-    waypoints: [PointSchema],
+    waypoints: [
+        {
+            id: {
+                type: Number,
+                required: true
+            },
+            coords: PointSchema
+        }
+    ],
     waypointsColor: [
         {
-            type: String,
-            required: true
+            id: {
+                type: Number,
+                required: true
+            },
+            color: {
+                type: String,
+                required: true
+            }
         }
     ],
     smoothPath: [PointSchema]
 });
 
-PathSchema.post('save', function(doc, next) {
-    this.model('Path').countDocuments({ saved: false }, (err, count) => {
-        if (err) {
-            next(err);
-        } else if (count > 100) {
-            this.model('Path').find({ saved: false }).sort({ createdAt: 1 }).limit(count - 100)
-                .then(docs => {
-                    const removePromises = docs.map(doc => doc.remove());
-                    return Promise.all(removePromises);
-                })
-                .then(() => next())
-                .catch(err => next(err));
-        } else {
-            next();
+PathSchema.post('save', async function(doc, next) {
+    try {
+        const count = await this.model('Path').countDocuments({ saved: false });
+        if (count > 100) {
+            const docs = await this.model('Path').find({ saved: false }).sort({ createdAt: 1 }).limit(count - 100);
+            const removePromises = docs.map(doc => doc.remove());
+            await Promise.all(removePromises);
         }
-    });
+        next();
+    } catch (err) {
+        next(err);
+    }
 });
 
 const Path = mongoose.model('Path', PathSchema);
@@ -68,4 +77,4 @@ const Path = mongoose.model('Path', PathSchema);
 module.exports = {
     Path,
     PathSchema
-}
+};

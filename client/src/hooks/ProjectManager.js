@@ -15,15 +15,19 @@ export default function useProjectManager() {
                 res.data.sort((a, b) => new Date(b.lastOpenAt) - new Date(a.lastOpenAt))[0]
             );
         }
+
+        return res.data;
     }
 
     const createProject = async (project) => {
         const res = await axios.post('/api/projects', project);
         setProjects([...projects, res.data]);
+
+        return res.data;
     }
 
     const deleteProject = async (id) => {
-        await axios.delete(`/api/projects/${id}`);
+        const res = await axios.delete(`/api/projects/${id}`);
         setProjects(projects.filter(p => p._id !== id));
 
         if (selectedProject?._id === id) {
@@ -31,11 +35,15 @@ export default function useProjectManager() {
                 projects.sort((a, b) => new Date(b.lastOpenAt) - new Date(a.lastOpenAt))[0]
             );
         }
+
+        return res.data;
     }
 
     const updateProject = async (id, project) => {
         const res = await axios.put(`/api/projects/${id}`, project);
         setProjects(projects.map(p => p._id === id ? res.data : p));
+
+        return res.data;
     }
 
     const updateParameters = async (id, parameters) => {
@@ -51,26 +59,36 @@ export default function useProjectManager() {
         setProjects(projects.map(p => p._id === id ? res.data : p));
 
         setSelectedProject(res.data);
+
+        return res.data;
     }
 
     const getPaths = async (projectId) => {
         const res = await axios.get(`/api/projects/${projectId}/paths`);
         setPaths(res.data);
+
+        return res.data;
     }
 
     const createPath = async (projectId, path) => {
         const res = await axios.post(`/api/projects/${projectId}/paths`, path);
         setPaths([...paths, res.data]);
+
+        return res.data;
     }
 
     const savePath = async (projectId, pathId) => {
         const res = await axios.put(`/api/projects/${projectId}/paths/${pathId}/save`);
         setPaths(paths.map(p => p._id === pathId ? res.data : p));
+
+        return res.data;
     }
 
     const unsavePath = async (projectId, pathId) => {
         const res = await axios.put(`/api/projects/${projectId}/paths/${pathId}/unsave`);
         setPaths(paths.map(p => p._id === pathId ? res.data : p));
+
+        return res.data;
     }
 
     return {

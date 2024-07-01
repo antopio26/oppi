@@ -10,6 +10,7 @@ export default function AppContextProvider({children, additionalStates = {}}) {
     const [maps, setMaps] = useState([]);
     const [projects, setProjects] = useState([]);
     const [paths, setPaths] = useState([]);
+    const [currentPath, setCurrentPath] = useState(null);
 
     return (
         <AppContext.Provider value={{
@@ -23,6 +24,8 @@ export default function AppContextProvider({children, additionalStates = {}}) {
             setProjects,
             paths,
             setPaths,
+            currentPath,
+            setCurrentPath,
             ...additionalStates
         }}>
             {children}

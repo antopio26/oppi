@@ -30,14 +30,6 @@ export default function FetchingLayer({children}) {
         }
     }, [selectedProject?._id]);
 
-    // TODO: Find better place for this
-    useEffect(() => {
-        if (selectedProject) {
-            console.log("Selected Project", selectedProject);
-
-        }
-    },[selectedProject?._id])
-
     return(
         <>
             {children}
