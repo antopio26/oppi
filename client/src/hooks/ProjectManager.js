@@ -1,12 +1,9 @@
 import axios from "axios";
 import {useContext} from "react";
 import {AppContext} from "../providers/AppContext";
-import {RemotePlannerContext} from "../providers/RemotePlannerContext";
 
 export default function useProjectManager() {
-    const {projects, setProjects, selectedProject, setSelectedProject} = useContext(AppContext);
-    const {paths, setPaths} = useContext(RemotePlannerContext);
-
+    const {projects, setProjects, selectedProject, setSelectedProject, paths, setPaths} = useContext(AppContext);
 
     const getProjects = async () => {
         const res = await axios.get('/api/projects');
