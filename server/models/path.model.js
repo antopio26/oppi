@@ -31,8 +31,7 @@ const PathSchema = new mongoose.Schema({
         default: false
     },
     cost: {
-        type: Number,
-        required: true
+        type: Number
     },
     waypoints: [
         {
@@ -55,8 +54,10 @@ const PathSchema = new mongoose.Schema({
             }
         }
     ],
-    smoothPath: [PointSchema]
+    // smoothPath: [PointSchema]
 });
+
+PathSchema.index({ project: 1, waypoints: 1, waypointsColor: 1, smoothPath: 1 }, { unique: true});
 
 PathSchema.post('save', async function(doc, next) {
     try {

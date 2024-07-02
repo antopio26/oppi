@@ -244,8 +244,6 @@ X
 (client/src/components/LoadingOverlay.jsx,8/4/8403dffac14627b0c43783392a3f203af9f1d700
 W
 'client/src/style/css/LoadingOverlay.css,a/c/ac4308d15b7a12fd588ef44c75516ed4431b7f92
-V
-&client/src/providers/ProjectContext.js,0/6/06a0b4ec8b5445a5bc6c18d982269edeef448726
 Y
 )client/src/components/threejs/Helpers.jsx,f/1/f14566b5b6e668b41c5afa021cc4c7a84caee79f
 X

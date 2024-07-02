@@ -1,8 +1,10 @@
 .paths-main {
+    overflow-y: auto;
     .paths-container {
         display: flex;
         flex-direction: column;
         gap: .5rem;
+        padding-bottom: 2rem;
 
         .path-card {
             display: flex;

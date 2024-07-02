@@ -25,6 +25,10 @@ export default function Map() {
     currentPathRef.current = currentPath;
 
     useEffect(() => {
+        if (voxels.positions.length === 0 || waypoints.length <2) {
+            return;
+        }
+
         setCurrentPath(null);
 
         const timeout = setTimeout(async () => {
@@ -35,15 +39,15 @@ export default function Map() {
             const path = await createPath(selectedProject._id, {
                 waypoints,
                 waypointsColor,
-                cost: smoothPath.cost,
-                smoothPath: smoothPath.path
+                // cost: smoothPath.cost,
+                // smoothPath: smoothPath.path
             })
 
             setCurrentPath(path);
-        }, 8000);
+        }, 4000);
 
         return () => clearTimeout(timeout);
-    }, [waypoints]);
+    }, [waypoints, waypointsColor]);
 
     return (
         <MapContextProvider additionalStates={{mapMode, setMapMode, sendParameters}}>
