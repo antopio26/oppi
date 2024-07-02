@@ -1,4 +1,4 @@
-import React, {useContext, useState} from 'react';
+import React, {useContext, useEffect, useState} from 'react';
 import "../style/css/Paths.css";
 import {useAuth0} from "@auth0/auth0-react";
 import Sidebar from "../components/Sidebar";

@@ -6,6 +6,14 @@
         gap: .5rem;
         padding-bottom: 2rem;
 
+        &:not(:has(.path-card))::after {
+            content: 'No paths found';
+            font-size: 1.75rem;
+            color: var(--secondary);
+            text-align: center;
+            grid-column: 1/-1;
+        }
+
         .path-card {
             display: flex;
             justify-content: space-between;

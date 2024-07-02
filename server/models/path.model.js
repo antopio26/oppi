@@ -14,7 +14,7 @@ const PointSchema = new mongoose.Schema({
         type: Number,
         required: true
     }
-});
+}, { _id: false });
 
 const PathSchema = new mongoose.Schema({
     createdAt: {
@@ -39,7 +39,8 @@ const PathSchema = new mongoose.Schema({
                 type: Number,
                 required: true
             },
-            coords: PointSchema
+            coords: PointSchema,
+            _id: false
         }
     ],
     waypointsColor: [
@@ -51,13 +52,28 @@ const PathSchema = new mongoose.Schema({
             color: {
                 type: String,
                 required: true
-            }
+            },
+            _id: false
         }
     ],
     // smoothPath: [PointSchema]
 });
 
-PathSchema.index({ project: 1, waypoints: 1, waypointsColor: 1, smoothPath: 1 }, { unique: true});
+// block the same path (waypoint by waypoint) from being saved multiple times
+PathSchema.pre('save', async function(next) {
+    try {
+        const count = await this.model('Path').countDocuments({ waypoints: { $all: this.waypoints } });
+        if (count > 0) {
+            const err = new Error('Duplicate path');
+            err.status = 208;
+            next(err);
+        }
+        next();
+    } catch (err) {
+        next(err);
+    }
+});
+
 
 PathSchema.post('save', async function(doc, next) {
     try {

@@ -16,7 +16,16 @@ import useProjectManager from "../hooks/ProjectManager";
 
 export default function Map() {
     const [mapMode, setMapMode] = useState({mode: "view"});
-    const {waypoints, waypointsColor, readyState, voxels, rrtPaths, optPaths, smoothPath, sendParameters} = useRemotePlanner();
+    const {
+        waypoints,
+        waypointsColor,
+        readyState,
+        voxels,
+        rrtPaths,
+        optPaths,
+        smoothPath,
+        sendParameters
+    } = useRemotePlanner();
     const {createPath} = useProjectManager();
     const navigate = useNavigate();
     const {selectedProject, currentPath, setCurrentPath} = useContext(AppContext);
@@ -25,17 +34,15 @@ export default function Map() {
     currentPathRef.current = currentPath;
 
     useEffect(() => {
-        if (voxels.positions.length === 0 || waypoints.length <2) {
+        if (voxels.positions.length === 0 || waypoints.length < 2) {
             return;
         }
 
-        setCurrentPath(null);
+        if (JSON.stringify(currentPath?.waypoints)!==JSON.stringify(waypoints)) {
+            setCurrentPath(null);
+        }
 
         const timeout = setTimeout(async () => {
-            if (currentPathRef.current !== null) {
-                return;
-            }
-
             const path = await createPath(selectedProject._id, {
                 waypoints,
                 waypointsColor,
@@ -43,22 +50,25 @@ export default function Map() {
                 // smoothPath: smoothPath.path
             })
 
-            setCurrentPath(path);
-        }, 4000);
+            console.log(path, currentPath)
+            if (JSON.stringify(path, (key, value) => key === "createdAt" || key === "_id" ? undefined : value) !== JSON.stringify(currentPath, (key, value) => key === "createdAt" || key === "_id" ? undefined : value)) {
+                setCurrentPath(path);
+            }
+        }, 6000);
 
         return () => clearTimeout(timeout);
     }, [waypoints, waypointsColor]);
 
     return (
         <MapContextProvider additionalStates={{mapMode, setMapMode, sendParameters}}>
-            { voxels.positions.length === 0 && <LoadingOverlay
+            {voxels.positions.length === 0 && <LoadingOverlay
                 message="Loading Map..."
                 cancelString="Back to Dashboard"
                 onCancel={() => navigate('/dashboard')}
-            /> }
+            />}
             <Sidebar
                 info={"Set a starting point, an ending point and generate a path. You can modify the path planning parameters and move within the map."}>
-                <MapSidebar />
+                <MapSidebar/>
             </Sidebar>
             <main style={{position: "relative"}} className={`map-main ${mapMode.mode}`}>
                 <h3>{selectedProject?.name}</h3>

@@ -3,7 +3,7 @@ import {useContext} from "react";
 import {AppContext} from "../providers/AppContext";
 
 export default function useProjectManager() {
-    const {projects, setProjects, selectedProject, setSelectedProject, paths, setPaths} = useContext(AppContext);
+    const {projects, setProjects, selectedProject, setSelectedProject, paths, setPaths, currentPath} = useContext(AppContext);
 
     const getProjects = async () => {
         const res = await axios.get('/api/projects');
@@ -72,9 +72,14 @@ export default function useProjectManager() {
 
     const createPath = async (projectId, path) => {
         const res = await axios.post(`/api/projects/${projectId}/paths`, path);
-        setPaths([...paths, res.data]);
+        if (res.status===200) {
+            setPaths([...paths, res.data]);
+            return res.data;
+        }else if (res.status===208){
+            return currentPath;
+        }
+        return null;
 
-        return res.data;
     }
 
     const savePath = async (projectId, pathId) => {

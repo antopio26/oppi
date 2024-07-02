@@ -28,8 +28,11 @@ router.post('/', async (req, res, next) => {
     await path.save().then((path) => {
         res.send(path);
     }).catch((err) => {
-      if (err.code === 11000) {
+        console.log(err)
+      if (err.code === 11000 || err.status === 208) {
         res.status(208).send({message: 'Already Reported. Duplicate path'});
+      }else{
+          next(err);
       }
     })
 })
