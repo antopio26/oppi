@@ -1,6 +1,6 @@
 # Octomap Path Planning Interface
 
-Una webapp che permette di pianificare e visualizzare percorsi in ambienti 3D sfruttando le
+Una web app che permette di pianificare e visualizzare percorsi in ambienti 3D sfruttando le
 potenzialità della libreria [THREE.js](https://threejs.org/) e l'efficienza di [Octomap](http://octomap.github.io/).
 
 ## Installazione e avvio
