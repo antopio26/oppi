@@ -164,7 +164,9 @@ remoto tramite WebSocket.
 
 L'inizializzazione della connessione WebSocket è gestita dalla libreria `useWebSocket`, che facilita l'interazione con
 il server remoto. Quando la connessione è stabilita, il tipo di dati binari viene configurato per accettare `arraybuffer`,
-necessario per gestire i dati binari provenienti dal server.
+necessario per gestire i dati binari provenienti dal server. Non sono state utilizzate librerie come *Socket.IO* in quanto
+avrebbero aggiunto overhead e complessità non necessaria da un punto di vista implementativo. La priorità in questo caso è
+stata data alla rapidità di invio e alla leggerezza fornita dalla libreria WebSocket pura.
 
 ### Stato dell'Applicazione
 
@@ -190,23 +192,11 @@ La gestione dei messaggi ricevuti dal server è centralizzata nella funzione `on
 - **octomap_smoothed_path**: Imposta il percorso liscio.
 - **octomap(resolution)**: Decodifica e aggiorna i dati voxel della mappa.
 
-### Riconnessione e Chiusura
-
-Il sistema è progettato per tentare la riconnessione automatica in caso di chiusura anomala del WebSocket.
-La funzione `shouldReconnect` determina se un tentativo di riconnessione è appropriato basandosi sul codice di chiusura ricevuto.
-
-La chiusura manuale della connessione è gestita dalla funzione `closeWebSocketConnection`, che chiude il WebSocket se è attivo.
-
 ### Aggiornamento Dinamico dei Waypoints
 
 Un effetto collaterale (`useEffect`) è configurato per inviare automaticamente i waypoints al pianificatore remoto
 non appena la connessione WebSocket è aperta e ci sono almeno due waypoints definiti. Questo garantisce che la
 pianificazione del percorso possa iniziare immediatamente dopo l'aggiunta dei waypoints.
-
-### Stato della Connessione
-
-Il contesto espone anche lo stato attuale della connessione WebSocket, fornendo feedback visivo agli utenti sull'integrità
-della connessione con il server remoto, con stati che variano tra `Connecting`, `Open`, `Closing`, `Closed`, e `Uninstantiated`.
 
 ### Integrazione e Condivisione dello Stato
 
