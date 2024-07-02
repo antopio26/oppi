@@ -256,3 +256,7 @@ N
 client/src/style/css/Paths.css,7/b/7b8a45732dd675ce21e0e6b329c748c799cb393c
 \
 ,client/src/providers/RemotePlannerContext.js,d/2/d22c05c57a6ea0fa4f7d09e1f743760a885bf7e5
+B
+docker-compose.yml,3/5/35b8c13cf2eb2a194eada000eb310d65aed53b2a
+A
+server/Dockerfile,7/6/7616e2c202d821cf272f76f16fc84f194a512f67

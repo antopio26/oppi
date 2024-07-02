@@ -90,13 +90,20 @@ export default function useProjectManager() {
     const savePath = async (projectId, pathId) => {
         const res = await axios.put(`/api/projects/${projectId}/paths/${pathId}/save`);
         setPaths(paths.map(p => p._id === pathId ? res.data : p));
-
+        setProjects(projects.map(p => p._id === projectId ? {
+            ...p,
+            nSavedPaths: (parseInt(p.nSavedPaths)||0) + 1
+        } : p));
         return res.data;
     }
 
     const unsavePath = async (projectId, pathId) => {
         const res = await axios.put(`/api/projects/${projectId}/paths/${pathId}/unsave`);
         setPaths(paths.map(p => p._id === pathId ? res.data : p));
+        setProjects(projects.map(p => p._id === projectId ? {
+            ...p,
+            nSavedPaths: (parseInt(p.nSavedPaths)||1) - 1
+        } : p));
 
         return res.data;
     }

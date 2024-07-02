@@ -78,7 +78,7 @@ PathSchema.pre('save', async function(next) {
 
 PathSchema.post('save', async function(doc, next) {
     try {
-        const count = await this.model('Path').countDocuments({ saved: false });
+        const count = await this.model('Path').countDocuments({project: doc.project, saved: false });
         if (count > 100) {
             const docs = await this.model('Path').find({ saved: false }).sort({ createdAt: 1 }).limit(count - 100);
             const removePromises = docs.map(doc => doc.remove());
@@ -100,6 +100,18 @@ PathSchema.post('save', async function(doc, next) {
         next(err);
     }
 });
+
+// PathSchema.post('findOneAndUpdate', async function(doc, next) {
+//     try {
+//         const count = await this.model('Path').countDocuments({project: doc.project, saved: true });
+//         const project = await this.model('Project').findById(doc.project);
+//         project.nSavedPaths = count;
+//         await project.save();
+//         next();
+//     } catch (err) {
+//         next(err);
+//     }
+// })
 
 PathSchema.post('deleteOne', {query: true, document: false}, async function(doc, next) {
     try {
