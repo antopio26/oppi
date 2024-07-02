@@ -18,7 +18,7 @@ export default function Paths() {
             <main className={"paths-main"}>
                 <h1>{selection[0].toUpperCase() + selection.slice(1) + " Paths"}</h1>
                 <div className={"paths-container"}>{
-                    (selection === "saved"?paths.filter((path)=>path.saved):paths)
+                    [{createdAt:"21-12-2024",waypoints:[1,2]},{createdAt:"21-12-2024",waypoints:[1,2]},...(selection === "saved"?paths.filter((path)=>path.saved):paths)]
                         .sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt))
                         .map((path, i) => (
                         <PathCard key={i} path={path} selection={selection}/>

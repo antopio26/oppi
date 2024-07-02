@@ -13,6 +13,10 @@ import LoadingOverlay from "../components/LoadingOverlay";
 import {useNavigate} from "react-router-dom";
 import {AppContext} from "../providers/AppContext";
 import useProjectManager from "../hooks/ProjectManager";
+import {InputText} from "primereact/inputtext";
+import MapDropdown from "../components/MapDropdown";
+import {Button} from "primereact/button";
+import {Dialog} from "primereact/dialog";
 
 export default function Map() {
     const [mapMode, setMapMode] = useState({mode: "view"});
@@ -35,11 +39,21 @@ export default function Map() {
 
     return (
         <MapContextProvider additionalStates={{mapMode, setMapMode, sendParameters}}>
-            {voxels.positions.length === 0 && <LoadingOverlay
+            {(selectedProject && voxels.positions.length === 0) && <LoadingOverlay
                 message="Loading Map..."
                 cancelString="Back to Dashboard"
                 onCancel={() => navigate('/dashboard')}
             />}
+            {!selectedProject &&
+                <Dialog header="No projects loaded" draggable={false}  visible={true} closable={false}>
+                    <p>
+                        There are no projects loaded.
+                        <br/>Please go to the <a href="/dashboard" onClick={(e)=> {
+                            e.preventDefault()
+                        navigate("/dashboard")
+                    }}>dashboard</a> and load a project.
+                    </p>
+                </Dialog>}
             <Sidebar
                 info={"Set a starting point, an ending point and generate a path. You can modify the path planning parameters and move within the map."}>
                 <MapSidebar/>

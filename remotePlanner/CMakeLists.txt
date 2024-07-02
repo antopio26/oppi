@@ -29,15 +29,9 @@ endif()
 
 include_directories(/usr/include/websocketpp /usr/include/nlohmann include)
 
-find_package(OpenCV REQUIRED)
-include_directories(${OpenCV_INCLUDE_DIRS})
-target_link_libraries(oppi ${OpenCV_LIBS})
-
-
 find_package(octomap REQUIRED)
 include_directories(${OCTOMAP_INCLUDE_DIRS})
 target_link_libraries(oppi ${OCTOMAP_LIBRARIES})
-
 
 find_package(dynamicEDT3D REQUIRED)
 include_directories(${DYNAMICEDT3D_INCLUDE_DIRS})
@@ -50,7 +44,3 @@ target_link_libraries(oppi ${WEBSOCKETPP_LIBRARIES})
 find_package(nlohmann_json REQUIRED)
 include_directories(${NLOHMANN_JSON_INCLUDE_DIR})
 target_link_libraries(oppi nlohmann_json::nlohmann_json)
-
-#find_package(ompl REQUIRED)
-#include_directories(${OMPL_INCLUDE_DIRS})
-#target_link_libraries(oppi ${OMPL_LIBRARIES})

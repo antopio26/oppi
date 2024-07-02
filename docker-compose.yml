@@ -1,12 +1,29 @@
 name: oppi
 services:
-  path_planning:
+  remote_planner:
     build:
       context: remotePlanner
-      dockerfile: remotePlanner/Dockerfile
+      dockerfile: Dockerfile
     network_mode: bridge
     ports:
       - "9002:9002"
-    container_name: ws_server
+    container_name: oppiRemotePlanner
     volumes:
-      - .:/ws
+      - ./maps:/ws/maps
+    restart: always  # Automatically restart the container if it stops
+    healthcheck:
+      test: [ "CMD-SHELL", "grep -qE 'Killed|Aborted|Segmentation Fault' /ws/build/log.txt || exit 1" ]
+      interval: 30s  # Check every 30 seconds
+      timeout: 10s  # Timeout for each check
+      retries: 3  # Restart after 3 consecutive failures
+      start_period: 10s  # Start checking after 10 seconds
+  server:
+    build:
+      context: .
+      dockerfile: server/Dockerfile
+    network_mode: bridge
+    ports:
+      - "3001:3001"
+    container_name: oppiServer
+    volumes:
+      - ./maps:/ws/maps

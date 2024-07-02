@@ -2,7 +2,6 @@
 #define RRT_STAR_RRT_STAR_H
 
 #include <iostream>
-#include <opencv2/opencv.hpp>
 #include <vector>
 #include <cmath>
 #include <random>

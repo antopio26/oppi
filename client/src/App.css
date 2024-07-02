@@ -397,6 +397,12 @@ input {
         .input-container:has(input:placeholder-shown, .p-dropdown .p-placeholder) ~ .buttonbar{
             display:none;
         }
+
+        a{
+            color: var(--primary);
+            font-weight: 600;
+            text-decoration: none;
+        }
     }
 
 }

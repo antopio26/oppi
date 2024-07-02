@@ -34,7 +34,9 @@ COPY . .
 RUN mkdir -p /ws/build
 
 # Build the code
-RUN cd /ws/build && cmake .. && make && make install
+RUN cd /ws/build && cmake .. && make
+
+WORKDIR /ws/build
 
 # Set the entrypoint
-ENTRYPOINT ["/ws/build/oppi"]
+ENTRYPOINT ["oppi", ">>", "log.txt"]
