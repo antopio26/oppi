@@ -24,7 +24,7 @@ services:
       dockerfile: server/Dockerfile
     network_mode: bridge
     ports:
-      - "3001:3001"
+      - "80:80"
     container_name: oppiServer
     volumes:
       - ./maps:/ws/maps

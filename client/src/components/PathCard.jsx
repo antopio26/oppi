@@ -12,16 +12,24 @@ export default function PathCard({path, selection}) {
 
     return (
         <div className="path-card">
-            {/*<span>#{path._id}</span>*/}
-            <span>Created on: {new Date(path.createdAt).toLocaleDateString("en-US", {
+            <div className={"data"}>
+                <span className={"no-colons"}>#</span><span>{path._id}</span>
+            </div>
+            <div className={"data"}>
+            <span>Created on</span><span>{new Date(path.createdAt).toLocaleDateString("en-US", {
                 day: "numeric",
                 month: "long",
                 year: "numeric",
                 hour: "numeric",
                 minute: "numeric"
             })}</span>
-            <span>Nodes: {path.waypoints.length}</span>
-            <span>Length: {path.cost}m</span>
+            </div>
+            <div className={"data"}>
+            <span>Nodes</span><span>{path.waypoints.length}</span>
+            </div>
+                <div className={"data"}>
+            <span>Length</span><span>{path.cost}m</span>
+                </div>
             <div className="actions">
                 <i className={"pi pi-bookmark primary-text save-button " + (path.saved ? "saved" : "")}
                    onClick={(e) => {
