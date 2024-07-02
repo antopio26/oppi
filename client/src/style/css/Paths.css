@@ -6,6 +6,9 @@
         gap: .5rem;
         padding-bottom: 2rem;
 
+        container-type: inline-size;
+        container-name: path-card;
+
         &:not(:has(.path-card))::after {
             content: 'No paths found';
             font-size: 1.75rem;
@@ -70,5 +73,12 @@
         &:has(.select-button:active) >:not(:has(.select-button:active)){
             opacity: .5;
         }
+    }
+}
+
+@container path-card (width < 550px){
+    .path-card{
+        display: grid;
+        grid-template-columns: 1fr 1fr 1fr;
     }
 }

@@ -36,7 +36,7 @@ RUN mkdir -p /ws/build
 # Build the code
 RUN cd /ws/build && cmake .. && make
 
-WORKDIR /ws/build
+RUN chmod +x /ws/entrypoint.sh
 
 # Set the entrypoint
-ENTRYPOINT ["oppi", ">>", "log.txt"]
+ENTRYPOINT ["/bin/bash", "-c", "/ws/entrypoint.sh"]

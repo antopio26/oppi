@@ -1,6 +1,6 @@
 name: oppi
 services:
-  remote_planner:
+  remote-planner:
     build:
       context: remotePlanner
       dockerfile: Dockerfile
@@ -11,6 +11,7 @@ services:
     volumes:
       - ./maps:/ws/maps
     restart: always  # Automatically restart the container if it stops
+    user: root  # Run as root user
     healthcheck:
       test: [ "CMD-SHELL", "grep -qE 'Killed|Aborted|Segmentation Fault' /ws/build/log.txt || exit 1" ]
       interval: 30s  # Check every 30 seconds
@@ -27,3 +28,4 @@ services:
     container_name: oppiServer
     volumes:
       - ./maps:/ws/maps
+    restart: always  # Automatically restart the container if it stops

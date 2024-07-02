@@ -73,7 +73,7 @@ void WebSocketClient::handleParametersMessage(const nlohmann::json &msg) {
 
 void WebSocketClient::handleMapMessage(const nlohmann::json &msg) {
     std::string map = msg["map"];
-    auto *selectedOctoMap = new octomap::OcTree("../../maps/" + map);
+    auto *selectedOctoMap = new octomap::OcTree("/ws/maps/" + map);
     env_ = std::make_shared<Environment>();
 
     double resolution = selectedOctoMap->getResolution();

@@ -13,6 +13,8 @@ RUN cd client && npm install
 # Build the frontend
 RUN cd client && npm run build
 
+WORKDIR /ws/server
+
 # Set the entrypoint
-ENTRYPOINT ["node", "server/main.js"]
+ENTRYPOINT ["node", "main.js"]
 
