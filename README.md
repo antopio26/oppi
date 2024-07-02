@@ -145,7 +145,7 @@ Gestisce i progetti dell'utente autenticato. Questa rotta raccoglie sotto di se 
 Gestisce i percorsi associati a un progetto specifico.
 #### Endpoint
 - **GET `/api/projects/:projectId/paths`**: Recupera tutti i percorsi di un progetto specifico.
-- **POST `//api/projects/:projectId/paths`**: Crea un nuovo percorso per un progetto specifico.
+- **POST `/api/projects/:projectId/paths`**: Crea un nuovo percorso per un progetto specifico.
 - **GET `/api/projects/:projectId/paths/saved`**: Recupera tutti i percorsi salvati di un progetto specifico.
 - **GET `/api/projects/:projectId/paths/:id`**: Recupera un percorso specifico tramite ID.
 - **PUT `/api/projects/:projectId/paths/:id`**: Aggiorna un percorso specifico tramite ID.
@@ -267,7 +267,3 @@ I componenti al suo interno condividono alcuni stati del `MapContextProvider` e 
 Nella `MapSidebar` si possono gestire waypoints e parametri attraverso gli appositi componenti `NodeList` e `ParametersList`.
 Il componente principale della pagina e dell'applicazione è il `Canvas` che contiene la `MapScene` con la mappa 3D, `Nodes` e `Path` che vengono aggiornati in tempo reale con i dati ricevuti dal Remote Planner.
 Infine sarà visibile un floating panel, `Metrics`, con le metriche di performance del percorso.
-
-
-
-
