@@ -6,9 +6,6 @@ WORKDIR /ws
 # Install ROS2 dependencies
 RUN apt-get update && apt-get install -y \
     gdb \
-    ros-humble-tf-transformations \
-    ros-humble-cv-bridge \
-    ros-humble-rviz2 \
     ros-humble-octomap \
     ros-humble-octomap-mapping \
     ros-humble-octomap-msgs \
@@ -29,3 +26,15 @@ RUN apt-get update && apt-get install -y \
 RUN apt-get update && apt-get install -y \
     python3-pip
 RUN pip3 install matplotlib numpy
+
+# Copy the source code
+COPY . .
+
+# Create a build directory
+RUN mkdir -p /ws/build
+
+# Build the code
+RUN cd /ws/build && cmake .. && make && make install
+
+# Set the entrypoint
+ENTRYPOINT ["/ws/build/oppi"]

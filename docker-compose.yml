@@ -2,8 +2,8 @@ name: oppi
 services:
   path_planning:
     build:
-      context: .
-      dockerfile: Dockerfile
+      context: remotePlanner
+      dockerfile: remotePlanner/Dockerfile
     network_mode: bridge
     ports:
       - "9002:9002"
