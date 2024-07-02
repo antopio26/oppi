@@ -6,11 +6,11 @@ WORKDIR /ws
 # Install ROS2 dependencies
 RUN apt-get update && apt-get install -y gdb
 RUN apt-get update && apt-get install -y ros-humble-octomap
-RUN apt-get update && apt-get install -y ros-humble-octomap-mapping
+# RUN apt-get update && apt-get install -y ros-humble-octomap-mapping
 RUN apt-get update && apt-get install -y ros-humble-octomap-msgs
-RUN apt-get update && apt-get install -y ros-humble-octomap-ros
-RUN apt-get update && apt-get install -y ros-humble-octomap-rviz-plugins
-RUN apt-get update && apt-get install -y ros-humble-octomap-server
+# RUN apt-get update && apt-get install -y ros-humble-octomap-ros
+# RUN apt-get update && apt-get install -y ros-humble-octomap-rviz-plugins
+# RUN apt-get update && apt-get install -y ros-humble-octomap-server
 RUN apt-get update && apt-get install -y ros-humble-dynamic-edt-3d
 
 RUN apt-get update && apt-get install -y \
