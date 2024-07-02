@@ -90,7 +90,7 @@ PathSchema.post('save', async function(doc, next) {
 
         project.nNodes += doc.waypoints.length;
         project.nPaths += 1;
-        project.totalLength += doc.cost;
+        // project.totalLength += doc.cost;
         project.nSavedPaths += doc.saved ? 1 : 0;
 
         await project.save();
@@ -106,7 +106,7 @@ PathSchema.post('deleteOne', {query: true, document: false}, async function(doc,
         const project = await this.model('Project').findById(doc.project);
         project.nNodes -= doc.waypoints.length;
         project.nPaths -= 1;
-        project.totalLength -= doc.cost;
+        // project.totalLength -= doc.cost;
         project.nSavedPaths -= doc.saved ? 1 : 0;
         await project.save();
         next();
@@ -120,7 +120,7 @@ PathSchema.post('deleteOne', {query: false, document: true}, async function(quer
         const project = await this.model('Project').findById(query.project);
         project.nNodes -= query.waypoints.length;
         project.nPaths -= 1;
-        project.totalLength -= query.cost;
+        // project.totalLength -= query.cost;
         project.nSavedPaths -= query.saved ? 1 : 0;
         await project.save();
         next();
@@ -134,7 +134,7 @@ PathSchema.post('findOneAndDelete', async function(query, next) {
         const project = await this.model('Project').findById(query.project)
         project.nNodes -= query.waypoints.length;
         project.nPaths -= 1;
-        project.totalLength -= query.cost;
+        // project.totalLength -= query.cost;
         project.nSavedPaths -= query.saved ? 1 : 0;
         await project.save();
         next();

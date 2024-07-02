@@ -27,9 +27,9 @@ export default function PathCard({path, selection}) {
             <div className={"data"}>
             <span>Nodes</span><span>{path.waypoints.length}</span>
             </div>
-                <div className={"data"}>
-            <span>Length</span><span>{path.cost}m</span>
-                </div>
+            {/*<div className={"data"}>
+                <span>Length</span><span>{path.cost}m</span>
+            </div>*/}
             <div className="actions">
                 <i className={"pi pi-bookmark primary-text save-button " + (path.saved ? "saved" : "")}
                    onClick={(e) => {
@@ -47,7 +47,7 @@ export default function PathCard({path, selection}) {
                         setWaypoints(path.waypoints);
                         setWaypointsColor(path.waypointsColor)
                         setCurrentPath(path);
-                        setSmoothPath({path: path.smoothPath, cost: path.cost})
+                        setSmoothPath({path: path.smoothPath, cost: path.cost || -1})
                         updateLastOpenAt(path.project)
                         navigate("/map")
                     }
