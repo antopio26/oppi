@@ -4,15 +4,14 @@ FROM ros:humble
 WORKDIR /ws
 
 # Install ROS2 dependencies
-RUN apt-get update && apt-get install -y \
-    gdb \
-    ros-humble-octomap \
-    ros-humble-octomap-mapping \
-    ros-humble-octomap-msgs \
-    ros-humble-octomap-ros \
-    ros-humble-octomap-rviz-plugins \
-    ros-humble-octomap-server \
-    ros-humble-dynamic-edt-3d
+RUN apt-get update && apt-get install -y gdb
+RUN apt-get update && apt-get install -y ros-humble-octomap
+RUN apt-get update && apt-get install -y ros-humble-octomap-mapping
+RUN apt-get update && apt-get install -y ros-humble-octomap-msgs
+RUN apt-get update && apt-get install -y ros-humble-octomap-ros
+RUN apt-get update && apt-get install -y ros-humble-octomap-rviz-plugins
+RUN apt-get update && apt-get install -y ros-humble-octomap-server
+RUN apt-get update && apt-get install -y ros-humble-dynamic-edt-3d
 
 RUN apt-get update && apt-get install -y \
     libeigen3-dev \
