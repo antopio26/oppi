@@ -22,7 +22,10 @@ export default function FetchingLayer({children}) {
 
     useEffect(() => {
         if (selectedProject){
-            getPaths(selectedProject._id);
+            getPaths(selectedProject._id).then(paths => {
+                setCurrentPath(paths.sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt))[0]);
+            })
+
 
             resetPlanner();
             sendParameters(selectedProject.parameters);
@@ -51,6 +54,7 @@ export default function FetchingLayer({children}) {
 
         return () => clearTimeout(timeout);
     }, [waypoints, waypointsColor]);
+
 
     return(
         <>
