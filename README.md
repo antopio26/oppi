@@ -20,7 +20,7 @@ docker-compose up
 
 Il progetto sarà disponibile all'indirizzo [http://localhost](http://localhost), con un websocket server in ascolto sulla porta `9002` (*ws://localhost:9002*).
 
-## Utilizzo (Casi d'Uso UML)
+## Utilizzo
 
 ![Diagramma dei Casi d'Uso](figures/use_cases.png)
 
