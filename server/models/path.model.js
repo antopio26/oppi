@@ -84,6 +84,59 @@ PathSchema.post('save', async function(doc, next) {
             const removePromises = docs.map(doc => doc.remove());
             await Promise.all(removePromises);
         }
+
+        // Update the project's nNodes nPaths nSavedPaths totalLength
+        const project = await this.model('Project').findById(doc.project);
+
+        project.nNodes += doc.waypoints.length;
+        project.nPaths += 1;
+        project.totalLength += doc.cost;
+        project.nSavedPaths += doc.saved ? 1 : 0;
+
+        await project.save();
+
+        next();
+    } catch (err) {
+        next(err);
+    }
+});
+
+PathSchema.post('deleteOne', {query: true, document: false}, async function(doc, next) {
+    try {
+        const project = await this.model('Project').findById(doc.project);
+        project.nNodes -= doc.waypoints.length;
+        project.nPaths -= 1;
+        project.totalLength -= doc.cost;
+        project.nSavedPaths -= doc.saved ? 1 : 0;
+        await project.save();
+        next();
+    } catch (err) {
+        next(err);
+    }
+});
+
+PathSchema.post('deleteOne', {query: false, document: true}, async function(query, next) {
+    try {
+        const project = await this.model('Project').findById(query.project);
+        project.nNodes -= query.waypoints.length;
+        project.nPaths -= 1;
+        project.totalLength -= query.cost;
+        project.nSavedPaths -= query.saved ? 1 : 0;
+        await project.save();
+        next();
+    } catch (err) {
+        next(err);
+    }
+});
+
+PathSchema.post('findOneAndDelete', async function(query, next) {
+    try {
+        const project = await this.model('Project').findById(query.project)
+        project.nNodes -= query.waypoints.length;
+        project.nPaths -= 1;
+        project.totalLength -= query.cost;
+        project.nSavedPaths -= query.saved ? 1 : 0;
+        await project.save();
         next();
     } catch (err) {
         next(err);

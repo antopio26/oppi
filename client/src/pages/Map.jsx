@@ -12,10 +12,6 @@ import useRemotePlanner from "../hooks/RemotePlanner";
 import LoadingOverlay from "../components/LoadingOverlay";
 import {useNavigate} from "react-router-dom";
 import {AppContext} from "../providers/AppContext";
-import useProjectManager from "../hooks/ProjectManager";
-import {InputText} from "primereact/inputtext";
-import MapDropdown from "../components/MapDropdown";
-import {Button} from "primereact/button";
 import {Dialog} from "primereact/dialog";
 
 export default function Map() {
@@ -30,12 +26,13 @@ export default function Map() {
         smoothPath,
         sendParameters
     } = useRemotePlanner();
-    const {createPath} = useProjectManager();
     const navigate = useNavigate();
-    const {selectedProject, currentPath, setCurrentPath} = useContext(AppContext);
+    const {selectedProject} = useContext(AppContext);
+    const [metrics, setMetrics] = useState({});
 
-    const currentPathRef = useRef(null);
-    currentPathRef.current = currentPath;
+    useEffect(()=>{
+        setMetrics({...metrics, cost: smoothPath?.cost})
+    },[smoothPath?.cost])
 
     return (
         <MapContextProvider additionalStates={{mapMode, setMapMode, sendParameters}}>
@@ -71,7 +68,7 @@ export default function Map() {
                         readyState={readyState}
                     />
                 </Canvas>
-                <Metrics/>
+                <Metrics metrics={metrics}/>
             </main>
         </MapContextProvider>
     )

@@ -1,6 +1,8 @@
 import {Button} from "primereact/button";
 import useProjectManager from "../hooks/ProjectManager";
 import {useNavigate} from "react-router-dom";
+import {useContext} from "react";
+import {AppContext} from "../providers/AppContext";
 
 export default function ProjectCard({project}) {
     const {updateLastOpenAt, deleteProject} = useProjectManager();
@@ -67,19 +69,19 @@ export default function ProjectCard({project}) {
                         <ul>
                             <li>
                                 <p className={"label"}>Paths</p>
-                                <p className={"value"}>21</p>
+                                <p className={"value"}>{project.nPaths}</p>
                             </li>
                             <li>
                                 <p className={"label"}>Nodes</p>
-                                <p className={"value"}>76</p>
+                                <p className={"value"}>{project.nNodes}</p>
                             </li>
                             <li>
                                 <p className={"label"}>Total length</p>
-                                <p className={"value"} data-unit={"m"}>550</p>
+                                <p className={"value"} data-unit={"m"}>{project.totalLength}</p>
                             </li>
                             <li>
-                                <p className={"label"}>Time to generate</p>
-                                <p className={"value"} data-unit={"s"}>7</p>
+                                <p className={"label"}>Saved Paths</p>
+                                <p className={"value"}>{project.nSavedPaths}</p>
                             </li>
                         </ul>
                 <div className="project-footer">

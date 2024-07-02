@@ -2,7 +2,7 @@ import {Button} from "primereact/button";
 import React from "react";
 
 export default function Metrics({metrics}) {
-    if (!metrics) return null;
+    if (!metrics || Object.keys(metrics).length === 0) return null;
 
     return (
         <div className="metrics-container">
@@ -14,7 +14,7 @@ export default function Metrics({metrics}) {
                 </div>
             </div>
             <div className="metrics-data">
-                {metrics.keys().map((key, i) => (
+                {Object?.keys(metrics).map((key, i) => (
                     <div className="metric" key={i}>
                         <span>{key}</span>
                         <span>{metrics[key]}</span>

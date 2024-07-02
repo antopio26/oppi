@@ -12,6 +12,22 @@ const ProjectSchema = new mongoose.Schema({
         ref: 'User',
         required: true
     },
+    nPaths: {
+        type: Number,
+        default: 0
+    },
+    nNodes: {
+        type: Number,
+        default: 0
+    },
+    totalLength: {
+        type: Number,
+        default: 0
+    },
+    nSavedPaths: {
+        type: Number,
+        default: 0
+    },
     createdAt: {
         type: Date,
         default: Date.now

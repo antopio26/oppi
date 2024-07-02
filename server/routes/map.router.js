@@ -1,76 +1,64 @@
 const express = require('express');
-const { Map, MapSchema } = require('../models/map.model');
-const fs = require('fs');
-const {MapUploadError} = require("../middleware/error.middleware");
+const path = require('path');
+const dotenv = require('dotenv');
+const cors = require('cors');
+const bodyParser = require('body-parser')
+const { errorHandler, DBError} = require('./middleware/error.middleware');
+const { notFoundHandler } = require('./middleware/not-found.middleware');
+const { authGuard } = require('./middleware/auth.middleware')
 
-const router = express.Router();
+// Load environment variables from .env file
+dotenv.config();
 
-const multer = require('multer');
+const jsonParser = bodyParser.json({ limit: '2mb' });
 
-const storage = multer.memoryStorage();
-const upload = multer({ storage: storage });
+// Create express app
+const app = express();
+const port = process.env.PORT || 80;
 
-router.get('/', async (req, res, next) => {
-    // Get all maps
-    res.send(await Map.find({user: req.user._id}));
-})
+// Enable CORS
+app.use(cors());
 
-router.post('/', upload.single('file'), async (req, res, next) => {
-    // Create a new map with mongose model, get the _id and save the file with _id as name
-    // req is a multipart/form-data cointaining map file and map name
+// Serve frontend static files from 'public' directory
+app.use(express.static(path.join(__dirname, 'public')));
 
-    const { name } = req.body
+const { connectDB } = require("./database/database");
 
-    const map = new Map({
-        name: name,
-        user: req.user._id
-    });
+let isConnected = false;
+connectDB().then(() => isConnected = true).catch(console.error);
 
-    try {
-        await map.save();
-    } catch (err) {
-        console.log(err);
+// Import API routes
+const userRoutes = require('./routes/user.router');
+const mapRoutes = require('./routes/map.router');
+const projectRoutes = require('./routes/project.router');
+const mongoose = require("mongoose");
 
-        next(new MapUploadError("Database Error"));
+// Middleware to check if the database is connected
+app.use("/api", (req, res, next) => {
+    if (isConnected) {
+        next();
+    } else {
+        next(new DBError("Database connection failed"));
     }
+});
 
-    try {
-        // Create directory if not exists
-        if (!fs.existsSync('../maps')) {
-            fs.mkdirSync('../maps');
-        }
-        fs.writeFileSync(`../maps/${map._id}`, req.file.buffer);
+// Use API routes
+app.use("/api/user", authGuard, userRoutes);
+app.use("/api/projects", authGuard, jsonParser, projectRoutes);
+app.use("/api/maps", authGuard, mapRoutes);
 
-        res.send(map);
-    } catch (err) {
-        console.log(err);
+// Handle 404 errors
+app.use("/api/", notFoundHandler);
 
-        await map.deleteOne();
+// Catch-all route to serve index.html for React Router
+app.get('*', (req, res) => {
+    res.sendFile(path.join(__dirname, 'public', 'index.html'));
+});
 
-        next(new MapUploadError("Map save error"));
-    }
-})
+// Error handling middleware
+app.use(errorHandler);
 
-router.put('/:id', async (req, res, next) => {
-    // Update map name, offset, size
-    await Map.findOneAndUpdate({_id: req.params.id, user: req.user._id}, req.body);
-    const map = await Map.findOne({_id: req.params.id, user: req.user._id});
-    res.send(map);
-})
-
-router.delete('/:id', async (req, res, next) => {
-    // Delete map
-    const map = await Map.findOneAndDelete({_id: req.params.id, user: req.user._id});
-
-    // Delete file
-    try {
-        fs.unlinkSync(`../maps/${map._id}`);
-    } catch (err) {
-        console.log(err);
-        // next(new MapUploadError("Map delete error"));
-    }
-
-    res.send(map);
-})
-
-module.exports = router
+// Start the server
+app.listen(port, () => {
+    console.log('Server is running on port ', port);
+});
