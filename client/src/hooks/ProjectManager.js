@@ -32,7 +32,7 @@ export default function useProjectManager() {
 
         if (selectedProject?._id === id) {
             setSelectedProject(
-                projects.sort((a, b) => new Date(b.lastOpenAt) - new Date(a.lastOpenAt))[0]
+                projects.filter(p => p._id !== id).sort((a, b) => new Date(b.lastOpenAt) - new Date(a.lastOpenAt))[0]
             );
         }
 
@@ -71,15 +71,20 @@ export default function useProjectManager() {
     }
 
     const createPath = async (projectId, path) => {
+        // in path.waypoints, if a coord is "", send 0 (coords is an object)
+        path.waypoints = path.waypoints.map(w => ({
+            ...w,
+            coords: {
+                x: w.coords.x || 0,
+                y: w.coords.y || 0,
+                z: w.coords.z || 0
+            }
+        }));
         const res = await axios.post(`/api/projects/${projectId}/paths`, path);
         if (res.status===200) {
             setPaths([...paths, res.data]);
-            return res.data;
-        }else if (res.status===208){
-            return currentPath;
         }
-        return null;
-
+        return res.data;
     }
 
     const savePath = async (projectId, pathId) => {

@@ -5,8 +5,8 @@ import {AppContext} from "../providers/AppContext";
 import useRemotePlanner from "../hooks/RemotePlanner";
 
 export default function PathCard({path, selection}) {
-    const {setWaypoints, setWaypointsColor} = useRemotePlanner();
-    const {savePath, unsavePath} = useProjectManager();
+    const {setWaypoints, setWaypointsColor, setSmoothPath} = useRemotePlanner();
+    const {savePath, unsavePath, updateLastOpenAt} = useProjectManager();
     const navigate = useNavigate();
     const {setCurrentPath} = useContext(AppContext);
 
@@ -35,9 +35,12 @@ export default function PathCard({path, selection}) {
                 </i>
                 <i className={"pi pi-compass primary-text select-button"} tabIndex={0} onClick={
                     (e) => {
+
                         setWaypoints(path.waypoints);
                         setWaypointsColor(path.waypointsColor)
                         setCurrentPath(path);
+                        setSmoothPath({path: path.smoothPath, cost: path.cost})
+                        updateLastOpenAt(path.project)
                         navigate("/map")
                     }
                 }></i>

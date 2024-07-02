@@ -56,16 +56,17 @@ const PathSchema = new mongoose.Schema({
             _id: false
         }
     ],
-    // smoothPath: [PointSchema]
+    smoothPath: [PointSchema]
 });
 
 // block the same path (waypoint by waypoint) from being saved multiple times
 PathSchema.pre('save', async function(next) {
     try {
-        const count = await this.model('Path').countDocuments({ waypoints: { $all: this.waypoints } });
-        if (count > 0) {
+        const path = await this.model('Path').findOne({ project: this.project, waypoints: { $all: this.waypoints } });
+        if (path) {
             const err = new Error('Duplicate path');
             err.status = 208;
+            err.path = path;
             next(err);
         }
         next();

@@ -46,7 +46,7 @@ export default function RemotePlannerContextProvider({children, remoteURL}) {
     const {sendMessage, getWebSocket, readyState} = useWebSocket(remoteURL, {
         onOpen: (e) => {
             e.target.binaryType = 'arraybuffer';
-            console.log('WebSocket connection established.');
+            // console.log('WebSocket connection established.');
 
             // Reset all states
             setVoxels({positions: [], sizes: []})
@@ -57,10 +57,10 @@ export default function RemotePlannerContextProvider({children, remoteURL}) {
             setSmoothPath({path: [], cost: -1})
         },
         onClose: () => {
-            console.log('WebSocket connection closed.')
+            // console.log('WebSocket connection closed.')
         },
         onError: (event) => {
-            console.error('WebSocket error:', event)
+            // console.error('WebSocket error:', event)
         },
         onMessage: async (event) => {
             let arrayBuffer;
@@ -98,13 +98,13 @@ export default function RemotePlannerContextProvider({children, remoteURL}) {
                     break;
                 default:
                     if (/^octomap\(\d+(\.\d+)?\)$/.test(msg.topic)) {
-                        console.log("Octomap received");
+                        // console.log("Octomap received");
 
                         // 'octomap(resolution)'
                         const resolution = parseFloat(msg.topic.match(/\(([^)]+)\)/)[1]);
 
                         const voxelsData = binaryDataToVoxels(msg.binaryData, resolution);
-                        console.log("Voxels received",voxelsData);
+                        // console.log("Voxels received",voxelsData);
                         voxelsData.positions = voxelsData.positions.map((coords) => new THREE.Vector3(coords[0], coords[2], coords[1]));
                         setVoxels(voxelsData);
                     } else {
@@ -129,7 +129,7 @@ export default function RemotePlannerContextProvider({children, remoteURL}) {
     useEffect(() => {
         if (readyState === WebSocket.OPEN) {
             if (waypoints.length >= 2) {
-                console.log("Waypoints sent", waypoints);
+                // console.log("Waypoints sent", waypoints);
                 sendMessage(JSON.stringify({
                     topic: 'r', waypoints:
                         waypoints.map((wp) => {
@@ -145,10 +145,6 @@ export default function RemotePlannerContextProvider({children, remoteURL}) {
             }
         }
     }, [waypoints]);
-
-    useEffect(() => {
-        console.log("RRT Paths sent", rrtPaths);
-    },[rrtPaths]);
 
     const connectionState = {
         [ReadyState.CONNECTING]: 'Connecting',
@@ -168,6 +164,7 @@ export default function RemotePlannerContextProvider({children, remoteURL}) {
             rrtPaths,
             optPaths,
             smoothPath,
+            setSmoothPath,
             chronoPath,
             completed,
             readyState,

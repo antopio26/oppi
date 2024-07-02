@@ -35,7 +35,7 @@ export default function MapScene({
 
     useEffect(() => {
         return () => {
-            console.log("MapScene unmount");
+            // console.log("MapScene unmount");
             console.log(voxels.positions.length);
             if (voxels.positions.length !== 0) {
 
@@ -69,10 +69,6 @@ export default function MapScene({
             OrbitControlsRef.current.autoRotateSpeed = 1 + 2 * Math.pow(Math.sin(OrbitControlsRef.current.getAzimuthalAngle()), 2);
         }
     })
-
-    useEffect(() => {
-        console.log("MapScene Voxels", voxels)
-    }, [voxels])
 
 
     return (

@@ -33,32 +33,6 @@ export default function Map() {
     const currentPathRef = useRef(null);
     currentPathRef.current = currentPath;
 
-    useEffect(() => {
-        if (voxels.positions.length === 0 || waypoints.length < 2) {
-            return;
-        }
-
-        if (JSON.stringify(currentPath?.waypoints)!==JSON.stringify(waypoints)) {
-            setCurrentPath(null);
-        }
-
-        const timeout = setTimeout(async () => {
-            const path = await createPath(selectedProject._id, {
-                waypoints,
-                waypointsColor,
-                // cost: smoothPath.cost,
-                // smoothPath: smoothPath.path
-            })
-
-            console.log(path, currentPath)
-            if (JSON.stringify(path, (key, value) => key === "createdAt" || key === "_id" ? undefined : value) !== JSON.stringify(currentPath, (key, value) => key === "createdAt" || key === "_id" ? undefined : value)) {
-                setCurrentPath(path);
-            }
-        }, 6000);
-
-        return () => clearTimeout(timeout);
-    }, [waypoints, waypointsColor]);
-
     return (
         <MapContextProvider additionalStates={{mapMode, setMapMode, sendParameters}}>
             {voxels.positions.length === 0 && <LoadingOverlay

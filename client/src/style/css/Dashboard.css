@@ -25,10 +25,10 @@
             grid-column: 1/-1;
         }
 
-        &:has(img:hover,img:focus-within) .project-card:not(:has(img:hover,img:focus-within)) {
+        &:has(.preview:hover,.preview:focus-within) .project-card:not(:has(.preview:hover,.preview:focus-within)) {
             opacity: .75;
         }
-        &:has(img:active, img.selected) .project-card:not(:has(img:active,img.selected)) {
+        &:has(img:active, img.selected,.preview:active,.preview i.selected) .project-card:not(:has(img:active,img.selected,.preview:active,.preview i.selected)) {
             opacity: .5;
         }
         .project-card {
@@ -97,10 +97,10 @@
                 }
             }
 
-            &:has(img:hover, img:focus-within){
+            &:has(.preview:hover, .preview:focus-within){
                 border-color: rgba(var(--primary-r), var(--primary-g), var(--primary-b), .5);
             }
-            &:has(img:active, img.selected){
+            &:has(img:active, img.selected, .preview:active, .preview i.selected){
                 border-color: var(--primary);
             }
 

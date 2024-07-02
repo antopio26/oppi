@@ -8,10 +8,10 @@ import {AppContext} from "../providers/AppContext";
 export default function FetchingLayer({children}) {
     const {isAuthenticated} = useAuth0();
     const {getMaps} = useMapManager();
-    const {getProjects, getPaths} = useProjectManager();
-    const {selectedProject} = useContext(AppContext);
+    const {getProjects, getPaths, createPath} = useProjectManager();
+    const {selectedProject, currentPath, setCurrentPath} = useContext(AppContext);
 
-    const {resetPlanner, sendParameters, changeMap} = useRemotePlanner();
+    const {resetPlanner, sendParameters, changeMap, voxels, waypoints, waypointsColor, smoothPath} = useRemotePlanner();
 
     useEffect(() => {
         if (isAuthenticated){
@@ -29,6 +29,28 @@ export default function FetchingLayer({children}) {
             changeMap(selectedProject.map);
         }
     }, [selectedProject?._id]);
+
+    useEffect(() => {
+        if (voxels.positions.length === 0 || waypoints.length < 2) {
+            return;
+        }
+
+        if (JSON.stringify(currentPath?.waypoints)!==JSON.stringify(waypoints)) {
+            setCurrentPath(null);
+        }
+
+        const timeout = setTimeout(async () => {
+            const path = await createPath(selectedProject._id, {
+                waypoints,
+                waypointsColor,
+                cost: smoothPath.cost,
+                smoothPath: smoothPath.path
+            })
+            setCurrentPath(path);
+        }, 6000);
+
+        return () => clearTimeout(timeout);
+    }, [waypoints, waypointsColor]);
 
     return(
         <>

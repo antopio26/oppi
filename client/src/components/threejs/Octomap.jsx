@@ -26,7 +26,7 @@ export function Octomap({voxels}) {
 
 
     useEffect(() => {
-        console.log("Octomap Voxels", voxels)
+        // console.log("Octomap Voxels", voxels)
         if (instancedVoxels.current) {
             instancedVoxels.current.count = voxels.positions.length
 
