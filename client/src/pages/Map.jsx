@@ -68,7 +68,7 @@ export default function Map() {
                         readyState={readyState}
                     />
                 </Canvas>
-                <Metrics metrics={metrics}/>
+                {/*<Metrics metrics={metrics}/>*/}
             </main>
         </MapContextProvider>
     )

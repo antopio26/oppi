@@ -81,7 +81,7 @@ export function NodeList() {
             const path = await createPath(selectedProject._id, {
                 waypoints,
                 waypointsColor,
-                cost: smoothPath.cost,
+                // cost: smoothPath.cost,
                 smoothPath: smoothPath.path,
                 saved: true
             })

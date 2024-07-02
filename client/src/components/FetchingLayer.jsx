@@ -46,7 +46,7 @@ export default function FetchingLayer({children}) {
             const path = await createPath(selectedProject._id, {
                 waypoints,
                 waypointsColor,
-                cost: smoothPath.cost,
+                // cost: smoothPath.cost,
                 smoothPath: smoothPath.path
             })
             setCurrentPath(path);
