@@ -3,10 +3,12 @@ import useProjectManager from "../hooks/ProjectManager";
 import {useNavigate} from "react-router-dom";
 import {useContext} from "react";
 import {AppContext} from "../providers/AppContext";
+import useRemotePlanner from "../hooks/RemotePlanner";
 
 export default function ProjectCard({project}) {
     const {updateLastOpenAt, deleteProject} = useProjectManager();
     const navigate = useNavigate();
+    const {setWaypoints} = useRemotePlanner();
 
     const timeSince = (date) => {
 
@@ -42,6 +44,7 @@ export default function ProjectCard({project}) {
         e.target.classList.add("selected");
 
         updateLastOpenAt(project._id).then(() => {
+            setWaypoints([{id: 0, coords: {x: 1, y: 0, z: 1}}]);
             navigate('/map')
         });
     }

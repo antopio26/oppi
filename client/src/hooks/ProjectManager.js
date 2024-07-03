@@ -31,9 +31,14 @@ export default function useProjectManager() {
         setProjects(projects.filter(p => p._id !== id));
 
         if (selectedProject?._id === id) {
-            setSelectedProject(
-                projects.filter(p => p._id !== id).sort((a, b) => new Date(b.lastOpenAt) - new Date(a.lastOpenAt))[0]
-            );
+            let newSelectedProject = projects.filter(p => p._id !== id).sort((a, b) => new Date(b.lastOpenAt) - new Date(a.lastOpenAt))[0];
+            if (newSelectedProject) {
+                setSelectedProject(newSelectedProject);
+                getPaths(newSelectedProject._id);
+            } else {
+                setSelectedProject(null);
+                setPaths([]);
+            }
         }
 
         return res.data;
@@ -83,6 +88,12 @@ export default function useProjectManager() {
         const res = await axios.post(`/api/projects/${projectId}/paths`, path);
         if (res.status===200) {
             setPaths([...paths, res.data]);
+            if (res.data.saved) {
+                setProjects(projects.map(p => p._id === projectId ? {
+                    ...p,
+                    nSavedPaths: (parseInt(p.nSavedPaths)||0) + 1
+                } : p));
+            }
         }
         return res.data;
     }
@@ -92,6 +103,8 @@ export default function useProjectManager() {
         setPaths(paths.map(p => p._id === pathId ? res.data : p));
         setProjects(projects.map(p => p._id === projectId ? {
             ...p,
+            nPaths: (parseInt(p.nPaths)||0) + 1,
+            nNodes: (parseInt(p.nNodes)||0) + res.data.waypoints.length,
             nSavedPaths: (parseInt(p.nSavedPaths)||0) + 1
         } : p));
         return res.data;

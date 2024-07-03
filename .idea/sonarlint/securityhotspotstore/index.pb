@@ -189,10 +189,6 @@ Y
 )server/middleware/not-found.middleware.js,1/b/1bdcc3eba0fe43ab682ab4e1c0d588a6228c221d
 ;
 client/.env,1/9/191d1665d4d8dc07f4bbf6e35a0d742096ce6a38
-H
-server/public/index.html,b/b/bb3e641c71891c3fc669df24e5a0d810327312c0
-Q
-!server/public/asset-manifest.json,4/a/4a9f2b253d015675abbdf52be0387e80cf96482e
 J
 server/models/map.model.js,c/6/c6dc3ac8c4aa74eb14a4e3d32aeb31b78bfd9a35
 N

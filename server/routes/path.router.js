@@ -50,25 +50,22 @@ router.put('/:id', async (req, res, next) => {
 
 router.put('/:id/save', async (req, res, next) => {
     // Save a path
-    await Path.findOneAndUpdate(
+    const path = await Path.findOneAndUpdate(
         {_id: req.params.id, project: req.project._id},
         {saved: true},
         {new: true}
     );
 
-    const path = await Path.findOne({_id: req.params.id, project: req.project._id});
     res.send(path);
 })
 
 router.put('/:id/unsave', async (req, res, next) => {
     // Unsave a path
-    await Path.findOneAndUpdate(
+    const path = await Path.findOneAndUpdate(
         {_id: req.params.id, project: req.project._id},
         {saved: false},
         {new: true}
     );
-
-    const path = await Path.findOne({_id: req.params.id, project: req.project._id});
     res.send(path);
 })
 

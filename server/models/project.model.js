@@ -1,6 +1,6 @@
 const mongoose = require('mongoose');
 const { Parameters } = require('./parameters.model');
-const { Path } = require('./path.model');
+const { Path, PathSchema } = require('./path.model');
 
 const ProjectSchema = new mongoose.Schema({
     name: {
