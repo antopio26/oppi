@@ -19,6 +19,10 @@ export function NodeList() {
         waypointsColor,
         setWaypointsColor,
         smoothPath,
+        rrtPaths,
+        setRrtPaths,
+        optPaths,
+        setOptPaths,
     } = useRemotePlanner();
 
     const {
@@ -64,6 +68,45 @@ export function NodeList() {
                 setTimeout(() => {
                     setWaypoints(waypoints.filter((wp, i) => i !== index));
                     setWaypointsColor(waypointsColor.filter((c) => c.id !== waypoints[index].id));
+                    setCurrentPath(null);
+
+                    let oldRrtPaths = [...rrtPaths];
+                    let oldOptPaths = [...optPaths];
+                    // for each path, remove the node with the same id, then decrement the id of all nodes with id > removed node
+                    setRrtPaths(oldRrtPaths.map((path) => {
+                        if (path.start.id === waypoints[index].id || path.goal.id === waypoints[index].id) {
+                            return null;
+                        }else {
+                            return {
+                                start: path.start.id > waypoints[index].id ? {
+                                    ...path.start,
+                                    id: path.start.id - 1
+                                } : path.start,
+                                goal: path.goal.id > waypoints[index].id ? {
+                                    ...path.goal,
+                                    id: path.goal.id - 1
+                                } : path.goal,
+                                path: path.path
+                            }
+                        }
+                    }).filter((path) => path !== null));
+                    setOptPaths(oldOptPaths.map((path) => {
+                        if (path.start.id === waypoints[index].id || path.goal.id === waypoints[index].id) {
+                            return null;
+                        }else {
+                            return {
+                                start: path.start.id > waypoints[index].id ? {
+                                    ...path.start,
+                                    id: path.start.id - 1
+                                } : path.start,
+                                goal: path.goal.id > waypoints[index].id ? {
+                                    ...path.goal,
+                                    id: path.goal.id - 1
+                                } : path.goal,
+                                path: path.path
+                            }
+                        }
+                    }).filter((path) => path !== null));
                 }, 500)
             }
             e.stopPropagation()
@@ -78,10 +121,11 @@ export function NodeList() {
                 setCurrentPath(await savePath(selectedProject._id, currentPath._id));
             }
         } else {
+            console.log(waypoints)
             const path = await createPath(selectedProject._id, {
                 waypoints,
                 waypointsColor,
-                // cost: smoothPath.cost,
+                cost: smoothPath.cost,
                 smoothPath: smoothPath.path,
                 saved: true
             })

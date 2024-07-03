@@ -11,7 +11,7 @@ export default function FetchingLayer({children}) {
     const {getProjects, getPaths, createPath} = useProjectManager();
     const {selectedProject, currentPath, setCurrentPath} = useContext(AppContext);
 
-    const {resetPlanner, sendParameters, changeMap, voxels, waypoints, waypointsColor, smoothPath} = useRemotePlanner();
+    const {resetPlanner, sendParameters, changeMap, voxels, waypoints, setWaypoints, waypointsColor, smoothPath} = useRemotePlanner();
 
     useEffect(() => {
         if (isAuthenticated){
@@ -23,8 +23,9 @@ export default function FetchingLayer({children}) {
     useEffect(() => {
         if (selectedProject){
             getPaths(selectedProject._id).then(paths => {
-                setCurrentPath(paths.sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt))[0]);
+                setCurrentPath(null);
             })
+            setWaypoints([{id: 0, coords: {x: 1, y: 0, z: 1}}]);
 
 
             resetPlanner();
@@ -38,7 +39,7 @@ export default function FetchingLayer({children}) {
             return;
         }
 
-        if (JSON.stringify(currentPath?.waypoints)!==JSON.stringify(waypoints)) {
+        if (currentPath && JSON.stringify(currentPath?.waypoints)!==JSON.stringify(waypoints)) {
             setCurrentPath(null);
         }
 
@@ -46,14 +47,14 @@ export default function FetchingLayer({children}) {
             const path = await createPath(selectedProject._id, {
                 waypoints,
                 waypointsColor,
-                // cost: smoothPath.cost,
+                cost: smoothPath.cost,
                 smoothPath: smoothPath.path
             })
             setCurrentPath(path);
         }, 6000);
 
         return () => clearTimeout(timeout);
-    }, [waypoints, waypointsColor]);
+    }, [waypoints, waypointsColor, smoothPath]);
 
 
     return(

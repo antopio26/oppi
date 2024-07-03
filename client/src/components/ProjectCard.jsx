@@ -8,7 +8,6 @@ import useRemotePlanner from "../hooks/RemotePlanner";
 export default function ProjectCard({project}) {
     const {updateLastOpenAt, deleteProject} = useProjectManager();
     const navigate = useNavigate();
-    const {setWaypoints} = useRemotePlanner();
 
     const timeSince = (date) => {
 
@@ -44,7 +43,6 @@ export default function ProjectCard({project}) {
         e.target.classList.add("selected");
 
         updateLastOpenAt(project._id).then(() => {
-            setWaypoints([{id: 0, coords: {x: 1, y: 0, z: 1}}]);
             navigate('/map')
         });
     }
@@ -80,7 +78,7 @@ export default function ProjectCard({project}) {
                             </li>
                             <li>
                                 <p className={"label"}>Total length</p>
-                                <p className={"value"} data-unit={"m"}>{project.totalLength}</p>
+                                <p className={"value"} data-unit={"m"}>{parseFloat(project.totalLength.toFixed(2))}</p>
                             </li>
                             <li>
                                 <p className={"label"}>Saved Paths</p>

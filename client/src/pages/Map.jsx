@@ -31,8 +31,10 @@ export default function Map() {
     const [metrics, setMetrics] = useState({});
 
     useEffect(()=>{
-        setMetrics({...metrics, cost: smoothPath?.cost})
-    },[smoothPath?.cost])
+        let cost = parseFloat(smoothPath?.cost)
+        cost = cost >= 0 ? parseFloat(cost.toFixed(4)) : "-";
+        setMetrics({...metrics, Nodes: smoothPath?.path?.length || "-", Cost: cost })
+    },[smoothPath])
 
     return (
         <MapContextProvider additionalStates={{mapMode, setMapMode, sendParameters}}>
@@ -64,11 +66,11 @@ export default function Map() {
                         voxels={voxels}
                         rrtPaths={rrtPaths}
                         optPaths={optPaths}
-                        smoothPath={smoothPath}
+                        smoothPath={smoothPath.path}
                         readyState={readyState}
                     />
                 </Canvas>
-                {/*<Metrics metrics={metrics}/>*/}
+                <Metrics metrics={metrics}/>
             </main>
         </MapContextProvider>
     )

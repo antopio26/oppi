@@ -4,11 +4,11 @@ import {useNavigate} from "react-router-dom";
 import {AppContext} from "../providers/AppContext";
 import useRemotePlanner from "../hooks/RemotePlanner";
 
-export default function PathCard({path, selection}) {
-    const {setWaypoints, setWaypointsColor, setSmoothPath} = useRemotePlanner();
+export default function PathCard({path}) {
+    const {setWaypoints, setWaypointsColor, setSmoothPath, setCompleted, setRrtPaths, setOptPaths} = useRemotePlanner();
     const {savePath, unsavePath, updateLastOpenAt} = useProjectManager();
     const navigate = useNavigate();
-    const {setCurrentPath} = useContext(AppContext);
+    const {currentPath, setCurrentPath} = useContext(AppContext);
 
     return (
         <div className="path-card">
@@ -44,10 +44,16 @@ export default function PathCard({path, selection}) {
                 <i className={"pi pi-compass primary-text select-button"} tabIndex={0} onClick={
                     (e) => {
 
-                        setWaypoints(path.waypoints);
-                        setWaypointsColor(path.waypointsColor)
-                        setCurrentPath(path);
-                        setSmoothPath({path: path.smoothPath, cost: path.cost || -1})
+                        console.log(JSON.parse(JSON.stringify(path.waypoints)), currentPath && JSON.parse(JSON.stringify(currentPath?.waypoints)))
+                        if (!currentPath || JSON.stringify(path.waypoints) !== JSON.stringify(currentPath?.waypoints)) {
+                            setWaypoints(path.waypoints);
+                            setWaypointsColor(path.waypointsColor);
+                            setCurrentPath(path);
+                            setSmoothPath({path: path.smoothPath, cost: path.cost || -1})
+                            setRrtPaths([]);
+                            setOptPaths([]);
+                            setCompleted(true);
+                        }
                         updateLastOpenAt(path.project)
                         navigate("/map")
                     }

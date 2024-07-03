@@ -49,12 +49,7 @@ export default function RemotePlannerContextProvider({children, remoteURL}) {
             // console.log('WebSocket connection established.');
 
             // Reset all states
-            setVoxels({positions: [], sizes: []})
-            setRrtPaths([])
-            setChronoPath([])
-            setCompleted(false)
-            setOptPaths([])
-            setSmoothPath({path: [], cost: -1})
+            resetPlanner();
         },
         onClose: () => {
             // console.log('WebSocket connection closed.')
@@ -76,10 +71,9 @@ export default function RemotePlannerContextProvider({children, remoteURL}) {
                 case 'octomap_path':
                     const nodes = JSON.parse(new TextDecoder('utf-8').decode(msg.binaryData));
                     // nodes structure {time: 0, path: [{x: 0, y: 0, z: 0}, ...], start: {id:0,coords:[]}, goal: {id:0,coords:[]}, cost: 0}
-                    // rrtPaths structure [{start: 0, goal: 1, path: [{x: 0, y: 0, z: 0}, ...]}, ...]
-                    setRrtPaths([...rrtPaths.filter((path) => {
-                        return (path.start !== nodes.start.id || path.goal !== nodes.goal.id)
-                    }),{start: nodes.start.id, goal: nodes.goal.id, path: nodes.path}]);
+                    // rrtPaths structure [{start: {id:0,coords:[]}, goal: {id:0,coords:[]}, path: [{x: 0, y: 0, z: 0}, ...]}, ...]
+                    setRrtPaths([...rrtPaths.filter((path) => (path.start.id !== nodes.start.id || path.goal.id !== nodes.goal.id))
+                        ,{start: nodes.start, goal: nodes.goal, path: nodes.path}]);
                     if (nodes.time) {
                         setChronoPath(chronoPath => [...chronoPath, nodes.time]);
                     }
@@ -87,14 +81,13 @@ export default function RemotePlannerContextProvider({children, remoteURL}) {
                 case 'octomap_optimized_path':
                     const optPath = JSON.parse(new TextDecoder('utf-8').decode(msg.binaryData));
                     // same as rrtPaths
-                    setOptPaths([...optPaths.filter((path) => {
-                        return (path.start !== optPath.start.id || path.goal !== optPath.goal.id)
-                    }),{start: optPath.start.id, goal: optPath.goal.id, path: optPath.path}]);
+                    setOptPaths([...optPaths.filter((path) => (path.start.id !== optPath.start.id || path.goal.id !== optPath.goal.id))
+                        ,{start: optPath.start, goal: optPath.goal, path: optPath.path}]);
                     break;
                 case 'octomap_smoothed_path':
                     const smoothPath = JSON.parse(new TextDecoder('utf-8').decode(msg.binaryData));
                     // console.log("Smooth Path received");
-                    setSmoothPath(smoothPath.path);
+                    setSmoothPath(smoothPath);
                     break;
                 default:
                     if (/^octomap\(\d+(\.\d+)?\)$/.test(msg.topic)) {
@@ -129,20 +122,26 @@ export default function RemotePlannerContextProvider({children, remoteURL}) {
     useEffect(() => {
         if (readyState === WebSocket.OPEN) {
             if (waypoints.length >= 2) {
-                // console.log("Waypoints sent", waypoints);
-                sendMessage(JSON.stringify({
-                    topic: 'r', waypoints:
-                        waypoints.map((wp) => {
-                            return {id: wp.id,
-                                coords: {
-                                    x: parseFloat(wp.coords.x) || 0,
-                                    y: parseFloat(wp.coords.y) || 0,
-                                    z: parseFloat(wp.coords.z) || 0
-                                }
-                            };
-                        })
-                }));
+                if (completed){
+                    setCompleted(false)
+                } else {
+                    sendMessage(JSON.stringify({
+                        topic: 'r', waypoints:
+                            waypoints.map((wp) => {
+                                return {
+                                    id: wp.id,
+                                    coords: {
+                                        x: parseFloat(wp.coords.x) || 0,
+                                        y: parseFloat(wp.coords.y) || 0,
+                                        z: parseFloat(wp.coords.z) || 0
+                                    }
+                                };
+                            })
+                    }));
+                }
             }
+            let oldRrtPaths = [...rrtPaths];
+            let oldOptPaths = [...optPaths];
         }
     }, [waypoints]);
 
@@ -162,11 +161,13 @@ export default function RemotePlannerContextProvider({children, remoteURL}) {
             setWaypointsColor,
             voxels,
             rrtPaths,
+            setRrtPaths,
             optPaths,
+            setOptPaths,
             smoothPath,
             setSmoothPath,
             chronoPath,
-            completed,
+            setCompleted,
             readyState,
             sendParameters,
             changeMap,

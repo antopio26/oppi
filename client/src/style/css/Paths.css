@@ -91,7 +91,7 @@
             }
         }
 
-        @container path-card (width < 550px){
+        @container path-card (width < 700px){
             .path-card{
                 display: grid;
                 grid-template-columns: auto auto;

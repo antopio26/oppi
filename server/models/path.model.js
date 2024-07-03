@@ -61,7 +61,7 @@ const PathSchema = new mongoose.Schema({
 // block the same path (waypoint by waypoint) from being saved multiple times
 PathSchema.pre('save', async function (next) {
     try {
-        const path = await this.model('Path').findOne({project: this.project, waypoints: {$all: this.waypoints}});
+        const path = await this.model('Path').findOne({project: this.project, waypoints: {$all: this.waypoints, $size: this.waypoints.length}});
         if (path) {
             const err = new Error('Duplicate path');
             err.status = 208;
@@ -89,7 +89,7 @@ PathSchema.post('save', async function (doc, next) {
 
         project.nNodes += doc.waypoints.length;
         project.nPaths += 1;
-        // project.totalLength += doc.cost;
+        project.totalLength += parseFloat(doc.cost) || 0;
         project.nSavedPaths += doc.saved ? 1 : 0;
 
         await project.save();
@@ -105,7 +105,7 @@ PathSchema.post('deleteOne', {query: true, document: false}, async function (doc
         const project = await this.model('Project').findById(doc.project);
         project.nNodes -= doc.waypoints.length;
         project.nPaths -= 1;
-        // project.totalLength -= doc.cost;
+        project.totalLength -= parseFloat(doc.cost) || 0;
         project.nSavedPaths -= doc.saved ? 1 : 0;
         await project.save();
         next();
@@ -119,7 +119,7 @@ PathSchema.post('deleteOne', {query: false, document: true}, async function (que
         const project = await this.model('Project').findById(query.project);
         project.nNodes -= query.waypoints.length;
         project.nPaths -= 1;
-        // project.totalLength -= query.cost;
+        project.totalLength -= parseFloat(query.cost) || 0;
         project.nSavedPaths -= query.saved ? 1 : 0;
         await project.save();
         next();
@@ -145,7 +145,7 @@ PathSchema.post('findOneAndDelete', async function (query, next) {
         const project = await this.model('Project').findById(query.project)
         project.nNodes -= query.waypoints.length;
         project.nPaths -= 1;
-        // project.totalLength -= query.cost;
+        project.totalLength -= parseFloat(query.cost) || 0;
         project.nSavedPaths -= query.saved ? 1 : 0;
         await project.save();
         next();

@@ -1,17 +1,20 @@
 
-vjavascript:S1135"4Complete the task associated to this "TODO" comment.(ÍÍµJ$8f497845-eb20-497f-b99a-cc01a7364902
-ljavascript:S1251"Remove this commented out code.(Ùê·„ûÿÿÿÿ8Ñî…“‡2J$23483924-30e4-4a45-ada8-ff0530ba5543
-“javascript:S6544A"QPromise-returning function provided to property where a void return was expected.(€±üºJ$b45a45d7-5645-447a-86f1-00a9f178b250
-ojavascript:S6836M"-Unexpected lexical declaration in case block.(Øı‹¶J$e0270f4e-ab10-43f3-87a9-724aecf82d73
-tjavascript:S6836X"-Unexpected lexical declaration in case block.(íÏ¯ÿÿÿÿÿJ$b016b11a-6b82-4d27-b98e-2f1e8dcfb711
-ojavascript:S6836_"-Unexpected lexical declaration in case block.(šîŞÇJ$a8169534-d900-4802-90c9-b6b90e2e8e26
-`javascript:S125`"Remove this commented out code.(úùã‹J$50b5c139-4b6d-43bd-b19b-a2381c509325
-gjavascript:S125e"Remove this commented out code.(½Í€ª8¼Ï†“‡2J$81c820bc-f87c-45ea-ad89-d992c8afd193
-njavascript:S6594h"'Use the "RegExp.exec()" method instead.(ˆ‘ğßùÿÿÿÿJ$f1996742-b46c-4882-83af-2da84f9b0b66
-ljavascript:S125k"Remove this commented out code.(ˆ©ùÿÿÿÿ8Òê†“‡2J$35373dc8-d590-4b7e-9a73-7c61d3dc1aff
-javascript:S1481z"IRemove the declaration of the unused 'closeWebSocketConnection' variable.(ËåÙÊıÿÿÿÿJ$9cb34c08-bcd3-4cac-897e-fbffa67d5f25
-javascript:S1854z"FRemove this useless assignment to variable "closeWebSocketConnection".(ËåÙÊıÿÿÿÿJ$a6d6a689-373a-4096-9c40-58454b5fcfda
-hjavascript:S125„"Remove this commented out code.(ó±±“8ùÆ‡“‡2J$29c36c5f-7f5f-4ce4-bf51-2f1140c4b621
-ˆjavascript:S1481•"@Remove the declaration of the unused 'connectionState' variable.(“²´üÿÿÿÿJ$a6da0779-5fa5-4185-85a3-ea2fde7968fa
-…javascript:S1854•"=Remove this useless assignment to variable "connectionState".(“²´üÿÿÿÿJ$d2c540c2-3da3-43a5-af11-8c6dae3fc5a0
-Èjavascript:S6481"…The object passed as the value prop to the Context provider changes every render. To fix this consider wrapping it in a useMemo hook.(ğªMJ$242c1274-07ec-4143-bb24-60002939c750
+}javascript:S1135"4Complete the task associated to this "TODO" comment.(ÍÍµ8Éê»Ì‡2J$92d00971-c134-43e6-8503-eef6b856e390
+ljavascript:S1251"Remove this commented out code.(Ùê·„ûÿÿÿÿ8Êê»Ì‡2J$b460f8c2-ee1b-45bd-b20f-cefc243c5b5d
+šjavascript:S6544<"QPromise-returning function provided to property where a void return was expected.(€±üº8Êê»Ì‡2J$c337dd55-e982-4d88-815d-839b4ef420f1
+vjavascript:S6836H"-Unexpected lexical declaration in case block.(Øı‹¶8Êê»Ì‡2J$2bdb3ede-b97e-4ff3-a2f4-8b93748f8f60
+{javascript:S6836R"-Unexpected lexical declaration in case block.(íÏ¯ÿÿÿÿÿ8Êê»Ì‡2J$d296cf13-55bf-4d5f-9808-5f07b5cc80d3
+vjavascript:S6836X"-Unexpected lexical declaration in case block.(šîŞÇ8Êê»Ì‡2J$c3a099a7-91c3-4e47-a729-af608508c4ab
+gjavascript:S125Y"Remove this commented out code.(úùã‹8Êê»Ì‡2J$56901bcd-1e6b-4a5e-af4d-a5973896b975
+gjavascript:S125^"Remove this commented out code.(½Í€ª8Êê»Ì‡2J$97d57566-beb4-4d68-947f-be2c0be48c22
+ujavascript:S6594a"'Use the "RegExp.exec()" method instead.(ˆ‘ğßùÿÿÿÿ8Êê»Ì‡2J$b71656d1-5375-471d-839f-a9297bfc0aa7
+ljavascript:S125d"Remove this commented out code.(ˆ©ùÿÿÿÿ8Êê»Ì‡2J$a39f5de6-a0c5-464d-a939-4b2b22b788c6
+—javascript:S1481s"IRemove the declaration of the unused 'closeWebSocketConnection' variable.(ËåÙÊıÿÿÿÿ8Êê»Ì‡2J$10d6a347-7eac-431a-a3d9-c7cecb7d2d89
+”javascript:S1854s"FRemove this useless assignment to variable "closeWebSocketConnection".(ËåÙÊıÿÿÿÿ8Êê»Ì‡2J$03d898a7-b10b-4393-aa17-4a376da525e9
+‹javascript:S1481"<Remove the declaration of the unused 'oldRrtPaths' variable.(êÏ’úûÿÿÿÿ8Êê»Ì‡2J$e26dd3df-ec8d-4990-8345-7d63911718ee
+ˆjavascript:S1854"9Remove this useless assignment to variable "oldRrtPaths".(êÏ’úûÿÿÿÿ8Êê»Ì‡2J$02c114b1-53d8-4918-af09-6e7e5877808b
+†javascript:S1481"<Remove the declaration of the unused 'oldOptPaths' variable.(êíŸ³8Êê»Ì‡2J$db1e7945-d674-4d31-92f6-aca343d26c93
+ƒjavascript:S1854"9Remove this useless assignment to variable "oldOptPaths".(êíŸ³8Êê»Ì‡2J$32b1dccd-28d0-458a-90ea-a612226d94b2
+javascript:S1481”"@Remove the declaration of the unused 'connectionState' variable.(“²´üÿÿÿÿ8Êê»Ì‡2J$30926896-d9a2-4c99-9e2c-1591f254ceef
+Œjavascript:S1854”"=Remove this useless assignment to variable "connectionState".(“²´üÿÿÿÿ8Êê»Ì‡2J$c21b7fbe-47e4-413d-b9cd-62994ddbf764
+Ïjavascript:S6481"…The object passed as the value prop to the Context provider changes every render. To fix this consider wrapping it in a useMemo hook.(ğªM8Êê»Ì‡2J$8c82598f-4ecf-4b00-9317-f63473e9b82d

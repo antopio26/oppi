@@ -21,7 +21,7 @@ export default function Paths() {
                     (selection === "saved"?paths.filter((path)=>path.saved):paths)
                         .sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt))
                         .map((path, i) => (
-                        <PathCard key={i} path={path} selection={selection}/>
+                        <PathCard key={i} path={path}/>
                     ))}
                 </div>
             </main>
