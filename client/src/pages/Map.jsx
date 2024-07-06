@@ -32,7 +32,7 @@ export default function Map() {
 
     useEffect(()=>{
         let cost = parseFloat(smoothPath?.cost)
-        cost = cost >= 0 ? parseFloat(cost.toFixed(4)) : "-";
+        cost = cost >= 0 ? parseFloat(cost.toFixed(4))+" m" : "-";
         setMetrics({...metrics, Nodes: smoothPath?.path?.length || "-", Cost: cost })
     },[smoothPath])
 

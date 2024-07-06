@@ -240,6 +240,15 @@ bool RRTStar::checkLinkCollisionWithDistMap(Node *node1, Node *node2) {
 
 void RRTStar::recalculateCostOfChildren(Node *node, double delta) {
     for (Node *child: node->children) {
+
+        if (child == goalNode) {
+            if (goalNode->cost > child->cost + delta) {
+                goalNode->parent = node;
+            } else {
+                continue;
+            }
+        }
+
         child->cost += delta;
         recalculateCostOfChildren(child, delta);
     }
@@ -404,6 +413,7 @@ RRTStar::rrtStar(nlohmann::json waypoints, std::shared_ptr<Environment> environm
     std::cout << "RRT* started" << std::endl;
     Node *start = new Node{waypoints[0]["coords"]["x"], waypoints[0]["coords"]["y"], waypoints[0]["coords"]["z"], nullptr, 0};
     Node *goal = new Node{waypoints[1]["coords"]["x"], waypoints[1]["coords"]["y"], waypoints[1]["coords"]["z"], nullptr, std::numeric_limits<double>::max()};
+    goalNode = goal;
     env = environment;
     std::cout << "Environment set" << parameters->stayAway << std::endl;
     parameters->safeStayAway = parameters->stayAway / cos(M_PI / 6);

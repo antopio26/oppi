@@ -50,6 +50,7 @@ class RRTStar {
 public:
     std::shared_ptr<RRTStarParameters> parameters = std::make_shared<RRTStarParameters>();
     std::shared_ptr<Environment> env;
+    Node* goalNode = nullptr;
 
     void getDirection(Node *node1, Node *node2, Node *direction);
 
@@ -58,8 +59,6 @@ public:
     bool checkMultipleRayCollision(Node *node1, Node *node2);
 
     bool checkLinkCollisionWithDistMap(Node *node1, Node *node2);
-
-    std::vector<Node *> rrtStar(Node *start, Node *goal, Environment &env);
 
     // pathFoundCallback with one argument
     std::shared_ptr<ComputedPath> rrtStar(nlohmann::json waypoints, std::shared_ptr<Environment> environment,
