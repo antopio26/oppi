@@ -17,6 +17,7 @@ export default function RemotePlannerContextProvider({children, remoteURL}) {
     const [chronoPath, setChronoPath] = useState([]);
 
     const [completed, setCompleted] = useState(false);
+    const [algorithm, setAlgorithm] = useState(null);
 
     // TODO: Add functions to handle sending data and commands to the remote planner
     const sendParameters = (parameters) => {
@@ -137,6 +138,7 @@ export default function RemotePlannerContextProvider({children, remoteURL}) {
                                     }
                                 };
                             })
+                        , planner: algorithm || ''
                     }));
                 }
             }
@@ -172,6 +174,8 @@ export default function RemotePlannerContextProvider({children, remoteURL}) {
             sendParameters,
             changeMap,
             resetPlanner,
+            algorithm,
+            setAlgorithm
         }}>
             {children}
         </RemotePlannerContext.Provider>

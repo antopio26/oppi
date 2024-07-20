@@ -262,3 +262,13 @@ N
 remotePlanner/src/RRT_star.cpp,e/e/ee0a585399687b793ffd5cffe2581e72e3e3314a
 H
 remotePlanner/.gitignore,3/a/3ad4e7f1630706c1328db59f62fc151a29e5e31c
+H
+remotePlanner/Dockerfile,9/8/98bd6284ffea341e88c63a97e94bee2095358ed3
+U
+%remotePlanner/src/WebSocketClient.cpp,a/b/ab1ea82db65b0ca9cda8e6bf586de03e179056e4
+w
+G.idea/sonarlint/issuestore/a/b/ab1ea82db65b0ca9cda8e6bf586de03e179056e4,3/4/3419187279976719880f6c5f1a948bcbbcb9d342
+Å
+Q.idea/sonarlint/securityhotspotstore/9/8/98bd6284ffea341e88c63a97e94bee2095358ed3,f/2/f21ac34538f832862c8801854b46bab37bb420ae
+Å
+Q.idea/sonarlint/securityhotspotstore/a/b/ab1ea82db65b0ca9cda8e6bf586de03e179056e4,c/f/cfaa6c5ccf6c3692c17f5fc2c63bc0ca4253f7d0

@@ -11,7 +11,7 @@ export function ParametersList() {
     const {selectedProject} = useContext(AppContext);
 
     const {updateParameters} = useProjectManager();
-    const {sendParameters} = useRemotePlanner();
+    const {sendParameters, setAlgorithm} = useRemotePlanner();
 
     const formRef = useRef(null);
 
@@ -58,6 +58,20 @@ export function ParametersList() {
                 <Button icon={"pi pi-save"} className={"save-button primary-text"} text rounded
                         onClick={handleSaveParams}/>
             </div>
+            <div className="parameters-list">
+                <div className="parameter">
+                    <label htmlFor="algorithm">Algorithm</label>
+                    <select id="algorithm" onChange={(e)=>{
+                        setAlgorithm(e.target.value)
+                    }}>
+                        <option value="">Custom</option>
+                        <option value="p">PRM</option>
+                        <option value="r">RRT</option>
+                        <option value="s">RRT*</option>
+                    </select>
+                </div>
+            </div>
+
             <form ref={formRef} className="section-content parameters-list">
                 <div className="parameter">
                     <label htmlFor="stepLength">Step length</label>

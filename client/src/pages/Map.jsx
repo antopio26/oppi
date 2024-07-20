@@ -23,6 +23,7 @@ export default function Map() {
         voxels,
         rrtPaths,
         optPaths,
+        chronoPath,
         smoothPath,
         sendParameters
     } = useRemotePlanner();
@@ -33,8 +34,9 @@ export default function Map() {
     useEffect(()=>{
         let cost = parseFloat(smoothPath?.cost)
         cost = cost >= 0 ? parseFloat(cost.toFixed(4))+" m" : "-";
-        setMetrics({...metrics, Nodes: smoothPath?.path?.length || "-", Cost: cost })
-    },[smoothPath])
+        let time = chronoPath.length > 0 ? chronoPath[chronoPath.length-1] + " µs" : "-"
+        setMetrics({...metrics,"Last Path Time": time, Nodes: smoothPath?.path?.length || "-", Cost: cost })
+    },[smoothPath, chronoPath])
 
     return (
         <MapContextProvider additionalStates={{mapMode, setMapMode, sendParameters}}>
